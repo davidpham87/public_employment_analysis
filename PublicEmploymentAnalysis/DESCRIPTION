@@ -1,0 +1,11 @@
+Package: PublicEmploymentAnalysis
+Type: Package
+Title: Public Employment Analysis: Empirical study with quarterly OECD Data
+Version: 1.0
+Date: 2015-10-21
+Author: David Pham
+Maintainer: David Pham <dpham@student.ethz.ch>
+Description: R code for the analysis of the public employment project at ETH.
+License: GPL (>= 2)
+Imports: Rcpp (>= 0.11.6)
+LinkingTo: Rcpp
