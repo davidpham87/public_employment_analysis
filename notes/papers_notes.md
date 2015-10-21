@@ -244,4 +244,4 @@ sum of employee between the following bodies:
 Missing value are interpolated when necessary and for small firms only there is
 a cutoff of the 60% smallest firms.
 
-## Common variables to consider for the analysis
+[//]: # (TODO: Common variables to consider for the analysis)
