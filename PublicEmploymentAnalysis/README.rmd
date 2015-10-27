@@ -1,0 +1,12 @@
+---
+title: Public Employment Analysis: Empirical study with quarterly OECD Data
+
+___
+
+# R code
+
+This is the R folder for reading and writing the data, the analysis and the
+data visualization.
+
+
+
