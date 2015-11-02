@@ -28,3 +28,11 @@ only.nas.columns <- lapply(eos, function(eo) {
 })
 
 lapply(only.nas.columns, nrow) # 15 for yearly, 99 for quarterly
+
+eos <- lapply(eos, as.data.table)
+setkey(eos[[1]], 'country')
+
+eos[[1]]['Switzerland'][, list(year, ypgtq)]
+eos[[1]]['Japan'][, list(year, ypgtq)]
+eos[[1]]['United States'][, list(year, 100*eg/et, eg, et)]
+eos[[1]]['Norway'][, list(year, 100*eg/et, eg, et)]
