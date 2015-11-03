@@ -53,4 +53,60 @@ Population are taken from
 
 - fiscal rules, fiscal transparency
 
+## Country missing
+
+
+| Country without Public Government |
+|----------------------------------:|
+| Australia                         |
+| Austria                           |
+| Brazil                            |
+| Chile                             |
+| China (People's Republic of)      |
+| Colombia                          |
+| Germany                           |
+| Greece                            |
+| Iceland                           |
+| India                             |
+| Indonesia                         |
+| Korea                             |
+| Latvia                            |
+| Mexico                            |
+| New Zealand                       |
+| Russia                            |
+| Slovenia                          |
+| South Africa                      |
+| Switzerland                       |
+|-----------------------------------|
+
+
+
+| Country         | Annually | Quarterly |
+|----------------:|---------:|----------:|
+| Belgium         | x        | x         |
+| Canada          | x        | x         |
+| Czech Republic  | x        | x         |
+| Denmark         | x        | x         |
+| Estonia         | x        | x         |
+| Finland         | x        | x         |
+| France          | x        | x         |
+| Hungary         | x        | x         |
+| Ireland         | x        | x         |
+| Israel          | x        |           |
+| Italy           | x        |           |
+| Japan           | x        | x         |
+| Luxembourg      | x        | x         |
+| Netherlands     | x        | x         |
+| Norway          | x        | x         |
+| Poland          | x        | x         |
+| Portugal        | x        |           |
+| Slovak Republic | x        |           |
+| Spain           | x        |           |
+| Sweden          | x        | x         |
+| Turkey          | x        |           |
+| United Kingdom  | x        | x         |
+| United States   | x        | x         |
+
+
 # Bibliography
+
