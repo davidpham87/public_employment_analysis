@@ -18,16 +18,18 @@ papersize: a4paper
 - Governemnt (public) employment: "eg"
 - Total Employement : "et"
 - GDP growth: gdpv_annpct
-- unemployment rate: ur
+- unemployment rate: unr
 - ecsa, ee?
 - Time effect: "year" or "date"
-- Government spending "ypgtq", *Total disbursements, general government, as a percentage of GDP*
+- Government spending "ypgtq", *Total disbursements, general government, as a
+  percentage of GDP*
 
 - "POP1574"
 - Electoral incentives (number of electoral years)
 - Economics conditions: ? See if growth or recession
 - country: "country"
-- money income per capita (Net/Gross household disposable income, real: YDRH(_G))
+- money income per capita (Net/Gross household disposable income, real:
+  YDRH(_G))
 
 - Ethnicity?
 - Left or right party
@@ -53,7 +55,7 @@ Population are taken from
 
 - fiscal rules, fiscal transparency
 
-## Country missing
+## Countries missing
 
 
 | Country without Public Government |
@@ -77,7 +79,6 @@ Population are taken from
 | Slovenia                          |
 | South Africa                      |
 | Switzerland                       |
-|-----------------------------------|
 
 
 
@@ -106,6 +107,13 @@ Population are taken from
 | Turkey          | x        |           |
 | United Kingdom  | x        | x         |
 | United States   | x        | x         |
+
+
+# TODO
+
+- Scale data?
+- Make the approriate transformation
+- Use the data for supplementary variable
 
 
 # Bibliography

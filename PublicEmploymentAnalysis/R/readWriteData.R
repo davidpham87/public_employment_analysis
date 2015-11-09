@@ -1,5 +1,5 @@
-library('readstata13')
 library('data.table')
+library('readstata13')
 library('magrittr')
 
 # Read and load data "../data/eo-*.dta"
@@ -28,30 +28,3 @@ only.nas.columns <- lapply(eos, function(eo) {
 })
 
 lapply(only.nas.columns, nrow) # 15 for yearly, 99 for quarterly
-
-# EDA
-
-eos <- lapply(eos, as.data.table)
-setkey(eos[[1]], 'country')
-setkey(eos[[2]], 'country')
-
-eos[[1]]['Switzerland'][, list(year, ypgtq)]
-eos[[1]]['Japan'][, list(year, ypgtq)]
-eos[[1]]['United States'][, list(year, 100*eg/et, eg, et)]
-eos[[1]]['Norway', list(year, 100*eg/et, eg, et)]
-
-eos[[1]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.a
-eos[[2]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.q
-
-missing.country <- eos[[1]][, setdiff(unique(country), country.a)]
-
-x <- eos[[1]][country.a]
-x[, egr := eg/et]
-
-options(tikzDefaultEngine = 'pdftex')
-gg <- ggplot(x, aes(year, 100*egr)) +
-  geom_line() + facet_wrap(~country) + theme_bw() +
-  ylab('Public Employment Ratio to Total Employment in percent')
-tikz('test.tex', height=6.5, width=9)
-print(gg)
-dev.off()
