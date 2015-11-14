@@ -50,3 +50,31 @@ Public employment availability
 | United Kingdom  | x        | x         |
 | United States   | x        | x         |
 |-----------------+----------+-----------|
+
+
+Fiscal data
+
+
+| Country        | Fiscal Score |
+|----------------+--------------|
+| Greece         |            1 |
+| Italy          |            2 |
+| Norway         |            2 |
+| Belgium        |            3 |
+| Denmark        |            3 |
+| Germany        |            3 |
+| Ireland        |            3 |
+| Spain          |            3 |
+| Switzerland    |            3 |
+| Austria        |            4 |
+| France         |            4 |
+| Portugal       |            4 |
+| Canada         |            5 |
+| Finland        |            5 |
+| Netherlands    |            5 |
+| Sweden         |            5 |
+| Australia      |            6 |
+| United Kingdom |            8 |
+| United States  |            9 |
+| New Zealand    |           10 |
+|----------------+--------------|

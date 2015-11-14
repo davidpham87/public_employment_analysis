@@ -2,6 +2,9 @@ library('data.table')
 library('readstata13')
 library('magrittr')
 library('ggplot2')
+library('tikzDevice')
+library('stargazer')
+
 
 dtas <-  list.files('../data/') %>% { .[grep('\\.dta$', .)] }
 eos <- lapply(dtas, function(x) read.dta13(file.path('..', 'data', x)))
@@ -31,6 +34,7 @@ x[, lpop := log(pop1574)]
 x <- x[!is.na(egr)] # Non na observation
 
 summary(x)
+baplot(sort(table(x$country)), horiz=T, las=2)
 
 options(tikzDefaultEngine = 'pdftex')
 gg <- ggplot(x, aes(year, 100*egr)) +
@@ -41,21 +45,22 @@ print(gg)
 dev.off()
 
 
-cols <- c('egr', # employement
+cols <- c('egr', # public employement
           'year',
           'gdpv_annpct', # gdp growth
           'unr', # 'unemployment rate'
           'ypgtq', # Total disburrsements, general government
           ## 'pop1574', # population proxy (from 15 to 74)
           'lpop', # log population
-          ## 'country',
+          'country',
           'ydrh' # net money income per capita
-)
-
+          )
 
 x.lm <- lm(egr ~ ., x[, cols, with=FALSE])
-x.step <- step(x.lm, egr ~.)
+summary(x.lm)
 
+par(mar=c(4, 10, 4, 4))
+x.step <- step(x.lm, egr ~.)
 
 ## Scale?
 ## log population?
