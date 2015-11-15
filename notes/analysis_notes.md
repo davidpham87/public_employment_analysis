@@ -54,6 +54,13 @@ Population are taken from
 ## Unfound data
 
 - fiscal rules, fiscal transparency
+- data from Lassen (2010 19-20) 
+- Fiscal transparency is interacted with gdp growth as it should contribute as
+  a good factor.
+
+Score in Lassen:
+
+
 
 ## Countries missing
 
