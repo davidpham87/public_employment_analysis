@@ -7,7 +7,10 @@ downloadOECDData <- function(link, file.name){
   download.file(link, paste0('../data/', file.name, '.csv'))
 }
 
+setkey(data.links, data)
+
 data.links[, downloadOECDData(links, data), by=1:nrow(data.links)]
+
 
 data <- lapply(data.links$data, function(x) fread(paste0('../data/', x, '.csv')))
 names(data) <- data.links$data
@@ -32,4 +35,5 @@ for (e in names(data)){
 
 
 library(ggplot2)
+ggplot(data[[1]], aes(as.numeric(TIME), GDP)) + geom_line(aes(colour=LOCATION))
 ggplot(data[[3]], aes(as.numeric(TIME), POP)) + geom_line(aes(colour=LOCATION))

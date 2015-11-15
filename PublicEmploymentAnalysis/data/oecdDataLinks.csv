@@ -2,3 +2,4 @@ data,links
 gini,https://stats.oecd.org/sdmx-json/data/DP_LIVE/.INCOMEINEQ.GINI../OECD?contentType=csv&detail=code&separator=comma&csv-lang=en
 government_spending,https://stats.oecd.org/sdmx-json/data/DP_LIVE/.GGEXP.TOT.PC_GDP./OECD?contentType=csv&detail=code&separator=comma&csv-lang=en
 population,https://stats.oecd.org/sdmx-json/data/DP_LIVE/AUS+AUT+BEL+CAN+CHE+CHL+CZE+DEU+DNK+ESP+EST+FIN+FRA+GBR+GRC+HUN+IRL+ISL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NOR+NZL+POL+PRT+SVK+SVN+SWE+TUR+USA.POP.TOT.MLN_PER.A/OECD?contentType=csv&detail=code&separator=comma&csv-lang=en&startPeriod=1979&endPeriod=2014
+gdp_capita,https://stats.oecd.org/sdmx-json/data/DP_LIVE/.GDP.TOT.USD_CAP./OECD?contentType=csv&detail=code&separator=comma&csv-lang=en

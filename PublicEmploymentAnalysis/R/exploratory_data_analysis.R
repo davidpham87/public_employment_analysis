@@ -40,7 +40,6 @@ tikz('test.tex', height=6.5, width=9)
 print(gg)
 dev.off()
 
-
 cols <- c('egr', # employement
           'year',
           'gdpv_annpct', # gdp growth
@@ -56,6 +55,10 @@ cols <- c('egr', # employement
 x.lm <- lm(egr ~ ., x[, cols, with=FALSE])
 x.step <- step(x.lm, egr ~.)
 
+
+new.data <- c('gini', 'government_spending', 'population')
+new.data %>% {paste0('../data/', ., '_cleaned.csv')} %>% fread
+fread(new_data)
 
 ## Scale?
 ## log population?
