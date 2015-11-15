@@ -59,12 +59,18 @@ cols <- c('egr', # public employement
 x.lm <- lm(egr ~ ., x[, cols, with=FALSE])
 summary(x.lm)
 
+
 par(mar=c(4, 10, 4, 4))
 x.step <- step(x.lm, egr ~.)
 
 new.data <- c('gini', 'government_spending', 'population')
 new.data %>% {paste0('../data/', ., '_cleaned.csv')} %>% fread
 fread(new_data)
+
+
+par(mar=c(4, 10, 4, 4))
+x.step <- step(x.lm, egr ~.)
+
 
 ## Scale?
 ## log population?
