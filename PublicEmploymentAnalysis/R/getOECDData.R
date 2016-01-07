@@ -1,5 +1,4 @@
-library(data.table)
-library(magrittr)
+source('init.R')
 
 data.links <- fread('../data/oecdDataLinks.csv')
 
@@ -27,13 +26,16 @@ for (i in 1:length(data)){
   data[[i]] <- x
 }
 
-# Reduce(function(x, y) merge(x, y, by=c('LOCATION', 'TIME'), all=TRUE), data)
-
 for (e in names(data)){
   write.csv(data[[e]], paste0('../data/', e, '_cleaned.csv'))
 }
 
 
-library(ggplot2)
-ggplot(data[[1]], aes(as.numeric(TIME), GDP)) + geom_line(aes(colour=LOCATION))
-ggplot(data[[3]], aes(as.numeric(TIME), POP)) + geom_line(aes(colour=LOCATION))
+cleanGDPData <- function(){
+  gdp <- fread('../data/gdp_capita_cleaned.csv')
+  gdp[, V1:=NULL]
+  setnames(gdp, 'GDP', 'GDP_PER_CAPITA')
+  write.csv(gdp, '../data/gdp_capita_cleaned.csv', row.names=FALSE)
+}
+
+cleanGDPData()

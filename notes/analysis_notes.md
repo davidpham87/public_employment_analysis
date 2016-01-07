@@ -58,8 +58,28 @@ Population are taken from
 - Fiscal transparency is interacted with gdp growth as it should contribute as
   a good factor.
 
-Score in Lassen:
-
+| Country        | Fiscal Score |
+|---------------:|-------------:|
+| Greece         |            1 |
+| Italy          |            2 |
+| Norway         |            2 |
+| Belgium        |            3 |
+| Denmark        |            3 |
+| Germany        |            3 |
+| Ireland        |            3 |
+| Spain          |            3 |
+| Switzerland    |            3 |
+| Austria        |            4 |
+| France         |            4 |
+| Portugal       |            4 |
+| Canada         |            5 |
+| Finland        |            5 |
+| Netherlands    |            5 |
+| Sweden         |            5 |
+| Australia      |            6 |
+| United Kingdom |            8 |
+| United States  |            9 |
+| New Zealand    |           10 |
 
 
 ## Countries missing
@@ -122,6 +142,10 @@ Score in Lassen:
 - Make the approriate transformation
 - Use the data for supplementary variable
 
+- Compare the models (step, using missing data)
+- Robustness
+- Compare amongst countries with only quaterly data
+- Quarterly <-> Check dates
 
 # Bibliography
 

@@ -9,6 +9,7 @@ papersize: a4paper
 ---
 
 <!-- pandoc -s -S  --number-sections --table-of-contents --biblio biblio.bib --csl chicago-author-date.csl  public_employment_notes.md -o public_employment_notes.pdf -->
+<!-- \bibliography{biblio.bib} -->
 
 # Introduction
 
@@ -37,10 +38,10 @@ This hypothesis is backed by the following observations:
 + GDP per capita in constant price
 + Portion of population having a university degree 
 + Measure of inequality
-+ country fixed effect
-+ unemployment rate
-+ money income per capita
-+ log of city population
++ Country fixed effect
++ Unemployment rate
++ Money Income per capita
++ Log of city population
 + Ethnicity
 + Time effect
 + OECD countries
