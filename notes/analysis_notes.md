@@ -137,15 +137,28 @@ Population are taken from
 
 
 # TODO
-
 - Scale data?
 - Make the approriate transformation
 - Use the data for supplementary variable
 
 - Compare the models (step, using missing data)
-- Robustness
 - Compare amongst countries with only quaterly data
 - Quarterly <-> Check dates
+
+# Missing data
+
+It causes bias.
+
+# Robustness
+
+Robustness?
+
+# Government Fiscal Transparency IMF Data
+Constant time 
+
+
+
+
 
 # Bibliography
 

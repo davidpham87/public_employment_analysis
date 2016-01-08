@@ -3,7 +3,9 @@ PCKGS <- c('data.table',
            'magrittr',
            'ggplot2',
            'tikzDevice',
-           'stargazer')
+           'stargazer',
+           'rsdmx'
+)
 
 loadPackages <- function(){
   lapply(PCKGS, require, character.only=TRUE)
