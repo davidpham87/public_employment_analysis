@@ -142,8 +142,12 @@ Population are taken from
 - Use the data for supplementary variable
 
 - Compare the models (step, using missing data)
-- Compare amongst countries with only quaterly data
 - Quarterly <-> Check dates
+
+# Quarterly 
+
+- No data for population
+- Compare amongst countries with only quaterly data
 
 # Missing data
 
