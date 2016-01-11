@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  8 JAN 2016 01:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  11 JAN 2016 21:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -364,22 +364,22 @@ Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
-)
-No file main.aux.
+) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -472,28 +472,50 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(./test.tex)
+(./simple_model_egr.tex)
 
-LaTeX Warning: Float too large for page by 38.45033pt on input line 15.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 27.
 
+(./simple_model_gdpv_annpct.tex)
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 28.
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./main.aux) ) 
+(./simple_model_lpop.tex)
+
+LaTeX Warning: Float too large for page by 2.32033pt on input line 29.
+
+(./simple_model_unr.tex)
+
+LaTeX Warning: Float too large for page by 2.32033pt on input line 30.
+
+(./simple_model_ydrh_to_gdpv.tex)
+
+LaTeX Warning: Float too large for page by 2.87589pt on input line 32.
+
+(./simple_model_ypgtq.tex)
+
+LaTeX Warning: Float too large for page by 2.32033pt on input line 34.
+
+(./model_diagnostic.tex)
+
+LaTeX Warning: Float too large for page by 2.32033pt on input line 36.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
+[7] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 13118 strings out of 493105
- 264173 string characters out of 6137072
- 374843 words of memory out of 5000000
- 16380 multiletter control sequences out of 15000+600000
+ 20998 strings out of 493105
+ 420190 string characters out of 6137072
+ 1902546 words of memory out of 5000000
+ 24240 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,54p,414b,715s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on main.pdf (1 page, 36752 bytes).
+ 55i,8n,54p,414b,713s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr10.pfb>
+Output written on main.pdf (7 pages, 353687 bytes).
 PDF statistics:
- 15 PDF objects out of 1000 (max. 8388607)
- 10 compressed objects within 1 object stream
+ 35 PDF objects out of 1000 (max. 8388607)
+ 24 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

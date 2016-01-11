@@ -1,3 +1,4 @@
+setwd('../')
 source('init.R')
 loadPackages()
 

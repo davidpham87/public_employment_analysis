@@ -1,0 +1,1434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Gini Coefficient</title>
+<!-- 2016-01-11 Mon 22:26 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="David Pham" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<style> pre.src {background: #3F3F3F; color: #DCDCCC;} </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Gini Coefficient</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Gini coefficient</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Gini coefficient</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Data from <a href="http://www.gini-research.org/articles/data_2">http://www.gini-research.org/articles/data_2</a>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">TIME</th>
+<th scope="col" class="right">AUS</th>
+<th scope="col" class="right">AUT</th>
+<th scope="col" class="right">BEL</th>
+<th scope="col" class="right">BGR</th>
+<th scope="col" class="right">CAN</th>
+<th scope="col" class="right">CZE</th>
+<th scope="col" class="right">DNK</th>
+<th scope="col" class="right">EST</th>
+<th scope="col" class="right">FIN</th>
+<th scope="col" class="right">FRA</th>
+<th scope="col" class="right">DEU-E</th>
+<th scope="col" class="right">DEU-W</th>
+<th scope="col" class="left">DEU</th>
+<th scope="col" class="right">GRC</th>
+<th scope="col" class="right">HUN</th>
+<th scope="col" class="right">IRL</th>
+<th scope="col" class="right">ITA</th>
+<th scope="col" class="right">JPN</th>
+<th scope="col" class="right">KOR</th>
+<th scope="col" class="left">KOR</th>
+<th scope="col" class="right">LVA</th>
+<th scope="col" class="right">LTU</th>
+<th scope="col" class="right">LUX</th>
+<th scope="col" class="right">NLD</th>
+<th scope="col" class="right">POL</th>
+<th scope="col" class="right">PRT</th>
+<th scope="col" class="right">ROM</th>
+<th scope="col" class="right">SVK</th>
+<th scope="col" class="left">SVN</th>
+<th scope="col" class="right">ESP</th>
+<th scope="col" class="right">SWE</th>
+<th scope="col" class="right">UK</th>
+<th scope="col" class="right">USA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">1980</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.240</td>
+<td class="right">0.290</td>
+<td class="right">0.206</td>
+<td class="right">0.256</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.307</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.206</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.315</td>
+<td class="right">0.201</td>
+<td class="right">0.257</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1981</td>
+<td class="right">0.281</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.224</td>
+<td class="right">0.290</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.256</td>
+<td class="right">0.228</td>
+<td class="right">0.205</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.299</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.246</td>
+<td class="right">0.223</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.244</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.199</td>
+<td class="right">0.263</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1982</td>
+<td class="right">0.270</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.225</td>
+<td class="right">0.290</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.255</td>
+<td class="right">0.229</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.309</td>
+<td class="right">0.209</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.287</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.242</td>
+<td class="right">0.222</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.203</td>
+<td class="right">0.261</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1983</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.236</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.232</td>
+<td class="right">0.300</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.254</td>
+<td class="right">0.230</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.248</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.292</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.239</td>
+<td class="right">0.221</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.252</td>
+<td class="right">0.245</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.201</td>
+<td class="right">0.268</td>
+<td class="right">0.331</td>
+</tr>
+
+<tr>
+<td class="right">1984</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.227</td>
+<td class="right">0.290</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.242</td>
+<td class="right">0.230</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.290</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.252</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.302</td>
+<td class="right">0.255</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.235</td>
+<td class="right">0.220</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.258</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.210</td>
+<td class="right">0.270</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1985</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.220</td>
+<td class="right">0.225</td>
+<td class="right">0.290</td>
+<td class="right">0.198</td>
+<td class="right">0.244</td>
+<td class="right">0.231</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.242</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.297</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.232</td>
+<td class="right">0.218</td>
+<td class="right">0.233</td>
+<td class="right">0.243</td>
+<td class="right">0.253</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.198</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.348</td>
+<td class="right">0.211</td>
+<td class="right">0.282</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1986</td>
+<td class="right">0.292</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.209</td>
+<td class="right">0.290</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.243</td>
+<td class="right">0.232</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.239</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.292</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.229</td>
+<td class="right">0.217</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.250</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.328</td>
+<td class="right">0.220</td>
+<td class="right">0.291</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1987</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.206</td>
+<td class="right">0.290</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.248</td>
+<td class="right">0.228</td>
+<td class="right">0.197</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.238</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.244</td>
+<td class="right">0.310</td>
+<td class="right">0.307</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.225</td>
+<td class="right">0.222</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.236</td>
+<td class="right">0.250</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.315</td>
+<td class="right">0.209</td>
+<td class="right">0.305</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1988</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.224</td>
+<td class="right">0.203</td>
+<td class="right">0.280</td>
+<td class="right">0.198</td>
+<td class="right">0.247</td>
+<td class="right">0.225</td>
+<td class="right">0.202</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.242</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.314</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.295</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.221</td>
+<td class="right">0.226</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.246</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.194</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.299</td>
+<td class="right">0.209</td>
+<td class="right">0.323</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1989</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.213</td>
+<td class="right">0.280</td>
+<td class="right">0.185</td>
+<td class="right">0.248</td>
+<td class="right">0.223</td>
+<td class="right">0.205</td>
+<td class="right">0.280</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.245</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.283</td>
+<td class="right">0.260</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.233</td>
+<td class="right">0.238</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.256</td>
+<td class="right">0.268</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.183</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.295</td>
+<td class="right">0.213</td>
+<td class="right">0.327</td>
+<td class="right">0.359</td>
+</tr>
+
+<tr>
+<td class="right">1990</td>
+<td class="right">0.279</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.227</td>
+<td class="right">0.290</td>
+<td class="right">0.201</td>
+<td class="right">0.252</td>
+<td class="right">0.233</td>
+<td class="right">0.202</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.246</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.280</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.256</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.225</td>
+<td class="right">0.228</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.273</td>
+<td class="right">0.256</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.227</td>
+<td class="right">0.180</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.296</td>
+<td class="right">0.220</td>
+<td class="right">0.339</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1991</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.258</td>
+<td class="right">0.290</td>
+<td class="right">0.222</td>
+<td class="right">0.254</td>
+<td class="right">0.297</td>
+<td class="right">0.201</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.202</td>
+<td class="right">0.244</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.278</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.250</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.247</td>
+<td class="right">0.264</td>
+<td class="right">0.234</td>
+<td class="right">0.273</td>
+<td class="right">0.243</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.258</td>
+<td class="right">0.180</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.288</td>
+<td class="right">0.226</td>
+<td class="right">0.341</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1992</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.223</td>
+<td class="right">0.278</td>
+<td class="right">0.290</td>
+<td class="right">0.181</td>
+<td class="right">0.258</td>
+<td class="right">0.361</td>
+<td class="right">0.199</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.205</td>
+<td class="right">0.253</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.266</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.296</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.245</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.250</td>
+<td class="right">0.300</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.269</td>
+<td class="right">0.252</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.259</td>
+<td class="right">0.189</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.286</td>
+<td class="right">0.218</td>
+<td class="right">0.340</td>
+<td class="right">0.355</td>
+</tr>
+
+<tr>
+<td class="right">1993</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.238</td>
+<td class="right">0.282</td>
+<td class="right">0.289</td>
+<td class="right">0.290</td>
+<td class="right">0.215</td>
+<td class="right">0.264</td>
+<td class="right">0.376</td>
+<td class="right">0.211</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.211</td>
+<td class="right">0.254</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.314</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.250</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.265</td>
+<td class="right">0.323</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.271</td>
+<td class="right">0.284</td>
+<td class="right">0.387</td>
+<td class="right">0.267</td>
+<td class="right">0.183</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.337</td>
+<td class="right">0.221</td>
+<td class="right">0.340</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1994</td>
+<td class="right">0.304</td>
+<td class="right">0.280</td>
+<td class="right">0.274</td>
+<td class="right">0.284</td>
+<td class="right">0.290</td>
+<td class="right">0.220</td>
+<td class="right">0.261</td>
+<td class="right">0.373</td>
+<td class="right">0.211</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.214</td>
+<td class="right">0.266</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.310</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.320</td>
+<td class="right">0.314</td>
+<td class="right">0.261</td>
+<td class="right">0.248</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.284</td>
+<td class="right">0.331</td>
+<td class="right">0.233</td>
+<td class="right">0.270</td>
+<td class="right">0.303</td>
+<td class="right">0.373</td>
+<td class="right">0.264</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.330</td>
+<td class="right">0.250</td>
+<td class="right">0.333</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1995</td>
+<td class="right">0.302</td>
+<td class="right">0.277</td>
+<td class="right">0.263</td>
+<td class="right">0.294</td>
+<td class="right">0.290</td>
+<td class="right">0.214</td>
+<td class="right">0.263</td>
+<td class="right">0.369</td>
+<td class="right">0.217</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.205</td>
+<td class="right">0.263</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.349</td>
+<td class="right">0.304</td>
+<td class="right">0.336</td>
+<td class="right">0.314</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.251</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.293</td>
+<td class="right">0.331</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.268</td>
+<td class="right">0.295</td>
+<td class="right">0.359</td>
+<td class="right">0.306</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.335</td>
+<td class="right">0.227</td>
+<td class="right">0.333</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1996</td>
+<td class="right">0.302</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.269</td>
+<td class="right">0.278</td>
+<td class="right">0.300</td>
+<td class="right">0.229</td>
+<td class="right">0.268</td>
+<td class="right">0.359</td>
+<td class="right">0.223</td>
+<td class="right">0.279</td>
+<td class="right">0.213</td>
+<td class="right">0.252</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.300</td>
+<td class="right">0.325</td>
+<td class="right">0.314</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.257</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.306</td>
+<td class="right">0.334</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.272</td>
+<td class="right">0.304</td>
+<td class="right">0.360</td>
+<td class="right">0.302</td>
+<td class="right">0.246</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.344</td>
+<td class="right">0.237</td>
+<td class="right">0.333</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1997</td>
+<td class="right">0.308</td>
+<td class="right">0.266</td>
+<td class="right">0.265</td>
+<td class="right">0.276</td>
+<td class="right">0.300</td>
+<td class="right">0.226</td>
+<td class="right">0.276</td>
+<td class="right">0.355</td>
+<td class="right">0.237</td>
+<td class="right">0.279</td>
+<td class="right">0.206</td>
+<td class="right">0.256</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.314</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.257</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.307</td>
+<td class="right">0.327</td>
+<td class="right">0.259</td>
+<td class="right">0.267</td>
+<td class="right">0.317</td>
+<td class="right">0.361</td>
+<td class="right">0.305</td>
+<td class="right">0.232</td>
+<td class="left">0.248</td>
+<td class="right">0.333</td>
+<td class="right">0.253</td>
+<td class="right">0.341</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1998</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.273</td>
+<td class="right">0.256</td>
+<td class="right">0.310</td>
+<td class="right">0.226</td>
+<td class="right">0.278</td>
+<td class="right">0.353</td>
+<td class="right">0.248</td>
+<td class="right">0.276</td>
+<td class="right">0.207</td>
+<td class="right">0.253</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.315</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.285</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.319</td>
+<td class="right">0.329</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.267</td>
+<td class="right">0.286</td>
+<td class="right">0.356</td>
+<td class="right">0.298</td>
+<td class="right">0.256</td>
+<td class="left">0.248</td>
+<td class="right">0.326</td>
+<td class="right">0.245</td>
+<td class="right">0.348</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">1999</td>
+<td class="right">0.312</td>
+<td class="right">0.252</td>
+<td class="right">0.271</td>
+<td class="right">0.251</td>
+<td class="right">0.310</td>
+<td class="right">0.238</td>
+<td class="right">0.278</td>
+<td class="right">0.356</td>
+<td class="right">0.259</td>
+<td class="right">0.284</td>
+<td class="right">0.212</td>
+<td class="right">0.251</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.322</td>
+<td class="right">0.302</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.312</td>
+<td class="right">0.268</td>
+<td class="right">0.288</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.323</td>
+<td class="right">0.328</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.269</td>
+<td class="right">0.289</td>
+<td class="right">0.350</td>
+<td class="right">0.299</td>
+<td class="right">0.240</td>
+<td class="left">0.248</td>
+<td class="right">0.321</td>
+<td class="right">0.261</td>
+<td class="right">0.346</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">2000</td>
+<td class="right">0.313</td>
+<td class="right">0.257</td>
+<td class="right">0.260</td>
+<td class="right">0.241</td>
+<td class="right">0.320</td>
+<td class="right">0.238</td>
+<td class="right">0.283</td>
+<td class="right">0.361</td>
+<td class="right">0.267</td>
+<td class="right">0.286</td>
+<td class="right">0.213</td>
+<td class="right">0.262</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.333</td>
+<td class="right">0.306</td>
+<td class="right">0.300</td>
+<td class="right">0.310</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.266</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.332</td>
+<td class="right">0.331</td>
+<td class="right">0.264</td>
+<td class="right">0.285</td>
+<td class="right">0.302</td>
+<td class="right">0.362</td>
+<td class="right">0.310</td>
+<td class="right">0.243</td>
+<td class="left">0.247</td>
+<td class="right">0.324</td>
+<td class="right">0.294</td>
+<td class="right">0.353</td>
+<td class="right">0.369</td>
+</tr>
+
+<tr>
+<td class="right">2001</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.245</td>
+<td class="right">0.320</td>
+<td class="right">0.228</td>
+<td class="right">0.284</td>
+<td class="right">0.354</td>
+<td class="right">0.258</td>
+<td class="right">0.286</td>
+<td class="right">0.223</td>
+<td class="right">0.267</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.304</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.310</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.277</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.334</td>
+<td class="right">0.329</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.278</td>
+<td class="right">0.301</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.353</td>
+<td class="right">0.262</td>
+<td class="left">0.243</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.266</td>
+<td class="right">0.349</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">2002</td>
+<td class="right">0.312</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.241</td>
+<td class="right">0.320</td>
+<td class="right">0.232</td>
+<td class="right">0.281</td>
+<td class="right">0.351</td>
+<td class="right">0.256</td>
+<td class="right">0.281</td>
+<td class="right">0.227</td>
+<td class="right">0.278</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.310</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.279</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.343</td>
+<td class="right">0.324</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.279</td>
+<td class="right">0.307</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.349</td>
+<td class="right">0.260</td>
+<td class="left">0.240</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.258</td>
+<td class="right">0.346</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">2003</td>
+<td class="right">0.312</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.255</td>
+<td class="right">0.247</td>
+<td class="right">0.320</td>
+<td class="right">0.228</td>
+<td class="right">0.283</td>
+<td class="right">0.350</td>
+<td class="right">0.260</td>
+<td class="right">0.280</td>
+<td class="right">0.229</td>
+<td class="right">0.277</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.316</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.312</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.270</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.347</td>
+<td class="right">0.327</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.278</td>
+<td class="right">0.310</td>
+<td class="right">0.378</td>
+<td class="right">0.352</td>
+<td class="right">0.255</td>
+<td class="left">0.240</td>
+<td class="right">0.344</td>
+<td class="right">0.253</td>
+<td class="right">0.341</td>
+<td class="right">0.374</td>
+</tr>
+
+<tr>
+<td class="right">2004</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.253</td>
+<td class="right">0.255</td>
+<td class="right">0.254</td>
+<td class="right">0.320</td>
+<td class="right">0.266</td>
+<td class="right">0.291</td>
+<td class="right">0.347</td>
+<td class="right">0.266</td>
+<td class="right">0.281</td>
+<td class="right">0.238</td>
+<td class="right">0.280</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.293</td>
+<td class="right">0.300</td>
+<td class="right">0.318</td>
+<td class="right">0.315</td>
+<td class="right">0.271</td>
+<td class="right">0.277</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.360</td>
+<td class="right">0.327</td>
+<td class="right">0.271</td>
+<td class="right">0.281</td>
+<td class="right">0.313</td>
+<td class="right">0.383</td>
+<td class="right">0.359</td>
+<td class="right">&#xa0;</td>
+<td class="left">0.241</td>
+<td class="right">0.327</td>
+<td class="right">0.258</td>
+<td class="right">0.342</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">2005</td>
+<td class="right">0.323</td>
+<td class="right">0.253</td>
+<td class="right">0.259</td>
+<td class="right">0.276</td>
+<td class="right">0.320</td>
+<td class="right">0.245</td>
+<td class="right">0.302</td>
+<td class="right">0.339</td>
+<td class="right">0.267</td>
+<td class="right">0.286</td>
+<td class="right">0.242</td>
+<td class="right">0.293</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.308</td>
+<td class="right">0.324</td>
+<td class="right">0.308</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.281</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.360</td>
+<td class="right">0.341</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.281</td>
+<td class="right">0.315</td>
+<td class="right">0.377</td>
+<td class="right">0.361</td>
+<td class="right">0.259</td>
+<td class="left">0.238</td>
+<td class="right">0.318</td>
+<td class="right">0.271</td>
+<td class="right">0.347</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="right">2006</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.249</td>
+<td class="right">0.257</td>
+<td class="right">0.305</td>
+<td class="right">0.320</td>
+<td class="right">0.239</td>
+<td class="right">0.309</td>
+<td class="right">0.328</td>
+<td class="right">0.273</td>
+<td class="right">0.291</td>
+<td class="right">0.238</td>
+<td class="right">0.289</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.284</td>
+<td class="right">0.324</td>
+<td class="right">0.302</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.285</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.371</td>
+<td class="right">0.344</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.276</td>
+<td class="right">0.310</td>
+<td class="right">0.370</td>
+<td class="right">0.364</td>
+<td class="right">0.280</td>
+<td class="left">0.237</td>
+<td class="right">0.312</td>
+<td class="right">0.288</td>
+<td class="right">0.353</td>
+<td class="right">0.378</td>
+</tr>
+
+<tr>
+<td class="right">2007</td>
+<td class="right">0.346</td>
+<td class="right">0.256</td>
+<td class="right">0.258</td>
+<td class="right">0.328</td>
+<td class="right">0.320</td>
+<td class="right">0.235</td>
+<td class="right">0.295</td>
+<td class="right">0.321</td>
+<td class="right">0.280</td>
+<td class="right">0.289</td>
+<td class="right">0.235</td>
+<td class="right">0.294</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.318</td>
+<td class="right">0.288</td>
+<td class="right">0.317</td>
+<td class="right">0.303</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.292</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.364</td>
+<td class="right">0.353</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.290</td>
+<td class="right">0.314</td>
+<td class="right">0.360</td>
+<td class="right">0.375</td>
+<td class="right">0.239</td>
+<td class="left">0.232</td>
+<td class="right">0.305</td>
+<td class="right">0.307</td>
+<td class="right">0.359</td>
+<td class="right">0.373</td>
+</tr>
+
+<tr>
+<td class="right">2008</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.255</td>
+<td class="right">0.252</td>
+<td class="right">0.348</td>
+<td class="right">0.320</td>
+<td class="right">0.228</td>
+<td class="right">0.286</td>
+<td class="right">0.313</td>
+<td class="right">0.268</td>
+<td class="right">0.289</td>
+<td class="right">0.242</td>
+<td class="right">0.293</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.289</td>
+<td class="right">0.275</td>
+<td class="right">0.307</td>
+<td class="right">0.304</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.294</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.369</td>
+<td class="right">0.354</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.282</td>
+<td class="right">0.312</td>
+<td class="right">0.355</td>
+<td class="right">0.347</td>
+<td class="right">0.235</td>
+<td class="left">0.234</td>
+<td class="right">0.308</td>
+<td class="right">0.289</td>
+<td class="right">0.358</td>
+<td class="right">0.373</td>
+</tr>
+
+<tr>
+<td class="right">2009</td>
+<td class="right">0.337</td>
+<td class="right">0.249</td>
+<td class="right">0.257</td>
+<td class="right">0.352</td>
+<td class="right">0.320</td>
+<td class="right">0.232</td>
+<td class="right">0.283</td>
+<td class="right">0.311</td>
+<td class="right">0.259</td>
+<td class="right">0.290</td>
+<td class="right">0.247</td>
+<td class="right">0.289</td>
+<td class="left">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.292</td>
+<td class="right">0.293</td>
+<td class="right">0.310</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.295</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.365</td>
+<td class="right">0.357</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.281</td>
+<td class="right">0.310</td>
+<td class="right">0.339</td>
+<td class="right">0.345</td>
+<td class="right">0.246</td>
+<td class="left">0.227</td>
+<td class="right">0.324</td>
+<td class="right">0.291</td>
+<td class="right">0.358</td>
+<td class="right">0.375</td>
+</tr>
+
+<tr>
+<td class="right">2010</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.256</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.358</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.237</td>
+<td class="right">0.299</td>
+<td class="right">0.308</td>
+<td class="right">0.266</td>
+<td class="right">0.299</td>
+<td class="right">&#xa0;</td>
+<td class="right">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.334</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.316</td>
+<td class="right">0.316</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.289</td>
+<td class="left">&#xa0;</td>
+<td class="right">0.366</td>
+<td class="right">0.364</td>
+<td class="right">0.276</td>
+<td class="right">0.287</td>
+<td class="right">0.319</td>
+<td class="right">0.345</td>
+<td class="right">&#xa0;</td>
+<td class="right">0.249</td>
+<td class="left">0.238</td>
+<td class="right">0.304</td>
+<td class="right">0.297</td>
+<td class="right">0.339</td>
+<td class="right">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-01-10 Son&gt;</span></span></p>
+<p class="author">Author: David Pham</p>
+<p class="date">Created: 2016-01-11 Mon 22:26</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

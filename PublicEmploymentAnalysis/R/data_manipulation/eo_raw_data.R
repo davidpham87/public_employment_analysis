@@ -3,6 +3,7 @@
 # to look for the keys in the xml and not on the XML packages.
 
 source('init.R')
+setwd('../')
 library(XML)
 library(parallel)
 

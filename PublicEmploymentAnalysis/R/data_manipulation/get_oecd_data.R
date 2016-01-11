@@ -1,5 +1,7 @@
+# Get data from OECD and parse them into csv
+setwd('../')
 source('init.R')
-
+loadPackages()
 data.links <- fread('../data/oecdDataLinks.csv')
 
 downloadOECDData <- function(link, file.name){
@@ -38,4 +40,13 @@ cleanGDPData <- function(){
   write.csv(gdp, '../data/gdp_capita_cleaned.csv', row.names=FALSE)
 }
 
+cleanGDPUSDData <- function(){
+  gdp <- fread('../data/gdp_usd_cleaned.csv')
+  gdp[, V1:=NULL]
+  setnames(gdp, 'GDP', 'GDP_USD')
+  write.csv(gdp, '../data/gdp_usd_cleaned.csv', row.names=FALSE)
+}
+
+
 cleanGDPData()
+cleanGDPUSDData()

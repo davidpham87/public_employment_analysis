@@ -5,19 +5,6 @@ library(impute)
 library(magrittr)
 library(parallel)
 
-
-MissingRatePerColumn <- function(x, p=0){
-  missing.rate <- vapply(x, function(y) mean(is.na(y)), 0.0) %>%
-    sort(TRUE) %>% round(4) %>% {Filter(function(x) x >= p, .)}
-  missing.rate
-}
-
-unselect <- function(data, cols){
-  new.cols <- Filter(function(x) !x %in% cols, colnames(data))
-  subset(data, select=new.cols)
-}
-
-
 cols <- c('egr', # public employement rate
           ## 'TIME', # year
           'YEAR',

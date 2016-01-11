@@ -160,9 +160,5 @@ Robustness?
 # Government Fiscal Transparency IMF Data
 Constant time 
 
-
-
-
-
 # Bibliography
 

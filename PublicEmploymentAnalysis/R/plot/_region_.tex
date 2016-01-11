@@ -1,0 +1,25 @@
+\message{ !name(main.tex)}\documentclass[a4paper, 10pt]{article}
+% All LaTeX documents including
+% tikz() output must use this
+% package!
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{tikz}
+\usepackage{pdflscape}
+
+\newcommand{\insertplot}[2]{
+  \begin{figure}[!ht]
+    \centering
+    \input{#1}
+    \caption{#2}
+  \end{figure}
+}
+
+\begin{document}
+
+\message{ !name(main.tex) !offset(15) }
+  \insertplot{model_diagnostic.tex}{Diagnostic plot from the regression
+    Public employment explained by the other variables}
+
+\message{ !name(main.tex) !offset(13) }
+
+\end{document}

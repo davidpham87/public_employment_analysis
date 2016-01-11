@@ -3,16 +3,17 @@ pckgs <- loadPackages()
 library(mice)
 library(impute)
 library(magrittr)
+library(plotly)
 
 cols <- c('egr', # public employement rate
           'TIME', # year
           'gdpv_annpct', # gdp growth
           'unr', # 'unemployment rate'
-          'ypgtq', # Total disburrsements, general government
-          ## 'pop1574', # population proxy (aged from 15 to 74)
+          'ypgtq', # Total disburrsements, general government percent of GDP
+          ## 'pop1574', # population proxy (aged from 15 to 74) # absolute number
           'lpop', # log population -> take approximation
           'country',
-          'ydrh' # net money income per capita
+          'ydrh_to_gdpv' # Ratio of net money income per capita to gdp (volume)
           )
 
 eos <- readRDS('../data/eo-data.rds')
@@ -22,7 +23,6 @@ setkey(eo.desc, VARIABLE) # enamble eo.desc['bsii'] => Balance of income, value,
 ## change time
 
 setkey(eos[[1]], 'country')
-setkey(eos[[2]], 'country')
 
 eos[[1]]['CHE'][, list(TIME, ypgtq)]
 eos[[1]]['JPN'][, list(TIME, ypgtq)]
@@ -30,47 +30,138 @@ eos[[1]]['USA'][, list(TIME, 100*eg/et, eg, et)]
 eos[[1]]['NOR', list(TIME, 100*eg/et, eg, et)]
 
 eos[[1]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.a
-eos[[2]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.q
-
 missing.country <- eos[[1]][, setdiff(unique(country), country.a)]
 
 # x is the data set with annual observation for eg
 x <- eos[[1]][country.a]
-x[, egr := eg/et] # et: General Government employment, et: Total employment
+x[, egr := 100*eg/et] # et: General Government employment, et: Total employment
 x[, country:=as.factor(country)]
-x[, lpop := log(pop1574)]
+x[, lpop := log(pop1574/1e6)] # log pop of millions
+x[, ydrh_to_gdpv:=100*ydrh/gdpv]
 x <- x[!is.na(egr)] # Non na observation
 
-summary(x)
-par(mar=c(2.5, 10, 2.5, 2.5))
-barplot(sort(table(x$country)), horiz=T, las=2)
-
-options(tikzDefaultEngine = 'pdftex')
-gg <- ggplot(x, aes(TIME, 100*egr)) +
-  geom_line() + facet_wrap(~country) + theme_bw() +
-  ylab('Public Employment Ratio to Total Employment in percent')
-tikz('test.tex', height=6.5, width=9)
-print(gg)
-dev.off()
-
 x.lm <- lm(egr ~ ., x[, cols, with=FALSE])
-summary(x.lm)
+x.lm.s <- summary(x.lm)
+x.lm.s
+eo.desc[cols]
+x.simple.model <- as.data.table(x.lm$model)
+
+
+# Data plots
+data.plot <- melt(data.table(x.lm$model), id.vars=c('country', 'TIME'))
+data.plot[, variable:=gsub('_', '\\\\_', variable)]
+
+descriptions <- list(`gdpv\\_annpct`='GDP growth',
+                     unr='Unemployment rate',
+                     ypgtq='Total disbursements, general government, in percent of GDP',
+                     egr='Public employment rate',
+                     lpop='Log of population',
+                     `ydrh\\_to\\_gdpv`='Household net income, in percent of GDP')
+
+
+data.plot[, {
+  options(tikzDefaultEngine = 'pdftex')
+  s <- paste0('plot/simple_model_', .BY[[1]], '.tex')
+  s <- gsub('\\', '', s, fixed=TRUE)
+  gg2 <- ggplot(.SD, aes(TIME, value)) + geom_line() + facet_wrap(~ country) +
+    ggtitle(paste0(descriptions[[.BY[[1]]]], ' by country'))
+  tikz(s, height=6, width=9)
+  print(gg2)
+  dev.off()
+}, by='variable']
+
+
+tikz('plot/model_diagnostic.tex', width=6, height=6)
+par(mfrow=c(2,2))
+plot(x.lm)
+dev.off()
 
 par(mar=c(4, 10, 4, 4))
 x.lm.lower <- lm(egr ~ 1, x[, cols, with=FALSE])
 x.step.low <- step(x.lm.lower, scope=list(lower=x.lm.lower, upper=x.lm), direction="both")
 x.step.up <- step(x.lm, scope=list(lower=x.lm.lower, upper=x.lm), direction="both")
 
-new.data <- c('gini', 'government_spending', 'population', 'gdp_capita')
-new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread)
+## Additional Data
+
+new.data.names <- new.data <-
+  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth')
+new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
+  lapply(function(dt) {
+    dt[, V1:=NULL]
+    setnames(dt, colnames(dt), tolower(colnames(dt)))
+    setnames(dt, 'time', 'TIME')
+    dt[, TIME:=as.numeric(TIME)]
+    setkeyv(dt, c('location', 'TIME'))}) %>% joinDataTable
+
+setnames(new.data, 'location', 'country')
+setkeyv(x, c('country', 'TIME'))
+
+imf.gfs <- fread('../data/imf_gfs_scores.csv', header=TRUE)[, list(ISO, `Index Score`)]
+setnames(imf.gfs, c('ISO', 'Index Score'), c('country', 'imf_gfs'))
+
+x.new <- new.data[J(x)]
+x.new[, lpoptot:=log(pop)]
+x.new[, pop:=NULL]
+x.new <- merge(x.new, imf.gfs, by='country') # add img_gfs fiscal_scores
+
+new.var.names <- list(incomeineq='gini', pop='population',
+                      gdp_per_capita='gdp_per_capita',
+                      fiscal_transparency='fiscal_transparency')
+
+## Robustness Analysis
+new.cols <- c('imf_gfs', 'incomeineq', 'lpoptot', 'gdp_per_capita')
+cols.extended <- c(cols, new.cols)
+# x.new[, fiscal_transparency:=scale(imf_gfs, scale=FALSE)]
+x.new[, imf_gfs:=scale(imf_gfs, scale=TRUE)]
+
+robustnessAnalysis <- function(data, cols, to.drop, formula=egr ~ .){
+  cols.extended <- unselectVector(cols, to.drop)
+  x.lm <- lm(formula, data[, cols.extended, with=FALSE])
+  print(summary(x.lm))
+  x.lm
+}
+
+# All variables
+ff <- egr ~ .  #+ imf_gfs*gdpv_annpct
+
+## Not so much difference, but loss of 150 data points, so keep lpop.
+lpoptot.lm <- robustnessAnalysis(x.new, c(cols, 'lpoptot'), 'lpop', ff)
+lpop.lm <- completeLmData(lpoptot.lm, x.new, 'lpop') %>%
+  robustnessAnalysis(cols, 'lpoptot', ff)
+
+## Income inquality is not significant and also limit the size of the dataset
+## gdp_per_capita and lpop are represented by ydrh and lpoptot, hence we can drop them
+incomeineq.lm <- robustnessAnalysis(x.new, c(cols, 'incomeineq'), '', ff)
+incomeineq.wo.lm <- robustnessAnalysis(as.data.table(incomeineq.lm$model), cols, '', ff)
+
+
+## gdp_per_capita seems to be significant # Loss of 500 observations though
+gdp.per.capita.lm <- robustnessAnalysis(x.new, c(cols, 'gdp_per_capita'), '', ff)
+gdp.per.capita.wo.lm <- as.data.table(gdp.per.capita.lm$model) %>%
+  robustnessAnalysis(cols, '', ff)
+
+fiscal.lm <- robustnessAnalysis(x.new, c(cols, 'fiscal_transparency'), '', ff)
+fiscal.wo.lm <- as.data.table(fiscal.lm$model) %>%
+  robustnessAnalysis(c(cols), '', ff)
+
+
+
+y <- x.new[, cols.extended, with=FALSE]
+
+
+
+compareValue(x.new, ggexp='ggexp', total_disburrsements='ypgtq')
+compareValue(x.new, ydrh='ydrh', gdp_cap='gdp_per_capita')
+compareValue(x.new, gdp_cap='gdp_per_capita')
+
+plot.data <- melt(x.new[, list(TIME, country, popwork=exp(lpop), poptot=exp(lpoptot)), ],
+                    id.vars=c('TIME', 'country'))
+gg <- ggplot(plot.data, aes(TIME, value)) + geom_line(aes(color=variable)) +
+  facet_wrap(~country)
+print(ggplotly(gg))
 
 par(mar=c(4, 10, 4, 4))
-x.step <- step(x.lm, egr ~.)
-
-## Quarter
-## Scale?
-## log population?
-## GDP per capita
+x.step <- step(x.lm, egr ~ .)
 
 ## Many missing data
 
@@ -87,12 +178,18 @@ missing.rate <- vapply(x, function(y, p) mean(is.na(y)), 0.0) %>%
   sort(TRUE) %>% round(4) %>% {Filter(function(x) x >= p, .)}
 
 sort(names(Filter(function(x) x > 0.9, missing.rate)))
-##  [1] "ecsa"      "gdpml"     "gdpmlv"    "gdpofs"    "gdpofsv"   "gdpvcsa"   "gnp"       "gnpv"      "icsa"      "iobv"
-## [11] "ioilv"     "ishv"      "nlgc"      "nlgcq"     "nlgml"     "nlgmlq"    "oilcon"    "oilmnt"    "oilsto"    "oilsup"
-## [21] "oilxnt"    "pgdpml"    "pgdpofs"   "pgnp"      "pmgsd"     "psbr"      "psbrq"     "pxgsd"     "r_gdpvwds" "savgml"
-## [31] "tdd"       "tindml"    "tindofs"   "tocrml"    "tocrofs"   "ttrade"    "tya"       "tybml"     "tybofs"    "tyml"
-## [41] "unrs"      "wpbrent"   "wphamd"    "wphd"      "wphfbd"    "wphfd"     "wphmmd"    "wphtbd"    "wpi"       "wpoil"
-## [51] "ypergml"   "ypergofs"  "ypgct"     "ypgtx"     "yrgct"     "yrgml"     "yrgofs"    "yrgtml"
-
 par(mar=c(2.5, 10, 2.5, 2.5))
 barplot(missing.rate, horiz=T, las=2)
+
+## library(mi)
+## mdf <- missing_data.frame(y)
+## options(mc.cores=8)
+## mi.imputations <- mi(mdf, n.iter = 50, n.chains = 4, max.minutes = 20)
+## pool(egr ~. , mi.imputations)
+
+# GDP is local currency
+ggplot(x[c('USA', 'JPN')], aes(TIME, gdp)) + geom_line() + facet_wrap( ~ country)
+
+# gdp per capita -> USD
+# total_spending_per_capita? USD?
+#
