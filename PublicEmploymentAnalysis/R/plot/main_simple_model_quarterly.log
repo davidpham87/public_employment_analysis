@@ -1,10 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  11 JAN 2016 21:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  12 JAN 2016 01:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**\input main.tex
-(./main.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+**\input main_simple_model_quarterly.tex
+(./main_simple_model_quarterly.tex
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
@@ -364,8 +365,9 @@ Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
-) (./main.aux)
-\openout1 = `main.aux'.
+)
+(./main_simple_model_quarterly.aux)
+\openout1 = `main_simple_model_quarterly.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
 LaTeX Font Info:    ... okay on input line 17.
@@ -472,50 +474,46 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(./simple_model_egr.tex)
+(./simple_model_quarterly_egr.tex)
 
 LaTeX Warning: Float too large for page by 2.32033pt on input line 27.
 
-(./simple_model_gdpv_annpct.tex)
+(./simple_model_quarterly_gdpv_annpct.tex)
 
 LaTeX Warning: Float too large for page by 2.32033pt on input line 28.
 
-(./simple_model_lpop.tex)
+(./simple_model_quarterly_lpop_interpolated.tex)
 
 LaTeX Warning: Float too large for page by 2.32033pt on input line 29.
 
-(./simple_model_unr.tex)
+(./simple_model_quarterly_unr.tex)
 
 LaTeX Warning: Float too large for page by 2.32033pt on input line 30.
 
-(./simple_model_ydrh_to_gdpv.tex)
+(./simple_model_quarterly_gdp_per_capita_interpolated.tex)
 
-LaTeX Warning: Float too large for page by 2.87589pt on input line 32.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 32.
 
-(./simple_model_ypgtq.tex)
+(./simple_model_quarterly_ypgtq_interpolated.tex)
 
 LaTeX Warning: Float too large for page by 2.32033pt on input line 34.
 
-(./model_diagnostic.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 36.
-
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
-[7] (./main.aux) ) 
+(./main_simple_model_quarterly.aux) ) 
 Here is how much of TeX's memory you used:
- 20998 strings out of 493105
- 420190 string characters out of 6137072
- 1902546 words of memory out of 5000000
- 24240 multiletter control sequences out of 15000+600000
+ 25491 strings out of 493105
+ 510116 string characters out of 6137072
+ 1078587 words of memory out of 5000000
+ 28736 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,54p,414b,713s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr10.pfb>
-Output written on main.pdf (7 pages, 353687 bytes).
+ 55i,8n,54p,437b,713s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr10.pfb>
+Output written on main_simple_model_quarterly.pdf (6 pages, 190931 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 30 PDF objects out of 1000 (max. 8388607)
+ 20 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

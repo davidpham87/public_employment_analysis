@@ -1,5 +1,5 @@
 (TeX-add-style-hook
- "main"
+ "main_simple_model_quarterly"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("article" "a4paper" "10pt")))

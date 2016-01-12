@@ -15,22 +15,13 @@ loadPackages <- function(){
   lapply(PCKGS, require, character.only=TRUE)
 }
 
+################################################################################
+### Utiltis
 
 joinDataTable <- function(lDT, kx=c('LOCATION', 'TIME')){
   Reduce(function(x, y) merge(x, y, all=TRUE), lDT)
 }
 
-## Shortcut to compare to variable in data.table x
-compareValue <- function(x, ...){
-  require(plotly)
-  argx <- unlist(list(...))
-  plot.data <- melt(x[, c('TIME', 'country', argx), with=FALSE],
-                    id.vars=c('TIME', 'country'))
-  gg <- ggplot(plot.data, aes(TIME, value)) + geom_line(aes(color=variable)) +
-    facet_wrap(~country)
-  print(ggplotly(gg))
-  gg
-}
 
 unscale <- function(s) {
   s * attr(s, 'scaled:scale') + attr(s, 'scaled:center')
@@ -59,6 +50,9 @@ unselect <- function(data, cols){
 
 unselectVector <- function(x, kx) x[!x %in% kx]
 
+################################################################################
+### Robustness Analysis
+
 ##' Useful this when doing robustness analysis (including excluding variable)
 completeLmData <- function(lm.model, DT, new.cols){
   new.DT <- as.data.table(lm.model$model)
@@ -67,6 +61,9 @@ completeLmData <- function(lm.model, DT, new.cols){
                   by=c('TIME', 'country'), all.x=TRUE)
 }
 
+
+################################################################################
+### Imputation functions
 
 scaleNumeric <- function(x){
   if (mode(x) == 'numeric'){
@@ -140,4 +137,48 @@ imputeDataSoftImpute <- function(dataset, ...){
 
   dataset[, fctrs] <- lapply(names(lvls), f)
   list(dataset)
+}
+
+################################################################################
+### Quarterly Functions
+
+interpolateQuarter <- function(t, y, max.time=2016){
+  data <- na.omit(data.table(t, y))
+  tout <- t[t >= min(data$t) & t <= max.time]
+  tryCatch({
+    yout <- spline(data$t, data$y, xout=tout)$y
+    c(rep(NA, times=length(t[t<min(data$t)])),
+      yout,
+      rep(NA, times=length(t[t>max.time])))
+  }, error = function(e) y)
+}
+
+
+interpolateQuarterColumn <- function(eo.q, eo.a, col, max.time){
+  setkey(eo.a, country, TIME)
+  setkey(eo.q, country, TIME)
+
+  col.new <- paste0(col, '_annual_data')
+  col.q <- paste0(col, '_interpolated')
+  setnames(eo.a, col, col.new)
+  eo.q <- merge(eo.q, eo.a[, c('country', 'TIME', col.new), with=FALSE], all.x=TRUE)
+  eo.q[, (col.q):=interpolateQuarter(TIME, get(col.new), get('max.time')), by='country']
+  eo.q[, (col.new):=NULL]
+  eo.q
+}
+
+
+################################################################################
+### Plots
+
+##' Shortcut to compare to variable in data.table x
+compareValue <- function(x, ...){
+  require(plotly)
+  argx <- unlist(list(...))
+  plot.data <- melt(x[, c('TIME', 'country', argx), with=FALSE],
+                    id.vars=c('TIME', 'country'))
+  gg <- ggplot(plot.data, aes(TIME, value)) + geom_line(aes(color=variable)) +
+    facet_wrap(~country)
+  print(ggplotly(gg))
+  gg
 }

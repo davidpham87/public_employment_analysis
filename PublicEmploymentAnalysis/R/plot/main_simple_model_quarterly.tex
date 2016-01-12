@@ -1,0 +1,38 @@
+\documentclass[a4paper, 10pt]{article}
+% All LaTeX documents including
+% tikz() output must use this
+% package!
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{tikz}
+\usepackage{pdflscape}
+
+\newcommand{\insertplot}[2]{
+  \begin{figure}[!ht]
+    \centering
+    \input{#1}
+    \caption{#2}
+  \end{figure}
+}
+
+\begin{document}
+
+% \begin{landscape}
+%   \begin{figure}[!h]
+%     \centering
+%     \input{test.tex}
+%     \caption{Simple Example}
+%   \end{figure}
+% \end{landscape}
+\begin{landscape}
+  \insertplot{simple_model_quarterly_egr.tex}{Public employment rate}
+  \insertplot{simple_model_quarterly_gdpv_annpct.tex}{GDP growth, volume}
+  \insertplot{simple_model_quarterly_lpop_interpolated.tex}{Log of working population}
+  \insertplot{simple_model_quarterly_unr.tex}{Unemployment rate}
+  \insertplot{simple_model_quarterly_gdp_per_capita_interpolated.tex}{GDP per
+    Capita in USD}
+  \insertplot{simple_model_quarterly_ypgtq_interpolated.tex}{Total government disbursement in
+    percent of GDP}
+  % \insertplot{model_diagnostic_quarterly.tex}{Diagnostic plot from the regression
+  %   Public employment explained by the other variables}
+\end{landscape}
+\end{document}

@@ -5,17 +5,21 @@ library(impute)
 library(magrittr)
 library(parallel)
 
+MAKE_PLOTS <- TRUE
+MAX_YEAR_EXTRAPOLATION <- 2016
+
 cols <- c('egr', # public employement rate
-          ## 'TIME', # year
           'YEAR',
           'QUARTER',
           'gdpv_annpct', # gdp growth
           'unr', # 'unemployment rate'
-          'ypgtq', # Total disburrsements, general government
+          'ypgtq_interpolated', # Total disburrsements, general government
           ## 'pop1574', # population proxy (aged from 15 to 74)
-          # 'lpop', # log population
+          'lpop_interpolated', # log population
           'country',
-          'ydrh' # net money income per capita
+          ## 'ydrh' # net money income per capita
+          # 'ydrh_to_gdpv', # interpolated value
+          'gdp_per_capita_interpolated'
           )
 
 eos <- readRDS('../data/eo-data.rds')
@@ -26,75 +30,116 @@ eos[[1]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.a
 eos[[2]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.q
 missing.country <- eos[[1]][, setdiff(unique(country), country.a)]
 
+## Splines for interpoalting between years
+eo.a <- copy(eos[[1]])
+eo.q <- copy(eos[[2]])
+eo.q <- Reduce(function(x, y) interpolateQuarterColumn(x, eo.a, y, MAX_YEAR_EXTRAPOLATION), c('unr', 'ypgtq', 'gdpv_annpct', 'ydrh', 'pop1574'), init=eo.q)
+eo.q[, ydrh_to_gdpv := ydrh_interpolated/gdpv]
+eo.q[, lpop_interpolated:=log(pop1574_interpolated)]
+
+
+################################################################################
+## New Data
+
+new.data.names <- new.data <-
+  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth')
+new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
+  lapply(function(dt) {
+    dt[, V1:=NULL]
+    setnames(dt, colnames(dt), tolower(colnames(dt)))
+    setnames(dt, 'time', 'TIME')
+    dt[, TIME:=as.numeric(TIME)]
+    setkeyv(dt, c('location', 'TIME'))}) %>% joinDataTable
+
+setnames(new.data, 'location', 'country')
+setkeyv(eo.a, c('country', 'TIME'))
+
+eo.q <- interpolateQuarterColumn(eo.q, new.data, 'gdp_per_capita', MAX_YEAR_EXTRAPOLATION)
+# Patch the missing part of gdpv_annpct
+eo.q[is.na(gdpv_annpct), gdpv_annpct:=gdpv_annpct_interpolated]
+
+################################################################################
+
 # x is the data set with annual observation for eg
-x <- eos[[2]]
+x <- eo.q
 setkey(x, 'country')
 x <- x[country.q]
 x[, YEAR:= as.numeric(YEAR)]
 x[, egr := eg/et] # et: General Government employment, et: Total employment
 x[, country:=as.factor(country)]
-# x[, lpop := log(pop1574)]
+x[, ydrh_to_gdpv:=100*ydrh/gdpv]
 x <- x[!is.na(egr)] # Non na observation
 
-summary(x)
-par(mar=c(2.5, 10, 2.5, 2.5))
-barplot(sort(table(x$country)), horiz=T, las=2)
 
 x.lm <- lm(egr ~ ., x[, cols, with=FALSE])
 summary(x.lm)
 
-par(mar=c(4, 10, 4, 4))
-x.lm.lower <- lm(egr ~ 1, x[, cols, with=FALSE])
-x.step.low <- step(x.lm.lower, scope=list(lower=x.lm.lower, upper=x.lm), direction="both")
-x.step.up <- step(x.lm, scope=list(lower=x.lm.lower, upper=x.lm), direction="both")
+################################################################################
+### Residuals are really bad when using no difference
+### New methods: diff all variable and study the difference
 
-new.data <- c('gini', 'government_spending', 'population', 'gdp_capita')
-new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread)
 
-par(mar=c(4, 10, 4, 4))
-x.step <- step(x.lm, egr ~.)
 
-## Look for column with more than 70% data
-p <- 0.0
-missing.rate <- MissingRatePerColumn(x)
-par(mar=c(2.5, 10, 2.5, 2.5))
-barplot(missing.rate, horiz=T, las=2)
-sort(names(Filter(function(x) x > 0.75, missing.rate)))
-cols <- names(Filter(function(x) x < 0.5, missing.rate))
+################################################################################
+## Plots
 
-y <- x[, cols, with=F]
-missing.rate <- MissingRatePerColumn(y)
-par(mar=c(2.5, 10, 2.5, 2.5))
-barplot(missing.rate, horiz=T, las=2)
+## Data plots
+if (MAKE_PLOTS){
+  data.plot <- melt(data.table(x.lm$model), id.vars=c('country', 'YEAR', 'QUARTER'))
 
-y[, QUARTER:=as.factor(QUARTER)]
-y[, country:=as.factor(country)]
+  quarter.substitute <-
+    lapply(1:4, function(i) list(paste0('-Q', i), paste0('.', 100*(i-1)/4)))
 
-## log population?
-## GDP per capita
-VIF <- function(data){
-  vif.unique <- . %>% {reformulate('.', ., FALSE)} %>% lm(data) %>% summary %$%
-  adj.r.squared %>% {1/(1-.)}
-  cn <- colnames(data)
-  f <- function(s) tryCatch(vif.unique(s), error=function(error) NaN)
-  res <- mclapply(cn, f, mc.cores=8)
-  names(res) <- cn
-  res
+  quarters.time <- Reduce(function(x, l) gsub(l[[1]], l[[2]], x),  quarter.substitute,
+                          data.plot[, paste0(YEAR, '-', QUARTER)]) %>% as.numeric
+  data.plot[, TIME:=quarters.time]
+
+
+  data.plot[, variable:=gsub('_', '\\\\_', variable)]
+  descriptions <- list(`gdpv\\_annpct`='GDP growth',
+                       unr='Unemployment rate',
+                       ypgtq='Total disbursements, general government, in percent of GDP',
+                       egr='Public employment rate',
+                       lpop='Log of population',
+                       `ydrh\\_to\\_gdpv`='Household net income, in percent of GDP')
+
+  data.plot[, {
+    options(tikzDefaultEngine = 'pdftex')
+    s <- paste0('plot/simple_model_quarterly_', .BY[[1]], '.tex')
+    s <- gsub('\\', '', s, fixed=TRUE)
+    gg2 <- ggplot(.SD, aes(TIME, value)) + geom_line() + facet_wrap(~ country) +
+      ggtitle(paste0(descriptions[[.BY[[1]]]], ' by country'))
+    tikz(s, height=6, width=9)
+    print(gg2)
+    dev.off()
+  }, by='variable']
+
+  tikz('plot/model_diagnostic_quarterly.tex', width=6, height=6)
+  par(mfrow=c(2,2))
+  plot(x.lm)
+  dev.off()
+
+  pdf('plot/model_diagnostic_quarterly.pdf', width=9, height=9)
+  par(mfrow=c(2,2))
+  plot(x.lm)
+  dev.off()
+
 }
 
-## y.impute <- imputeDataSoftImpute(as.data.frame(y), ncol(y)-1)[[1]] %>% as.data.table
-vifs <- VIF(unselect(y, 'egr'))
-vifs.dt <- data.table(vifs=unlist(vifs), names=names(vifs),
-                      desc=eo.desc[names(vifs), Variable])
 
-n <- 5
-imputations <- mice::mice(y, n)
-data.mice <- lapply(1:n, function(i) mice::complete(imputations, i))
 
-y.lm <- lm(egr ~ ., y.impute)
-summary(y.lm)
 
-par(mar=c(4, 10, 4, 4))
-y.lm.lower <- lm(egr ~ 1, y.impute)
-# y.step.low <- step(y.lm.lower, scope=list(lower=y.lm.lower, upper=y.lm), direction="both")
-# y.step.up <- step(y.lm, scope=list(lower=y.lm.lower, upper=y.lm), direction="both")
+
+################################################################################
+### Plot
+### Check quality of the interpolation
+if (FALSE) {
+  summary(x)
+  par(mar=c(2.5, 10, 2.5, 2.5))
+  barplot(sort(table(x$country)), horiz=T, las=2)
+
+  compareValue(eo.q[country.q], int='gdpv_interpolated', quarter='gdpv')
+  compareValue(eo.q[country.q], int='ypgtq_interpolated', quarter='ypgtq')
+  compareValue(eo.q[country.q], int='unr_interpolated', quarter='unr')
+  compareValue(eo.q[country.q], int='ydrh_interpolated', quarter='ydrh')
+}
