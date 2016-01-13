@@ -155,7 +155,7 @@ It causes bias.
 
 # Robustness
 
-Robustness?
+* Check table of log population robustness (not automated CountryUSA, labels are messed up)
 
 # Government Fiscal Transparency IMF Data
 Constant time 

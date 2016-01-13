@@ -9,7 +9,9 @@ PCKGS <- c('data.table',
            'rpart',
            'glmnet',
            'parallel',
-           'DescTools')
+           'DescTools',
+           'plm',
+           'plotly')
 
 loadPackages <- function(){
   lapply(PCKGS, require, character.only=TRUE)

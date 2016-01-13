@@ -74,6 +74,39 @@ x <- x[!is.na(egr)] # Non na observation
 x.lm <- lm(egr ~ ., x[, cols, with=FALSE])
 summary(x.lm)
 
+robustnessAnalysis <- function(data, cols, to.drop, formula=egr ~ .){
+  cols.extended <- unselectVector(cols, to.drop)
+  x.lm <- lm(formula, data[, cols.extended, with=FALSE])
+  print(summary(x.lm))
+  x.lm
+}
+
+
+## Using the trick fiscal_transparencyscore*gdp_growth
+x.new <- copy(x)
+lassen <- fread('../data/lassen_fiscal_scores.csv')
+x.lassen <- merge(x.new, lassen, by.x='country', by.y='ISO')
+
+imf.gfs <- fread('../data/imf_gfs_scores.csv', header=TRUE) %>%
+  {.[, list(ISO, `Index Score`)]}
+setnames(imf.gfs, c('ISO', 'Index Score'), c('country', 'imf_gfs'))
+x.imf.gfs <- merge(x.new, imf.gfs, by='country')
+
+setnames(x.lassen, 'Index Score', 'fiscal_transparency_score')
+setnames(x.imf.gfs, 'imf_gfs', 'fiscal_transparency_score')
+
+ff <- egr ~ .
+ff.fiscal <- egr ~ . - fiscal_transparency_score + fiscal_transparency_score*gdpv_annpct
+lassen.lm <- robustnessAnalysis(x.lassen, c(cols, 'fiscal_transparency_score'), '',
+                                ff.fiscal)
+lassen.wo.lm <- robustnessAnalysis(as.data.table(lassen.lm$model), cols, '', ff)
+
+imf.gfs.lm <- robustnessAnalysis(x.imf.gfs, c(cols, 'fiscal_transparency_score'), '',
+                                ff.fiscal)
+imf.gfs.wo.lm <- robustnessAnalysis(as.data.table(imf.gfs.lm$model), cols, '', ff)
+
+par(mfrow = c(2,2))
+plot(imf.gfs.lm)
 ################################################################################
 ### Residuals are really bad when using no difference
 ### New methods: diff all variable and study the difference
@@ -98,10 +131,11 @@ if (MAKE_PLOTS){
   data.plot[, variable:=gsub('_', '\\\\_', variable)]
   descriptions <- list(`gdpv\\_annpct`='GDP growth',
                        unr='Unemployment rate',
-                       ypgtq='Total disbursements, general government, in percent of GDP',
+                       ypgtq_interpolated='Total disbursements, general government, in percent of GDP',
                        egr='Public employment rate',
-                       lpop='Log of population',
-                       `ydrh\\_to\\_gdpv`='Household net income, in percent of GDP')
+                       lpop_interpolated='Log of population',
+                       `ydrh\\_to\\_gdpv_interpolated`='Household net income, in percent of GDP',
+                       'gdp_per_capita_interpolated'= 'GDP per capita, in Millions of USD')
 
   data.plot[, {
     options(tikzDefaultEngine = 'pdftex')
