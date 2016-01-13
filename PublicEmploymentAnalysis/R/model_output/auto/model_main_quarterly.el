@@ -1,5 +1,5 @@
 (TeX-add-style-hook
- "main_simple_model_quarterly"
+ "model_main_quarterly"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("article" "a4paper" "10pt")))
@@ -7,13 +7,12 @@
                      '(("geometry" "margin=2.5cm")))
    (TeX-run-style-hooks
     "latex2e"
+    "simple_statistic_quarterly"
     "article"
     "art10"
     "geometry"
     "tikz"
-    "pdflscape"
-    "pdfpages"
-    "graphicx")
+    "pdflscape")
    (TeX-add-symbols
-    '("insertplot" 2))))
+    '("insertmodel" 2))))
 

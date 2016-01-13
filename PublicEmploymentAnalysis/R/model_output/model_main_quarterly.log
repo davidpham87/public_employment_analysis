@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  13 JAN 2016 23:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  13 JAN 2016 22:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**\input main_simple_model.tex
-(./main_simple_model.tex
+**\input model_main_quarterly.tex
+(./model_main_quarterly.tex
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -366,21 +366,31 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
 )
-(./main_simple_model.aux)
-\openout1 = `main_simple_model.aux'.
+(./model_main_quarterly.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+)
+\openout1 = `model_main_quarterly.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -474,70 +484,59 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(./model_diagnostic.tex)
+(./simple_statistic_quarterly.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 8.
 
-LaTeX Warning: Float too large for page by 14.32033pt on input line 30.
+Overfull \hbox (24.45177pt too wide) in paragraph at lines 8--24
+ [][] 
+ []
 
-(./model_fit_quality.tex)
+) (./simple_lm_quarterly.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 7.
+) (./simple_lm_lassen_quarterly.tex
+Overfull \hbox (39.17355pt too wide) in paragraph at lines 7--57
+ [][] 
+ []
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 31.
+) (./simple_lm_imf_quarterly.tex
+Overfull \hbox (39.17355pt too wide) in paragraph at lines 7--57
+ [][] 
+ []
 
-(./simple_model_egr.tex)
+) [1
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 33.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+(./model_main_quarterly.aux)
 
-(./simple_model_gdpv_annpct.tex)
+LaTeX Warning: There were multiply-defined labels.
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 34.
-
-(./simple_model_lpop.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 35.
-
-(./simple_model_lpoptot.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 36.
-
-(./simple_model_unr.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 37.
-
-(./simple_model_gdp_per_capita.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 38.
-
-(./simple_model_ydrh_to_gdpv.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 40.
-
-(./simple_model_ypgtq.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 42.
-
-(./simple_model_incomeineq.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 43.
-
-(./simple_model_fiscal_transparency.tex)
-
-LaTeX Warning: Float too large for page by 2.32033pt on input line 45.
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
-[7] [8] [9] [10] [11] [12] (./main_simple_model.aux) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 24274 strings out of 493105
- 485493 string characters out of 6137072
- 2382730 words of memory out of 5000000
- 27501 multiletter control sequences out of 15000+600000
- 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 11752 strings out of 493105
+ 236951 string characters out of 6137072
+ 294065 words of memory out of 5000000
+ 14996 multiletter control sequences out of 15000+600000
+ 5809 words of font info for 21 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,54p,427b,713s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on main_simple_model.pdf (12 pages, 424730 bytes).
+ 55i,10n,54p,430b,269s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmti10.pfb>
+Output written on model_main_quarterly.pdf (3 pages, 91292 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
+ 49 PDF objects out of 1000 (max. 8388607)
+ 35 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

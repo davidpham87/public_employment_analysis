@@ -1,0 +1,24 @@
+\documentclass[a4paper, 10pt]{article}
+% All LaTeX documents including
+% tikz() output must use this
+% package!
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{tikz}
+\usepackage{pdflscape}
+
+\newcommand{\insertmodel}[2]{
+  \input{#1}
+
+}
+
+\begin{document}
+
+\input{simple_statistic_quarterly.tex}
+
+\insertmodel{simple_lm_quarterly.tex}
+
+\insertmodel{simple_lm_lassen_quarterly.tex}
+
+\insertmodel{simple_lm_imf_quarterly.tex}
+
+\end{document}

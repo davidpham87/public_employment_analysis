@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  12 JAN 2016 19:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  13 JAN 2016 23:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -366,21 +366,54 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2013/08/25 v0.4v Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count110
+\calc@Bcount=\count111
+\calc@Adimen=\dimen159
+\calc@Bdimen=\dimen160
+\calc@Askip=\skip43
+\calc@Bskip=\skip44
+LaTeX Info: Redefining \setlength on input line 75.
+LaTeX Info: Redefining \addtolength on input line 76.
+\calc@Ccount=\count112
+\calc@Cskip=\skip45
+)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2013/10/06 v2.0d eso-pic (RN)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box37
+\AM@toc@title=\toks28
+\c@AM@survey=\count113
+\AM@templatesizebox=\box38
+)
 (./main_simple_model_quarterly.aux)
 \openout1 = `main_simple_model_quarterly.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -419,17 +452,17 @@ LaTeX Font Info:    ... okay on input line 17.
 ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen159
-\scratchbox=\box37
-\nofMPsegments=\count111
-\nofMParguments=\count112
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen160
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count114
+\scratchdimen=\dimen161
+\scratchbox=\box39
+\nofMPsegments=\count115
+\nofMParguments=\count116
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count117
+\MPscratchDim=\dimen162
+\MPnumerator=\count118
+\makeMPintoPDFobject=\count119
+\everyMPtoPDFconversion=\toks30
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -474,46 +507,62 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+\AtBeginShipoutBox=\box40
+
+<model_diagnostic_quarterly.pdf, id=4, 650.43pt x 650.43pt>
+File: model_diagnostic_quarterly.pdf Graphic file (type pdf)
+
+<use model_diagnostic_quarterly.pdf>
+Package pdftex.def Info: model_diagnostic_quarterly.pdf used on input line 32.
+(pdftex.def)             Requested size: 426.80394pt x 426.79134pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 36.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 36.
+
+
+LaTeX Warning: Float too large for page by 8.04723pt on input line 37.
+
 (./simple_model_quarterly_egr.tex)
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 27.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 39.
 
 (./simple_model_quarterly_gdpv_annpct.tex)
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 28.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 40.
 
 (./simple_model_quarterly_lpop_interpolated.tex)
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 29.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 41.
 
 (./simple_model_quarterly_unr.tex)
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 30.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 42.
 
 (./simple_model_quarterly_gdp_per_capita_interpolated.tex)
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 32.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 44.
 
 (./simple_model_quarterly_ypgtq_interpolated.tex)
 
-LaTeX Warning: Float too large for page by 2.32033pt on input line 34.
+LaTeX Warning: Float too large for page by 2.32033pt on input line 46.
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
-(./main_simple_model_quarterly.aux) ) 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./model_diagnostic_quart
+erly.pdf>] [2] [3] [4] [5] [6] [7] (./main_simple_model_quarterly.aux) ) 
 Here is how much of TeX's memory you used:
- 25491 strings out of 493105
- 510116 string characters out of 6137072
- 1078605 words of memory out of 5000000
- 28736 multiletter control sequences out of 15000+600000
+ 26257 strings out of 493105
+ 522491 string characters out of 6137072
+ 1095454 words of memory out of 5000000
+ 29478 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,54p,437b,713s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr10.pfb>
-Output written on main_simple_model_quarterly.pdf (6 pages, 190938 bytes).
+ 55i,8n,54p,437b,722s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on main_simple_model_quarterly.pdf (7 pages, 287203 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
- 20 compressed objects within 1 object stream
+ 42 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

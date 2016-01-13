@@ -5,6 +5,8 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{tikz}
 \usepackage{pdflscape}
+\usepackage{pdfpages}
+\usepackage{graphicx}
 
 \newcommand{\insertplot}[2]{
   \begin{figure}[!ht]
@@ -24,6 +26,16 @@
 %   \end{figure}
 % \end{landscape}
 \begin{landscape}
+
+  \begin{figure}
+    \centering
+    \includegraphics[height=15cm]{model_diagnostic_quarterly}
+    \caption{Model diagnostic for the linear model $\Delta( \textrm{Public
+        Employement Rate})$ against the GDP growth, log of working
+      population, unemployment rate (with lag), and government expenses, with
+      control on autoregression and fixed effects.}
+   \end{figure}
+
   \insertplot{simple_model_quarterly_egr.tex}{Public employment rate}
   \insertplot{simple_model_quarterly_gdpv_annpct.tex}{GDP growth, volume}
   \insertplot{simple_model_quarterly_lpop_interpolated.tex}{Log of working population}

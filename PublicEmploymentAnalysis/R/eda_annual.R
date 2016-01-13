@@ -68,6 +68,7 @@ data.plm <- as.data.frame(DT)
 form <- formula(terms(egr ~ ., data = data.plm))
 dform <- update(form, . ~ . + L(egr, 1))
 summary(dynlm(dform, na.omit(data.plm)))
+
 ## x.gam <- gam(ff, data=x[, cols, with=FALSE])
 ## plot(x.gam)
 ## gam.check(x.gam)
@@ -194,8 +195,7 @@ descriptions <- list(`gdpv\\_annpct`='GDP growth',
                      lpoptot='Log of total population in million',
                      'TIME'='Time',
                      egr_diff='Change in Public Employment Rate (CPER)',
-                     egr_lagged='Lagged change in Public Employment Rate'
-                     )
+                     egr_lagged='Lagged change in Public Employment Rate')
 
 ## Data plots
 if (MAKE_PLOT){
@@ -226,7 +226,7 @@ if (MAKE_PLOT){
 
   ## Plots the pacf for the diff of egr
   tikz('plot/model_pacf.tex', width=6, height=6)
-  par(mfrow=c(5,5))
+  par(mfrow=c(4, 4))
   x[, {pacf(egr, main=.BY[[1]]);0}, by='country']
   dev.off()
 
