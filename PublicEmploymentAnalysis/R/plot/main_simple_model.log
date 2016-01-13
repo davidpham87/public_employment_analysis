@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  12 JAN 2016 22:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  13 JAN 2016 19:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -521,16 +521,16 @@ LaTeX Warning: Float too large for page by 14.32033pt on input line 41.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
 [7] [8] [9] [10] [11] (./main_simple_model.aux) ) 
 Here is how much of TeX's memory you used:
- 23575 strings out of 493105
- 471705 string characters out of 6137072
- 2325469 words of memory out of 5000000
- 26805 multiletter control sequences out of 15000+600000
+ 23519 strings out of 493105
+ 470545 string characters out of 6137072
+ 2314902 words of memory out of 5000000
+ 26749 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,8n,54p,427b,713s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on main_simple_model.pdf (11 pages, 413656 bytes).
+Output written on main_simple_model.pdf (11 pages, 410142 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  32 compressed objects within 1 object stream

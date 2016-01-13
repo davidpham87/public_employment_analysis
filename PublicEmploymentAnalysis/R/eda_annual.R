@@ -3,14 +3,15 @@ pckgs <- loadPackages()
 
 MAKE_PLOT <- FALSE
 
-cols <- c('egr', # public employement rate
+cols <- c('egr_diff', # public employement rate
+          'egr_lagged',
           'TIME', # year
           'gdpv_annpct', # gdp growth
           'unr', # 'unemployment rate'
           'ypgtq', # Total disburrsements, general government percent of GDP
           ## 'pop1574', # population proxy (aged from 15 to 74) # absolute number
           'lpop', # log population -> take approximation
-          'country',
+          #'country'
           'ydrh_to_gdpv' # Ratio of net money income per capita to gdp (volume)
           )
 
@@ -25,7 +26,10 @@ missing.country <- eos[[1]][, setdiff(unique(country), country.a)]
 
 
 x <- eos[[1]][country.a]
-x[, egr := 100*eg/et] # et: General Government employment, et: Total employment
+x[, egr := 100*eg/et, by='country'] # et: General Government employment, et: Total employment
+x[, egr_diff:= c(NA, diff(egr)), by='country'] # et: General Government employment, et: Total employment
+x <- x[TIME < 2016 & TIME > 1990] # make sure there are no projections
+x[, egr_lagged:= c(NA, egr_diff[1:length(egr_diff)-1]), by='country'] # et: General Government employment, et: Total employment
 time.numeric <- x$TIME
 x[, TIME:=as.factor(TIME)]
 x[, country:=as.factor(country)]
@@ -37,13 +41,33 @@ library(mgcv)
 library(sfsmisc)
 library(nlme)
 
+par(mfrow=c(5,5))
+x[, { pacf(egr, main=.BY[[1]]); 0 }, by='country']
+
+showdiag <- function(lm.obj){
+  par(mfrow = c(2, 2))
+  plot(lm.obj)
+}
+
+
 ## Expand the formula
-
-x.lm <- lm(egr ~ ., data=x[, cols, with=FALSE])
+x.lm <- lm(egr_diff~ ., data=x[, cols, with=FALSE])
 x.lm.s <- summary(x.lm)
+x.lm.s
+
+x.model.lm <- na.omit(x[, c(cols, 'country'), with=FALSE])
+lvl2num <- function(x) as.numeric(levels(x)[x])
+x.model.lm$TIME <- x.model.lm[, lvl2num(TIME)]
+y.fit.simple.lm <- fitted(x.lm)
 
 
-
+DT <- copy(x[, cols, with=FALSE])
+library(plm)
+library(dynlm)
+data.plm <- as.data.frame(DT)
+form <- formula(terms(egr ~ ., data = data.plm))
+dform <- update(form, . ~ . + L(egr, 1))
+summary(dynlm(dform, na.omit(data.plm)))
 ## x.gam <- gam(ff, data=x[, cols, with=FALSE])
 ## plot(x.gam)
 ## gam.check(x.gam)
@@ -107,7 +131,7 @@ robustnessAnalysis <- function(data, cols, to.drop, formula=egr ~ .){
 }
 
 # All variables
-ff <- egr ~ .  #+ imf_gfs*gdpv_annpct
+ff <- egr_diff~ .  #+ imf_gfs*gdpv_annpct
 x.new[, TIME:=as.factor(TIME)]
 
 ## W/o countries
@@ -146,7 +170,7 @@ x.imf.gfs <- merge(x.new, imf.gfs, by='country')
 setnames(x.lassen, 'Index Score', 'fiscal_transparency_score')
 setnames(x.imf.gfs, 'imf_gfs.y', 'fiscal_transparency_score')
 
-ff.fiscal <- egr ~ . - fiscal_transparency_score + fiscal_transparency_score*gdpv_annpct
+ff.fiscal <- egr_diff~ . - fiscal_transparency_score + fiscal_transparency_score*gdpv_annpct
 lassen.lm <- robustnessAnalysis(x.lassen, c(cols, 'fiscal_transparency_score'), '',
                                 ff.fiscal)
 lassen.wo.lm <- robustnessAnalysis(as.data.table(lassen.lm$model), cols, '', ff)
@@ -168,7 +192,10 @@ descriptions <- list(`gdpv\\_annpct`='GDP growth',
                      `fiscal\\_transparency`='IMF GFS Index',
                      incomeineq='Gini coefficient',
                      lpoptot='Log of total population in million',
-                     'TIME'='Time')
+                     'TIME'='Time',
+                     egr_diff='Change in Public Employment Rate (CPER)',
+                     egr_lagged='Lagged change in Public Employment Rate'
+                     )
 
 ## Data plots
 if (MAKE_PLOT){
@@ -196,11 +223,24 @@ if (MAKE_PLOT){
   par(mfrow=c(2,2))
   plot(x.lm)
   dev.off()
+
+  ## Plots the pacf for the diff of egr
+  tikz('plot/model_pacf.tex', width=6, height=6)
+  par(mfrow=c(5,5))
+  x[, {pacf(egr, main=.BY[[1]]);0}, by='country']
+  dev.off()
+
+  colnames(x.model.lm) <- gsub('\\_', '\\\\_', colnames(x.model.lm))
+  y.fit <- y.fit.simple.lm
+  tikz('plot/model_fit_quality.tex', width=6, height=6)
+  gg <- compareValue(as.data.table(cbind(x.model.lm, y.fit)), y.fit='y.fit', egr='egr\\_diff')
+  print(gg)
+  dev.off()
 }
 
 
 ## If you want to compare visually the variables
-if (MAKE_PLOT){
+if (FALSE){
   ## compareValue(x.new, total_disburrsements='ypgtq')
   ## compareValue(x.new, ydrh='ydrh', gdp_cap='gdp_per_capita')
   ## compareValue(x.new, gdp_cap='gdp_per_capita')
@@ -230,9 +270,12 @@ description <-
          country='Country',
          `gdpv_annpct:fiscal_transparency_score`='Effect of Fiscal Transparency on GDP Growth',
          fiscal_transparency_score='Fiscal Transparency',
-         'gini_toth'='Gini coefficient (Toth 2015)'),
+         'gini_toth'='Gini coefficient (Toth 2015)',
+         egr_diff='Change in Public Employment Rate (CPER)',
+         egr_lagged='Lagged change in Public Employment Rate'),
     descriptions)
 
+x.lm$model$TIME <- lvl2num(x.lm$model$TIME)
 queryList(description, colnames(x.lm$model)) %>% {
   stargazer(x.lm$model, out='model_output/simple_statistic.tex',
             covariate.labels=.,
@@ -242,9 +285,9 @@ queryList(description, colnames(x.lm$model)) %>% {
 toTexModel <- function(li.lm, title, out, dep.names='Public employment rate'){
   cov.labs <- na.omit(queryList(description, names(coef(li.lm[[1]]))[-1]))
   argx <- c(li.lm, list(title=title, out=out, covariate.labels=cov.labs,
-                        dep.var.labels=dep.name, omit=c('TIME', 'country'),
+                        dep.var.labels=dep.name, omit=c('TIME', 'country', 'egr_lagged'),
                         omit.labels = c('Year fixed-effect',
-                                        'Country fixed-effect')))
+                                        'Country fixed-effect', 'Auto-correlation effect')))
   do.call(stargazer, argx)
 }
 
