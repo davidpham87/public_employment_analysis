@@ -6,14 +6,27 @@ geometry:
     - margin=3cm
 papersize: a4paper
 
-
 ---
 
 <!-- \bibliography{biblio.bib} So that RefTeX knows about the bibliography -->
 
-# Data
+# Summary of the analysis
 
-## OECD economic outlook
+
+
+# Model and Data
+
+Following [@aaskoven2015fiscal], the following variable were selected to
+explain the public employment rate:
+
+government employment, total employment, gdp growth,
+
+## Data
+
+### OECD economic outlook
+
+Economic outlook data set with annual and quarterly frequency.
+
 
 - Governemnt (public) employment: "eg"
 - Total Employement : "et"
@@ -37,7 +50,7 @@ papersize: a4paper
 
 ## OECD Population
 
-Population are taken from 
+Population are taken from
 [OECD](http://stats.oecd.org/Index.aspx?DatasetCode=POP_FIVE_HIST).
 
 - log of city population ?
@@ -54,7 +67,7 @@ Population are taken from
 ## Unfound data
 
 - fiscal rules, fiscal transparency
-- data from Lassen (2010 19-20) 
+- data from Lassen (2010 19-20)
 - Fiscal transparency is interacted with gdp growth as it should contribute as
   a good factor.
 
@@ -144,7 +157,7 @@ Population are taken from
 - Compare the models (step, using missing data)
 - Quarterly <-> Check dates
 
-# Quarterly 
+# Quarterly
 
 - No data for population
 - Compare amongst countries with only quaterly data
@@ -158,7 +171,6 @@ It causes bias.
 * Check table of log population robustness (not automated CountryUSA, labels are messed up)
 
 # Government Fiscal Transparency IMF Data
-Constant time 
+Constant time
 
 # Bibliography
-

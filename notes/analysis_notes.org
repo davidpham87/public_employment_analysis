@@ -1,0 +1,210 @@
+#+TITLE: Analysis of Public Employment Rate
+#+AUTHOR: David Pham
+#+EMAIL: davidpham87@gmail.com
+#+DATE: 2016-01-13
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper]
+#+LATEX_HEADER: \usepackage[margin=3.5cm]{geometry}
+#+LATEX_HEADER: \bibliographystyle{chicago}% ---> Hampel,F., E.Ronchetti,... W.Stahel(1986) ...
+#+LATEX_HEADER: \bibliography{biblio.bib}
+#+SETUPFILE: ~/.emacs.d/packs/lang-code/lib/org-html-themes/setup/theme-readtheorg.setup
+#+HTML_HEAD: <style> pre.src {background: #3F3F3F; color: #DCDCCC;} </style>
+#+OPTIONS: ^:{}
+#+BIBLIOGRAPHY: biblio plain
+
+* Summary
+
+
+* Model and Data
+
+** Data
+
+Following \cite{aaskoven2015fiscal}, the following variable were selected from
+the Economic Outlook database to explain the public employment rate:
+
+| Variable                         | Oecd code   |
+|----------------------------------+-------------|
+| country                          | country     |
+| government employment            | eg          |
+| total employment                 | et          |
+| GDP growth                       | gdpv_annpct |
+| unemployment rate                | unr         |
+| government spending              | ypgtq       |
+| adult population                 | pop1574     |
+| Net household dispossable income | ydrh        |
+|----------------------------------+-------------|
+
+Additionally, the following time series were retrieved to compare result of the
+regression with \cite{aaskoven2015fiscal} and \cite{alesina2000redistributive}:
+
+| Data                              | Source                         |
+|-----------------------------------+--------------------------------|
+| GPD per capita                    | OECD \cite{@oecd2015gdp}       |
+| gini index                        | OECD \cite{oecd2015inequality} |
+| gini index                        | \cite{toth2014chapter}         |
+| Fiscal Transparency               | IMF \cite{wang2015trends}      |
+| Laassen Fiscal Transparency Score | \cite{aaskoven2015fiscal}      |
+|-----------------------------------+--------------------------------|
+
+Unfortunately, these data had an annual frequency only. Note that the IMF
+fiscal transparency data provides time series for the last ten years.
+
+
+** Model
+
+\cite{aaskoven2015fiscal} explains the level of public employment with gdp
+growth with an additional nonlinear effect provided by the fiscal transparency
+score of a country, namely
+
+\begin{align*}
+Y_{i,t} = \alpha + \beta_1 G_{i,t} + \beta_2 G_{i,t} T_i + \beta_3 X_{i,t} + \eta_i + \tau_t + \varepsilon_{i,t},
+\end{align*}
+
+where the variables are
++ $Y_{i,t}$, the public employment;
++ $G_{i,t}$, GDP growth;
++ $T_{i}$, fiscal transparency;
++ $X$ is the vector of control variables;
++ $\eta_i$, country fixed effect;
++ $\tau_t$, year fixed effect.
+
+However, with the data from the OECD, the diagnostic plots of this model are
+quite disturbing: residuals show a clear correlation and tails of the
+distribution clearly deviate from the Gaussian assumption. Moreover, in my
+opinion, it is quite controversial to add a nonlinear effect ($\beta_2 G_{it}
+T_i$) without looking at the linear effect of $T_i$.
+
+After several attempts to find an acceptable model, the fixed effect with
+autoregressive components looked promising. In this model, the difference of
+the public employment are explained:
+
+\begin{align*}
+\Delta Y_{i,t} = Y_{i,t} - Y{i,t-1}= \alpha + \rho Y_{i, t-1} + \beta_1 G_{it} + \beta_2 X{i, t} + \beta_3 X_{i, t-1} + \tau_t + \varepsilon_{it},
+\end{align*}
+
+where the variable are same as previously. Controls variables (in $X_{it}$)were:
+
+- Unemployment rate;
+- Log of adult population (aged between 15-74 years old);
+- Government expenses;
+- Net household disposable income in percent of GDP.
+
+Robustness has been studied by adding and deleting the following variables from the predictors
+
+- Total population;
+- GDP per capita;
+- Gini coefficient;
+- Fiscal transparency scores (IMF time series, Lassen scores and IMF scores).
+
+Result can be found in appendix.
+
+* Challenges with the data
+
+  The data present some challenges: missingness among variable and among frequency.
+
+  As observations are not always present for all variables for a country at a
+  fixed year, the common approach in regression analysis is to keep only
+  complete-case. This can obviously lead to some bias. In this study, when
+  doing robustness analysis, it is possible that the size of the data set vary
+  considerably between models.
+
+  Concerning quarterly data, most of control variable are not reported on
+  quarterly basis in the oecd dataset \footnote{The dataset in Stata format
+  seemed to be corrupted}. A spline smoother has been applied to interpolated
+  between points and obviously this affect the quality of the fits with
+  quarterly data as the independent variable is too smooth.
+
+** Note about the data
+
+   Fiscal transparency is interacted with gdp growth as it should
+   contribute as a good factor. Here are the Lassen Scores as in \cite{aaskoven2015fiscal}
+
+#+CAPTION: Transcription of fiscal transparency scores from \cite{aaskoven2015fiscal}.
+| Country          | Fiscal Score   |
+|------------------+----------------|
+| Greece           | 1              |
+| Italy            | 2              |
+| Norway           | 2              |
+| Belgium          | 3              |
+| Denmark          | 3              |
+| Germany          | 3              |
+| Ireland          | 3              |
+| Spain            | 3              |
+| Switzerland      | 3              |
+| Austria          | 4              |
+| France           | 4              |
+| Portugal         | 4              |
+| Canada           | 5              |
+| Finland          | 5              |
+| Netherlands      | 5              |
+| Sweden           | 5              |
+| Australia        | 6              |
+| United Kingdom   | 8              |
+| United States    | 9              |
+| New Zealand      | 10             |
+
+
+Here is the list of countries belonging in the OECD database. A cross tells if public employment data were available.
+
+#+CAPTION: Availability of public employment data inside the Economic Outlook 98 data set.
+
+| Country                      | Annually | Quarterly |
+|------------------------------+----------+-----------|
+| Australia                    |          |           |
+| Austria                      |          |           |
+| Belgium                      | x        | x         |
+| Brazil                       |          |           |
+| Canada                       | x        | x         |
+| Chile                        |          |           |
+| China (People's Republic of) |          |           |
+| Colombia                     |          |           |
+| Czech Republic               | x        | x         |
+| Denmark                      | x        | x         |
+| Estonia                      | x        | x         |
+| Finland                      | x        | x         |
+| France                       | x        | x         |
+| Germany                      |          |           |
+| Greece                       |          |           |
+| Hungary                      | x        | x         |
+| Iceland                      |          |           |
+| India                        |          |           |
+| Indonesia                    |          |           |
+| Ireland                      | x        | x         |
+| Israel                       | x        |           |
+| Italy                        | x        |           |
+| Japan                        | x        | x         |
+| Korea                        |          |           |
+| Latvia                       |          |           |
+| Luxembourg                   | x        | x         |
+| Mexico                       |          |           |
+| Netherlands                  | x        | x         |
+| New Zealand                  |          |           |
+| Norway                       | x        | x         |
+| Poland                       | x        | x         |
+| Portugal                     | x        |           |
+| Russia                       |          |           |
+| Slovak Republic              | x        |           |
+| Slovenia                     |          |           |
+| South Africa                 |          |           |
+| Spain                        | x        |           |
+| Sweden                       | x        | x         |
+| Switzerland                  |          |           |
+| Turkey                       | x        |           |
+| United Kingdom               | x        | x         |
+| United States                | x        | x         |
+|------------------------------+----------+-----------|
+
+
+** What remains to be done
+   - One has to find data and time series about the political side of the
+     government.
+
+* Note
+
+  The original variables were selected because of the prior distribution we had
+  on them. Advanced statistical methods should be tried to discover if any other
+  predictors could be better. For example, in quarterly data, Lasso method
+  selected the variable *Net exports, contribution to growth* as potential
+  variable.
+
+* Bibliography

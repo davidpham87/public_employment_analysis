@@ -1,0 +1,269 @@
+% Created 2016-01-14 Don 00:23
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage[margin=3.5cm]{geometry}
+\bibliographystyle{chicago}% ---> Hampel,F., E.Ronchetti,... W.Stahel(1986) ...
+\bibliography{biblio.bib}
+\author{David Pham}
+\date{\textit{<2016-01-13 Mit>}}
+\title{Analysis of Public Employment Rate}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Summary of the analysis}
+\label{sec-1}
+
+\section{Model and Data}
+\label{sec-2}
+
+Following \cite{aaskoven2015fiscal}, the following variable were selected from
+the Economic Outlook database to explain the public employment rate:
+
+\begin{center}
+\begin{tabular}{ll}
+Variable & Oecd code\\
+\hline
+country & country\\
+government employment & eg\\
+total employment & et\\
+GDP growth & gdpv$_{\text{annpct}}$\\
+unemployment rate & unr\\
+government spending & ypgtq\\
+adult population & pop1574\\
+Net household dispossable income & ydrh\\
+\hline
+\end{tabular}
+\end{center}
+
+Additionally, the following time series were retrieved to compare result of the
+regression with \cite{aaskoven2015fiscal} and \cite{alesina2000redistributive}:
+
+\begin{center}
+\begin{tabular}{ll}
+Data & Source\\
+\hline
+GPD per capita & OECD\\
+gini index & OECD\\
+gini index & \cite{toth2014chapter}\\
+Fiscal Transparency & IMF \cite{wang2015trends}\\
+Laassen Fiscal Transparency Score & \cite{aaskoven2015fiscal}\\
+\hline
+\end{tabular}
+\end{center}
+
+Unfortunately, these data had an annual frequency only.
+
+\subsection{Data}
+\label{sec-2-1}
+
+\subsubsection{OECD economic outlook}
+\label{sec-2-1-1}
+
+Economic outlook data set with annual and quarterly frequency.
+
+\begin{itemize}
+\item Governemnt (public) employment: "eg"
+\item Total Employement : "et"
+\item GDP growth: gdpv$\backslash$$_{\text{annpct}}$
+\item unemployment rate: unr
+\item ecsa, ee?
+\item Time effect: "year" or "date"
+\item Government spending "ypgtq", \emph{Total disbursements, general
+government, as a percentage of GDP}
+
+\item "POP1574"
+\item Electoral incentives (number of electoral years)
+\item Economics conditions: ? See if growth or recession
+\item country: "country"
+\item money income per capita (Net/Gross household disposable income, real:
+YDRH($\backslash$$_{\text{G}}$))
+
+\item Ethnicity?
+\item Left or right party
+\item Portion of population having a university degree
+\end{itemize}
+
+\subsection{OECD Population}
+\label{sec-2-2}
+
+Population are taken from
+\href{http://stats.oecd.org/Index.aspx?DatasetCode=POP_FIVE_HIST}{OECD}.
+
+\begin{itemize}
+\item log of city population ?
+\end{itemize}
+
+\subsection{National Accounts}
+\label{sec-2-3}
+
+\begin{itemize}
+\item GDP per capita in constant price. [@oecd2015gdp]
+\end{itemize}
+
+\subsection{Inequality}
+\label{sec-2-4}
+
+\begin{itemize}
+\item Measure of inequality: gini [@oecd2015inequality]
+\end{itemize}
+
+\subsection{Unfound data}
+\label{sec-2-5}
+
+\begin{itemize}
+\item fiscal rules, fiscal transparency
+\item data from Lassen (2010 19-20)
+\item Fiscal transparency is interacted with gdp growth as it should
+contribute as a good factor.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{lr}
+Country & Fiscal Score\\
+\hline
+Greece & 1\\
+Italy & 2\\
+Norway & 2\\
+Belgium & 3\\
+Denmark & 3\\
+Germany & 3\\
+Ireland & 3\\
+Spain & 3\\
+Switzerland & 3\\
+Austria & 4\\
+France & 4\\
+Portugal & 4\\
+Canada & 5\\
+Finland & 5\\
+Netherlands & 5\\
+Sweden & 5\\
+Australia & 6\\
+United Kingdom & 8\\
+United States & 9\\
+New Zealand & 10\\
+\end{tabular}
+\end{center}
+
+\subsection{Countries missing}
+\label{sec-2-6}
+
+\begin{center}
+\begin{tabular}{l}
+Country without Public Government\\
+\hline
+Australia\\
+Austria\\
+Brazil\\
+Chile\\
+China (People's Republic of)\\
+Colombia\\
+Germany\\
+Greece\\
+Iceland\\
+India\\
+Indonesia\\
+Korea\\
+Latvia\\
+Mexico\\
+New Zealand\\
+Russia\\
+Slovenia\\
+South Africa\\
+Switzerland\\
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{lll}
+Country & Annually & Quarterly\\
+\hline
+Belgium & x & x\\
+Canada & x & x\\
+Czech Republic & x & x\\
+Denmark & x & x\\
+Estonia & x & x\\
+Finland & x & x\\
+France & x & x\\
+Hungary & x & x\\
+Ireland & x & x\\
+Israel & x & \\
+Italy & x & \\
+Japan & x & x\\
+Luxembourg & x & x\\
+Netherlands & x & x\\
+Norway & x & x\\
+Poland & x & x\\
+Portugal & x & \\
+Slovak Republic & x & \\
+Spain & x & \\
+Sweden & x & x\\
+Turkey & x & \\
+United Kingdom & x & x\\
+United States & x & x\\
+\end{tabular}
+\end{center}
+
+\section{{\bfseries\sffamily TODO} }
+\label{sec-3}
+
+\begin{itemize}
+\item Scale data?
+\item Make the approriate transformation
+\item Use the data for supplementary variable
+
+\item Compare the models (step, using missing data)
+\item Quarterly <-> Check dates
+\end{itemize}
+
+\section{Quarterly}
+\label{sec-4}
+
+\begin{itemize}
+\item No data for population
+\item Compare amongst countries with only quaterly data
+\end{itemize}
+
+\section{Missing data}
+\label{sec-5}
+
+It causes bias.
+
+\section{Robustness}
+\label{sec-6}
+
+\begin{itemize}
+\item Check table of log population robustness (not automated CountryUSA,
+labels are messed up)
+\end{itemize}
+
+\section{Government Fiscal Transparency IMF Data}
+\label{sec-7}
+
+Constant time
+
+\section{Bibliography}
+\label{sec-8}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

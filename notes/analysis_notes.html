@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Analysis of Public Employment Rate</title>
+<!-- 2016-01-14 Don 00:32 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="David Pham" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<style> pre.src {background: #3F3F3F; color: #DCDCCC;} </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Analysis of Public Employment Rate</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Summary of the analysis</a></li>
+<li><a href="#sec-2">2. Model and Data</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Data</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. OECD economic outlook</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2. OECD Population</a></li>
+<li><a href="#sec-2-3">2.3. National Accounts</a></li>
+<li><a href="#sec-2-4">2.4. Inequality</a></li>
+<li><a href="#sec-2-5">2.5. Unfound data</a></li>
+<li><a href="#sec-2-6">2.6. Countries missing</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. <span class="todo TODO">TODO</span> </a></li>
+<li><a href="#sec-4">4. Quarterly</a></li>
+<li><a href="#sec-5">5. Missing data</a></li>
+<li><a href="#sec-6">6. Robustness</a></li>
+<li><a href="#sec-7">7. Government Fiscal Transparency IMF Data</a></li>
+<li><a href="#sec-8">8. Bibliography</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Summary of the analysis</h2>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Model and Data</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Following \cite{aaskoven2015fiscal}, the following variable were selected from
+the Economic Outlook database to explain the public employment rate:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Variable</th>
+<th scope="col" class="left">Oecd code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">country</td>
+<td class="left">country</td>
+</tr>
+
+<tr>
+<td class="left">government employment</td>
+<td class="left">eg</td>
+</tr>
+
+<tr>
+<td class="left">total employment</td>
+<td class="left">et</td>
+</tr>
+
+<tr>
+<td class="left">GDP growth</td>
+<td class="left">gdpv_annpct</td>
+</tr>
+
+<tr>
+<td class="left">unemployment rate</td>
+<td class="left">unr</td>
+</tr>
+
+<tr>
+<td class="left">government spending</td>
+<td class="left">ypgtq</td>
+</tr>
+
+<tr>
+<td class="left">adult population</td>
+<td class="left">pop1574</td>
+</tr>
+
+<tr>
+<td class="left">Net household dispossable income</td>
+<td class="left">ydrh</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Additionally, the following time series were retrieved to compare result of the
+regression with \cite{aaskoven2015fiscal} and \cite{alesina2000redistributive}:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Data</th>
+<th scope="col" class="left">Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">GPD per capita</td>
+<td class="left">OECD</td>
+</tr>
+
+<tr>
+<td class="left">gini index</td>
+<td class="left">OECD</td>
+</tr>
+
+<tr>
+<td class="left">gini index</td>
+<td class="left">\cite{toth2014chapter}</td>
+</tr>
+
+<tr>
+<td class="left">Fiscal Transparency</td>
+<td class="left">IMF \cite{wang2015trends}</td>
+</tr>
+
+<tr>
+<td class="left">Laassen Fiscal Transparency Score</td>
+<td class="left">\cite{aaskoven2015fiscal}</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Unfortunately, these data had an annual frequency only.
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Data</h3>
+<div class="outline-text-3" id="text-2-1">
+</div><div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> OECD economic outlook</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+Economic outlook data set with annual and quarterly frequency.
+</p>
+
+<ul class="org-ul">
+<li>Governemnt (public) employment: "eg"
+</li>
+<li>Total Employement : "et"
+</li>
+<li>GDP growth: gdpv\_annpct
+</li>
+<li>unemployment rate: unr
+</li>
+<li>ecsa, ee?
+</li>
+<li>Time effect: "year" or "date"
+</li>
+<li>Government spending "ypgtq", <i>Total disbursements, general
+government, as a percentage of GDP</i>
+</li>
+
+<li>"POP1574"
+</li>
+<li>Electoral incentives (number of electoral years)
+</li>
+<li>Economics conditions: ? See if growth or recession
+</li>
+<li>country: "country"
+</li>
+<li>money income per capita (Net/Gross household disposable income, real:
+YDRH(\_G))
+</li>
+
+<li>Ethnicity?
+</li>
+<li>Left or right party
+</li>
+<li>Portion of population having a university degree
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> OECD Population</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Population are taken from
+<a href="http://stats.oecd.org/Index.aspx?DatasetCode=POP_FIVE_HIST">OECD</a>.
+</p>
+
+<ul class="org-ul">
+<li>log of city population ?
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> National Accounts</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>GDP per capita in constant price. [@oecd2015gdp]
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Inequality</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>Measure of inequality: gini [@oecd2015inequality]
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Unfound data</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li>fiscal rules, fiscal transparency
+</li>
+<li>data from Lassen (2010 19-20)
+</li>
+<li>Fiscal transparency is interacted with gdp growth as it should
+contribute as a good factor.
+</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Country</th>
+<th scope="col" class="right">Fiscal Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Greece</td>
+<td class="right">1</td>
+</tr>
+
+<tr>
+<td class="left">Italy</td>
+<td class="right">2</td>
+</tr>
+
+<tr>
+<td class="left">Norway</td>
+<td class="right">2</td>
+</tr>
+
+<tr>
+<td class="left">Belgium</td>
+<td class="right">3</td>
+</tr>
+
+<tr>
+<td class="left">Denmark</td>
+<td class="right">3</td>
+</tr>
+
+<tr>
+<td class="left">Germany</td>
+<td class="right">3</td>
+</tr>
+
+<tr>
+<td class="left">Ireland</td>
+<td class="right">3</td>
+</tr>
+
+<tr>
+<td class="left">Spain</td>
+<td class="right">3</td>
+</tr>
+
+<tr>
+<td class="left">Switzerland</td>
+<td class="right">3</td>
+</tr>
+
+<tr>
+<td class="left">Austria</td>
+<td class="right">4</td>
+</tr>
+
+<tr>
+<td class="left">France</td>
+<td class="right">4</td>
+</tr>
+
+<tr>
+<td class="left">Portugal</td>
+<td class="right">4</td>
+</tr>
+
+<tr>
+<td class="left">Canada</td>
+<td class="right">5</td>
+</tr>
+
+<tr>
+<td class="left">Finland</td>
+<td class="right">5</td>
+</tr>
+
+<tr>
+<td class="left">Netherlands</td>
+<td class="right">5</td>
+</tr>
+
+<tr>
+<td class="left">Sweden</td>
+<td class="right">5</td>
+</tr>
+
+<tr>
+<td class="left">Australia</td>
+<td class="right">6</td>
+</tr>
+
+<tr>
+<td class="left">United Kingdom</td>
+<td class="right">8</td>
+</tr>
+
+<tr>
+<td class="left">United States</td>
+<td class="right">9</td>
+</tr>
+
+<tr>
+<td class="left">New Zealand</td>
+<td class="right">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Countries missing</h3>
+<div class="outline-text-3" id="text-2-6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Country without Public Government</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Australia</td>
+</tr>
+
+<tr>
+<td class="left">Austria</td>
+</tr>
+
+<tr>
+<td class="left">Brazil</td>
+</tr>
+
+<tr>
+<td class="left">Chile</td>
+</tr>
+
+<tr>
+<td class="left">China (People's Republic of)</td>
+</tr>
+
+<tr>
+<td class="left">Colombia</td>
+</tr>
+
+<tr>
+<td class="left">Germany</td>
+</tr>
+
+<tr>
+<td class="left">Greece</td>
+</tr>
+
+<tr>
+<td class="left">Iceland</td>
+</tr>
+
+<tr>
+<td class="left">India</td>
+</tr>
+
+<tr>
+<td class="left">Indonesia</td>
+</tr>
+
+<tr>
+<td class="left">Korea</td>
+</tr>
+
+<tr>
+<td class="left">Latvia</td>
+</tr>
+
+<tr>
+<td class="left">Mexico</td>
+</tr>
+
+<tr>
+<td class="left">New Zealand</td>
+</tr>
+
+<tr>
+<td class="left">Russia</td>
+</tr>
+
+<tr>
+<td class="left">Slovenia</td>
+</tr>
+
+<tr>
+<td class="left">South Africa</td>
+</tr>
+
+<tr>
+<td class="left">Switzerland</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Country</th>
+<th scope="col" class="left">Annually</th>
+<th scope="col" class="left">Quarterly</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Belgium</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Canada</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Czech Republic</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Denmark</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Estonia</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Finland</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">France</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Hungary</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Ireland</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Israel</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Italy</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Japan</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Luxembourg</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Netherlands</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Norway</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Poland</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Portugal</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Slovak Republic</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Spain</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Sweden</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Turkey</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">United Kingdom</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">United States</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> </h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>Scale data?
+</li>
+<li>Make the approriate transformation
+</li>
+<li>Use the data for supplementary variable
+</li>
+
+<li>Compare the models (step, using missing data)
+</li>
+<li>Quarterly &lt;-&gt; Check dates
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Quarterly</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>No data for population
+</li>
+<li>Compare amongst countries with only quaterly data
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Missing data</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+It causes bias.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Robustness</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>Check table of log population robustness (not automated CountryUSA,
+labels are messed up)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Government Fiscal Transparency IMF Data</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Constant time
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Bibliography</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2016-01-13</p>
+<p class="author">Author: David Pham</p>
+<p class="date">Created: 2016-01-14 Don 00:32</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

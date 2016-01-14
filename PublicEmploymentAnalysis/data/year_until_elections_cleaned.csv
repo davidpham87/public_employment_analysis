@@ -1,0 +1,1325 @@
+"","worldbank_code","iso2c","country","year","yrcurnt","yrcurnt_corrected"
+"1","AUS","AU","Australia",1975,0,0
+"2","AUS","AU","Australia",1976,2,2
+"3","AUS","AU","Australia",1977,0,0
+"4","AUS","AU","Australia",1978,2,2
+"5","AUS","AU","Australia",1979,1,1
+"6","AUS","AU","Australia",1980,0,0
+"7","AUS","AU","Australia",1981,2,2
+"8","AUS","AU","Australia",1982,1,1
+"9","AUS","AU","Australia",1983,0,0
+"10","AUS","AU","Australia",1984,0,0
+"11","AUS","AU","Australia",1985,2,2
+"12","AUS","AU","Australia",1986,1,1
+"13","AUS","AU","Australia",1987,0,0
+"14","AUS","AU","Australia",1988,2,2
+"15","AUS","AU","Australia",1989,1,1
+"16","AUS","AU","Australia",1990,0,0
+"17","AUS","AU","Australia",1991,2,2
+"18","AUS","AU","Australia",1992,1,1
+"19","AUS","AU","Australia",1993,0,0
+"20","AUS","AU","Australia",1994,2,2
+"21","AUS","AU","Australia",1995,1,1
+"22","AUS","AU","Australia",1996,0,0
+"23","AUS","AU","Australia",1997,2,2
+"24","AUS","AU","Australia",1998,1,0
+"25","AUS","AU","Australia",1999,2,2
+"26","AUS","AU","Australia",2000,1,1
+"27","AUS","AU","Australia",2001,0,0
+"28","AUS","AU","Australia",2002,2,2
+"29","AUS","AU","Australia",2003,1,1
+"30","AUS","AU","Australia",2004,0,0
+"31","AUS","AU","Australia",2005,2,2
+"32","AUS","AU","Australia",2006,1,1
+"33","AUS","AU","Australia",2007,0,0
+"34","AUS","AU","Australia",2008,2,2
+"35","AUS","AU","Australia",2009,1,1
+"36","AUS","AU","Australia",2010,0,0
+"37","AUS","AU","Australia",2011,2,2
+"38","AUS","AU","Australia",2012,1,1
+"39","AUT","AT","Austria",1975,0,0
+"40","AUT","AT","Austria",1976,3,4
+"41","AUT","AT","Austria",1977,2,3
+"42","AUT","AT","Austria",1978,1,2
+"43","AUT","AT","Austria",1979,0,0
+"44","AUT","AT","Austria",1980,3,4
+"45","AUT","AT","Austria",1981,2,3
+"46","AUT","AT","Austria",1982,1,2
+"47","AUT","AT","Austria",1983,0,0
+"48","AUT","AT","Austria",1984,3,4
+"49","AUT","AT","Austria",1985,2,3
+"50","AUT","AT","Austria",1986,0,0
+"51","AUT","AT","Austria",1987,3,4
+"52","AUT","AT","Austria",1988,2,3
+"53","AUT","AT","Austria",1989,1,2
+"54","AUT","AT","Austria",1990,0,0
+"55","AUT","AT","Austria",1991,3,4
+"56","AUT","AT","Austria",1992,2,3
+"57","AUT","AT","Austria",1993,1,2
+"58","AUT","AT","Austria",1994,0,0
+"59","AUT","AT","Austria",1995,0,0
+"60","AUT","AT","Austria",1996,3,4
+"61","AUT","AT","Austria",1997,2,3
+"62","AUT","AT","Austria",1998,1,2
+"63","AUT","AT","Austria",1999,0,0
+"64","AUT","AT","Austria",2000,3,4
+"65","AUT","AT","Austria",2001,2,3
+"66","AUT","AT","Austria",2002,1,0
+"67","AUT","AT","Austria",2003,3,4
+"68","AUT","AT","Austria",2004,2,3
+"69","AUT","AT","Austria",2005,1,2
+"70","AUT","AT","Austria",2006,0,0
+"71","AUT","AT","Austria",2007,3,4
+"72","AUT","AT","Austria",2008,2,0
+"73","AUT","AT","Austria",2009,1,4
+"74","AUT","AT","Austria",2010,0,3
+"75","AUT","AT","Austria",2011,3,2
+"76","AUT","AT","Austria",2012,2,1
+"77","AUT","AT","Austria",2013,NA,0
+"78","BEL","BE","Belgium",1975,3,3
+"79","BEL","BE","Belgium",1976,2,2
+"80","BEL","BE","Belgium",1977,1,0
+"81","BEL","BE","Belgium",1978,0,0
+"82","BEL","BE","Belgium",1979,3,3
+"83","BEL","BE","Belgium",1980,2,2
+"84","BEL","BE","Belgium",1981,0,0
+"85","BEL","BE","Belgium",1982,3,3
+"86","BEL","BE","Belgium",1983,2,2
+"87","BEL","BE","Belgium",1984,1,1
+"88","BEL","BE","Belgium",1985,0,0
+"89","BEL","BE","Belgium",1986,3,3
+"90","BEL","BE","Belgium",1987,0,0
+"91","BEL","BE","Belgium",1988,3,3
+"92","BEL","BE","Belgium",1989,2,2
+"93","BEL","BE","Belgium",1990,1,1
+"94","BEL","BE","Belgium",1991,0,0
+"95","BEL","BE","Belgium",1992,3,3
+"96","BEL","BE","Belgium",1993,2,2
+"97","BEL","BE","Belgium",1994,1,1
+"98","BEL","BE","Belgium",1995,0,0
+"99","BEL","BE","Belgium",1996,3,3
+"100","BEL","BE","Belgium",1997,2,2
+"101","BEL","BE","Belgium",1998,1,1
+"102","BEL","BE","Belgium",1999,0,0
+"103","BEL","BE","Belgium",2000,3,3
+"104","BEL","BE","Belgium",2001,2,2
+"105","BEL","BE","Belgium",2002,1,1
+"106","BEL","BE","Belgium",2003,0,0
+"107","BEL","BE","Belgium",2004,3,3
+"108","BEL","BE","Belgium",2005,2,2
+"109","BEL","BE","Belgium",2006,1,1
+"110","BEL","BE","Belgium",2007,0,0
+"111","BEL","BE","Belgium",2008,3,3
+"112","BEL","BE","Belgium",2009,2,2
+"113","BEL","BE","Belgium",2010,1,0
+"114","BEL","BE","Belgium",2011,3,3
+"115","BEL","BE","Belgium",2012,2,2
+"116","BEL","BE","Belgium",2013,NA,1
+"117","BGR","BG","Bulgaria",1990,NA,0
+"118","BGR","BG","Bulgaria",1991,4,0
+"119","BGR","BG","Bulgaria",1992,0,3
+"120","BGR","BG","Bulgaria",1993,4,2
+"121","BGR","BG","Bulgaria",1994,3,0
+"122","BGR","BG","Bulgaria",1995,2,3
+"123","BGR","BG","Bulgaria",1996,0,2
+"124","BGR","BG","Bulgaria",1997,4,0
+"125","BGR","BG","Bulgaria",1998,3,3
+"126","BGR","BG","Bulgaria",1999,2,2
+"127","BGR","BG","Bulgaria",2000,1,1
+"128","BGR","BG","Bulgaria",2001,0,0
+"129","BGR","BG","Bulgaria",2002,3,3
+"130","BGR","BG","Bulgaria",2003,2,2
+"131","BGR","BG","Bulgaria",2004,1,1
+"132","BGR","BG","Bulgaria",2005,0,0
+"133","BGR","BG","Bulgaria",2006,3,3
+"134","BGR","BG","Bulgaria",2007,2,2
+"135","BGR","BG","Bulgaria",2008,1,1
+"136","BGR","BG","Bulgaria",2009,0,0
+"137","BGR","BG","Bulgaria",2010,3,3
+"138","BGR","BG","Bulgaria",2011,2,2
+"139","BGR","BG","Bulgaria",2012,1,1
+"140","BGR","BG","Bulgaria",2013,NA,0
+"141","BGR","BG","Bulgaria",2014,NA,0
+"142","CAN","CA","Canada",1975,4,4
+"143","CAN","CA","Canada",1976,3,3
+"144","CAN","CA","Canada",1977,2,2
+"145","CAN","CA","Canada",1978,1,1
+"146","CAN","CA","Canada",1979,0,0
+"147","CAN","CA","Canada",1980,4,0
+"148","CAN","CA","Canada",1981,4,4
+"149","CAN","CA","Canada",1982,3,3
+"150","CAN","CA","Canada",1983,2,2
+"151","CAN","CA","Canada",1984,1,0
+"152","CAN","CA","Canada",1985,4,4
+"153","CAN","CA","Canada",1986,3,3
+"154","CAN","CA","Canada",1987,2,2
+"155","CAN","CA","Canada",1988,1,0
+"156","CAN","CA","Canada",1989,4,4
+"157","CAN","CA","Canada",1990,3,3
+"158","CAN","CA","Canada",1991,2,2
+"159","CAN","CA","Canada",1992,1,1
+"160","CAN","CA","Canada",1993,0,0
+"161","CAN","CA","Canada",1994,3,3
+"162","CAN","CA","Canada",1995,2,2
+"163","CAN","CA","Canada",1996,1,1
+"164","CAN","CA","Canada",1997,0,0
+"165","CAN","CA","Canada",1998,3,3
+"166","CAN","CA","Canada",1999,2,2
+"167","CAN","CA","Canada",2000,1,0
+"168","CAN","CA","Canada",2001,3,3
+"169","CAN","CA","Canada",2002,2,2
+"170","CAN","CA","Canada",2003,1,1
+"171","CAN","CA","Canada",2004,0,0
+"172","CAN","CA","Canada",2005,3,3
+"173","CAN","CA","Canada",2006,2,0
+"174","CAN","CA","Canada",2007,3,3
+"175","CAN","CA","Canada",2008,2,0
+"176","CAN","CA","Canada",2009,3,3
+"177","CAN","CA","Canada",2010,2,2
+"178","CAN","CA","Canada",2011,1,0
+"179","CAN","CA","Canada",2012,3,3
+"180","CAN","CA","Canada",2013,NA,2
+"181","HRV","HR","Croatia",1991,4,1
+"182","HRV","HR","Croatia",1992,0,0
+"183","HRV","HR","Croatia",1993,4,4
+"184","HRV","HR","Croatia",1994,3,3
+"185","HRV","HR","Croatia",1995,2,0
+"186","HRV","HR","Croatia",1996,1,4
+"187","HRV","HR","Croatia",1997,0,3
+"188","HRV","HR","Croatia",1998,4,2
+"189","HRV","HR","Croatia",1999,3,1
+"190","HRV","HR","Croatia",2000,2,0
+"191","HRV","HR","Croatia",2001,2,4
+"192","HRV","HR","Croatia",2002,1,3
+"193","HRV","HR","Croatia",2003,0,0
+"194","HRV","HR","Croatia",2004,3,4
+"195","HRV","HR","Croatia",2005,2,3
+"196","HRV","HR","Croatia",2006,1,2
+"197","HRV","HR","Croatia",2007,0,0
+"198","HRV","HR","Croatia",2008,3,4
+"199","HRV","HR","Croatia",2009,2,3
+"200","HRV","HR","Croatia",2010,1,2
+"201","HRV","HR","Croatia",2011,0,0
+"202","HRV","HR","Croatia",2012,3,3
+"203","HRV","HR","Croatia",2013,NA,2
+"204","CYP","CY","Cyprus",1978,4,4
+"205","CYP","CY","Cyprus",1979,3,3
+"206","CYP","CY","Cyprus",1980,2,2
+"207","CYP","CY","Cyprus",1981,1,1
+"208","CYP","CY","Cyprus",1982,1,1
+"209","CYP","CY","Cyprus",1983,0,0
+"210","CYP","CY","Cyprus",1984,4,4
+"211","CYP","CY","Cyprus",1985,3,3
+"212","CYP","CY","Cyprus",1986,2,2
+"213","CYP","CY","Cyprus",1987,1,1
+"214","CYP","CY","Cyprus",1988,0,0
+"215","CYP","CY","Cyprus",1989,4,4
+"216","CYP","CY","Cyprus",1990,3,3
+"217","CYP","CY","Cyprus",1991,2,2
+"218","CYP","CY","Cyprus",1992,1,1
+"219","CYP","CY","Cyprus",1993,0,0
+"220","CYP","CY","Cyprus",1994,4,4
+"221","CYP","CY","Cyprus",1995,3,3
+"222","CYP","CY","Cyprus",1996,2,2
+"223","CYP","CY","Cyprus",1997,1,1
+"224","CYP","CY","Cyprus",1998,0,0
+"225","CYP","CY","Cyprus",1999,4,4
+"226","CYP","CY","Cyprus",2000,3,3
+"227","CYP","CY","Cyprus",2001,2,2
+"228","CYP","CY","Cyprus",2002,1,1
+"229","CYP","CY","Cyprus",2003,0,0
+"230","CYP","CY","Cyprus",2004,4,4
+"231","CYP","CY","Cyprus",2005,3,3
+"232","CYP","CY","Cyprus",2006,2,2
+"233","CYP","CY","Cyprus",2007,1,1
+"234","CYP","CY","Cyprus",2008,0,0
+"235","CYP","CY","Cyprus",2009,4,4
+"236","CYP","CY","Cyprus",2010,3,3
+"237","CYP","CY","Cyprus",2011,2,2
+"238","CYP","CY","Cyprus",2012,1,1
+"239","CYP","CY","Cyprus",2013,NA,0
+"240","CZE","CZ","Czech Republic",1977,4,4
+"241","CZE","CZ","Czech Republic",1978,3,3
+"242","CZE","CZ","Czech Republic",1979,2,2
+"243","CZE","CZ","Czech Republic",1980,1,1
+"244","CZE","CZ","Czech Republic",1981,0,0
+"245","CZE","CZ","Czech Republic",1982,4,4
+"246","CZE","CZ","Czech Republic",1983,3,3
+"247","CZE","CZ","Czech Republic",1984,2,2
+"248","CZE","CZ","Czech Republic",1985,1,1
+"249","CZE","CZ","Czech Republic",1986,0,0
+"250","CZE","CZ","Czech Republic",1987,4,4
+"251","CZE","CZ","Czech Republic",1988,3,3
+"252","CZE","CZ","Czech Republic",1989,2,2
+"253","CZE","CZ","Czech Republic",1990,0,0
+"254","CZE","CZ","Czech Republic",1991,4,4
+"255","CZE","CZ","Czech Republic",1992,0,0
+"256","CZE","CZ","Czech Republic",1993,4,4
+"257","CZE","CZ","Czech Republic",1994,3,3
+"258","CZE","CZ","Czech Republic",1995,2,2
+"259","CZE","CZ","Czech Republic",1996,0,0
+"260","CZE","CZ","Czech Republic",1997,4,4
+"261","CZE","CZ","Czech Republic",1998,0,0
+"262","CZE","CZ","Czech Republic",1999,3,3
+"263","CZE","CZ","Czech Republic",2000,2,2
+"264","CZE","CZ","Czech Republic",2001,1,1
+"265","CZE","CZ","Czech Republic",2002,0,0
+"266","CZE","CZ","Czech Republic",2003,3,3
+"267","CZE","CZ","Czech Republic",2004,2,2
+"268","CZE","CZ","Czech Republic",2005,1,1
+"269","CZE","CZ","Czech Republic",2006,0,0
+"270","CZE","CZ","Czech Republic",2007,3,3
+"271","CZE","CZ","Czech Republic",2008,2,2
+"272","CZE","CZ","Czech Republic",2009,1,1
+"273","CZE","CZ","Czech Republic",2010,0,0
+"274","CZE","CZ","Czech Republic",2011,3,3
+"275","CZE","CZ","Czech Republic",2012,2,2
+"276","DNK","DK","Denmark",1975,0,0
+"277","DNK","DK","Denmark",1976,3,3
+"278","DNK","DK","Denmark",1977,0,0
+"279","DNK","DK","Denmark",1978,3,3
+"280","DNK","DK","Denmark",1979,0,0
+"281","DNK","DK","Denmark",1980,3,3
+"282","DNK","DK","Denmark",1981,2,0
+"283","DNK","DK","Denmark",1982,0,3
+"284","DNK","DK","Denmark",1983,3,2
+"285","DNK","DK","Denmark",1984,0,0
+"286","DNK","DK","Denmark",1985,3,3
+"287","DNK","DK","Denmark",1986,2,2
+"288","DNK","DK","Denmark",1987,0,0
+"289","DNK","DK","Denmark",1988,0,0
+"290","DNK","DK","Denmark",1989,3,3
+"291","DNK","DK","Denmark",1990,0,0
+"292","DNK","DK","Denmark",1991,3,3
+"293","DNK","DK","Denmark",1992,2,2
+"294","DNK","DK","Denmark",1993,1,1
+"295","DNK","DK","Denmark",1994,0,0
+"296","DNK","DK","Denmark",1995,3,3
+"297","DNK","DK","Denmark",1996,2,2
+"298","DNK","DK","Denmark",1997,1,1
+"299","DNK","DK","Denmark",1998,0,0
+"300","DNK","DK","Denmark",1999,3,3
+"301","DNK","DK","Denmark",2000,2,2
+"302","DNK","DK","Denmark",2001,1,0
+"303","DNK","DK","Denmark",2002,3,3
+"304","DNK","DK","Denmark",2003,2,2
+"305","DNK","DK","Denmark",2004,1,1
+"306","DNK","DK","Denmark",2005,0,0
+"307","DNK","DK","Denmark",2006,3,3
+"308","DNK","DK","Denmark",2007,2,0
+"309","DNK","DK","Denmark",2008,3,3
+"310","DNK","DK","Denmark",2009,2,2
+"311","DNK","DK","Denmark",2010,1,1
+"312","DNK","DK","Denmark",2011,0,0
+"313","DNK","DK","Denmark",2012,3,3
+"314","DNK","DK","Denmark",2013,NA,2
+"315","EST","EE","Estonia",1992,0,0
+"316","EST","EE","Estonia",1993,3,3
+"317","EST","EE","Estonia",1994,2,2
+"318","EST","EE","Estonia",1995,1,0
+"319","EST","EE","Estonia",1996,0,3
+"320","EST","EE","Estonia",1997,4,2
+"321","EST","EE","Estonia",1998,3,1
+"322","EST","EE","Estonia",1999,2,0
+"323","EST","EE","Estonia",2000,1,3
+"324","EST","EE","Estonia",2001,0,2
+"325","EST","EE","Estonia",2002,4,1
+"326","EST","EE","Estonia",2003,3,0
+"327","EST","EE","Estonia",2004,2,3
+"328","EST","EE","Estonia",2005,1,2
+"329","EST","EE","Estonia",2006,0,1
+"330","EST","EE","Estonia",2007,4,0
+"331","EST","EE","Estonia",2008,3,3
+"332","EST","EE","Estonia",2009,2,2
+"333","EST","EE","Estonia",2010,1,1
+"334","EST","EE","Estonia",2011,0,0
+"335","EST","EE","Estonia",2012,4,3
+"336","EST","EE","Estonia",2013,NA,2
+"337","FIN","FI","Finland",1976,3,3
+"338","FIN","FI","Finland",1977,2,2
+"339","FIN","FI","Finland",1978,1,1
+"340","FIN","FI","Finland",1979,0,0
+"341","FIN","FI","Finland",1980,3,3
+"342","FIN","FI","Finland",1981,2,2
+"343","FIN","FI","Finland",1982,1,1
+"344","FIN","FI","Finland",1983,0,0
+"345","FIN","FI","Finland",1984,3,3
+"346","FIN","FI","Finland",1985,2,2
+"347","FIN","FI","Finland",1986,1,1
+"348","FIN","FI","Finland",1987,0,0
+"349","FIN","FI","Finland",1988,3,3
+"350","FIN","FI","Finland",1989,2,2
+"351","FIN","FI","Finland",1990,1,1
+"352","FIN","FI","Finland",1991,0,0
+"353","FIN","FI","Finland",1992,3,3
+"354","FIN","FI","Finland",1993,2,2
+"355","FIN","FI","Finland",1994,1,1
+"356","FIN","FI","Finland",1995,0,0
+"357","FIN","FI","Finland",1996,3,3
+"358","FIN","FI","Finland",1997,2,2
+"359","FIN","FI","Finland",1998,1,1
+"360","FIN","FI","Finland",1999,0,0
+"361","FIN","FI","Finland",2000,3,3
+"362","FIN","FI","Finland",2001,2,2
+"363","FIN","FI","Finland",2002,1,1
+"364","FIN","FI","Finland",2003,0,0
+"365","FIN","FI","Finland",2004,3,3
+"366","FIN","FI","Finland",2005,2,2
+"367","FIN","FI","Finland",2006,1,1
+"368","FIN","FI","Finland",2007,0,0
+"369","FIN","FI","Finland",2008,3,3
+"370","FIN","FI","Finland",2009,2,2
+"371","FIN","FI","Finland",2010,1,1
+"372","FIN","FI","Finland",2011,0,0
+"373","FIN","FI","Finland",2012,3,3
+"374","FRA","FR","France",1975,3,3
+"375","FRA","FR","France",1976,2,2
+"376","FRA","FR","France",1977,1,1
+"377","FRA","FR","France",1978,0,0
+"378","FRA","FR","France",1979,4,4
+"379","FRA","FR","France",1980,3,3
+"380","FRA","FR","France",1981,0,0
+"381","FRA","FR","France",1982,4,4
+"382","FRA","FR","France",1983,3,3
+"383","FRA","FR","France",1984,2,2
+"384","FRA","FR","France",1985,1,1
+"385","FRA","FR","France",1986,0,0
+"386","FRA","FR","France",1987,4,4
+"387","FRA","FR","France",1988,0,0
+"388","FRA","FR","France",1989,4,4
+"389","FRA","FR","France",1990,3,3
+"390","FRA","FR","France",1991,2,2
+"391","FRA","FR","France",1992,1,1
+"392","FRA","FR","France",1993,0,0
+"393","FRA","FR","France",1994,4,4
+"394","FRA","FR","France",1995,3,3
+"395","FRA","FR","France",1996,2,2
+"396","FRA","FR","France",1997,0,0
+"397","FRA","FR","France",1998,4,4
+"398","FRA","FR","France",1999,3,3
+"399","FRA","FR","France",2000,2,2
+"400","FRA","FR","France",2001,1,1
+"401","FRA","FR","France",2002,0,0
+"402","FRA","FR","France",2003,4,4
+"403","FRA","FR","France",2004,3,3
+"404","FRA","FR","France",2005,2,2
+"405","FRA","FR","France",2006,1,1
+"406","FRA","FR","France",2007,0,0
+"407","FRA","FR","France",2008,4,4
+"408","FRA","FR","France",2009,3,3
+"409","FRA","FR","France",2010,2,2
+"410","FRA","FR","France",2011,1,1
+"411","FRA","FR","France",2012,0,0
+"412","DEU","DE","Germany",1975,1,1
+"413","DEU","DE","Germany",1976,0,0
+"414","DEU","DE","Germany",1977,3,3
+"415","DEU","DE","Germany",1978,2,2
+"416","DEU","DE","Germany",1979,1,1
+"417","DEU","DE","Germany",1980,0,0
+"418","DEU","DE","Germany",1981,3,3
+"419","DEU","DE","Germany",1982,2,2
+"420","DEU","DE","Germany",1983,0,0
+"421","DEU","DE","Germany",1984,3,3
+"422","DEU","DE","Germany",1985,2,2
+"423","DEU","DE","Germany",1986,1,1
+"424","DEU","DE","Germany",1987,0,0
+"425","DEU","DE","Germany",1988,3,3
+"426","DEU","DE","Germany",1989,2,2
+"427","DEU","DE","Germany",1990,0,0
+"428","DEU","DE","Germany",1991,3,3
+"429","DEU","DE","Germany",1992,2,2
+"430","DEU","DE","Germany",1993,1,1
+"431","DEU","DE","Germany",1994,0,0
+"432","DEU","DE","Germany",1995,3,3
+"433","DEU","DE","Germany",1996,2,2
+"434","DEU","DE","Germany",1997,1,1
+"435","DEU","DE","Germany",1998,0,0
+"436","DEU","DE","Germany",1999,3,3
+"437","DEU","DE","Germany",2000,2,2
+"438","DEU","DE","Germany",2001,1,1
+"439","DEU","DE","Germany",2002,0,0
+"440","DEU","DE","Germany",2003,3,3
+"441","DEU","DE","Germany",2004,2,2
+"442","DEU","DE","Germany",2005,1,0
+"443","DEU","DE","Germany",2006,3,3
+"444","DEU","DE","Germany",2007,2,2
+"445","DEU","DE","Germany",2008,1,1
+"446","DEU","DE","Germany",2009,0,0
+"447","DEU","DE","Germany",2010,3,3
+"448","DEU","DE","Germany",2011,2,2
+"449","DEU","DE","Germany",2012,1,1
+"450","DEU","DE","Germany",2013,NA,0
+"451","GRC","GR","Greece",1975,4,4
+"452","GRC","GR","Greece",1976,3,3
+"453","GRC","GR","Greece",1977,0,0
+"454","GRC","GR","Greece",1978,4,4
+"455","GRC","GR","Greece",1979,3,3
+"456","GRC","GR","Greece",1980,2,2
+"457","GRC","GR","Greece",1981,0,0
+"458","GRC","GR","Greece",1982,4,4
+"459","GRC","GR","Greece",1983,3,3
+"460","GRC","GR","Greece",1984,2,2
+"461","GRC","GR","Greece",1985,0,0
+"462","GRC","GR","Greece",1986,3,3
+"463","GRC","GR","Greece",1987,2,2
+"464","GRC","GR","Greece",1988,1,1
+"465","GRC","GR","Greece",1989,0,0
+"466","GRC","GR","Greece",1990,3,0
+"467","GRC","GR","Greece",1991,2,3
+"468","GRC","GR","Greece",1992,1,2
+"469","GRC","GR","Greece",1993,0,0
+"470","GRC","GR","Greece",1994,3,3
+"471","GRC","GR","Greece",1995,2,2
+"472","GRC","GR","Greece",1996,0,0
+"473","GRC","GR","Greece",1997,3,3
+"474","GRC","GR","Greece",1998,2,2
+"475","GRC","GR","Greece",1999,1,1
+"476","GRC","GR","Greece",2000,0,0
+"477","GRC","GR","Greece",2001,3,3
+"478","GRC","GR","Greece",2002,2,2
+"479","GRC","GR","Greece",2003,1,1
+"480","GRC","GR","Greece",2004,0,0
+"481","GRC","GR","Greece",2005,3,3
+"482","GRC","GR","Greece",2006,2,2
+"483","GRC","GR","Greece",2007,1,0
+"484","GRC","GR","Greece",2008,3,3
+"485","GRC","GR","Greece",2009,2,0
+"486","GRC","GR","Greece",2010,3,3
+"487","GRC","GR","Greece",2011,2,2
+"488","GRC","GR","Greece",2012,1,0
+"489","GRC","GR","Greece",2013,NA,3
+"490","HUN","HU","Hungary",1975,0,0
+"491","HUN","HU","Hungary",1976,4,4
+"492","HUN","HU","Hungary",1977,3,3
+"493","HUN","HU","Hungary",1978,2,2
+"494","HUN","HU","Hungary",1979,1,1
+"495","HUN","HU","Hungary",1980,0,0
+"496","HUN","HU","Hungary",1981,4,4
+"497","HUN","HU","Hungary",1982,3,3
+"498","HUN","HU","Hungary",1983,2,2
+"499","HUN","HU","Hungary",1984,1,1
+"500","HUN","HU","Hungary",1985,0,0
+"501","HUN","HU","Hungary",1986,4,4
+"502","HUN","HU","Hungary",1987,3,3
+"503","HUN","HU","Hungary",1988,2,2
+"504","HUN","HU","Hungary",1989,1,1
+"505","HUN","HU","Hungary",1990,0,0
+"506","HUN","HU","Hungary",1991,3,3
+"507","HUN","HU","Hungary",1992,2,2
+"508","HUN","HU","Hungary",1993,1,1
+"509","HUN","HU","Hungary",1994,0,0
+"510","HUN","HU","Hungary",1995,3,3
+"511","HUN","HU","Hungary",1996,2,2
+"512","HUN","HU","Hungary",1997,1,1
+"513","HUN","HU","Hungary",1998,0,0
+"514","HUN","HU","Hungary",1999,3,3
+"515","HUN","HU","Hungary",2000,2,2
+"516","HUN","HU","Hungary",2001,1,1
+"517","HUN","HU","Hungary",2002,0,0
+"518","HUN","HU","Hungary",2003,3,3
+"519","HUN","HU","Hungary",2004,2,2
+"520","HUN","HU","Hungary",2005,1,1
+"521","HUN","HU","Hungary",2006,0,0
+"522","HUN","HU","Hungary",2007,3,3
+"523","HUN","HU","Hungary",2008,2,2
+"524","HUN","HU","Hungary",2009,1,1
+"525","HUN","HU","Hungary",2010,0,0
+"526","HUN","HU","Hungary",2011,3,3
+"527","HUN","HU","Hungary",2012,2,2
+"528","ISL","IS","Iceland",1975,3,3
+"529","ISL","IS","Iceland",1976,2,2
+"530","ISL","IS","Iceland",1977,1,1
+"531","ISL","IS","Iceland",1978,0,0
+"532","ISL","IS","Iceland",1979,0,0
+"533","ISL","IS","Iceland",1980,3,3
+"534","ISL","IS","Iceland",1981,2,2
+"535","ISL","IS","Iceland",1982,1,1
+"536","ISL","IS","Iceland",1983,0,0
+"537","ISL","IS","Iceland",1984,3,3
+"538","ISL","IS","Iceland",1985,2,2
+"539","ISL","IS","Iceland",1986,1,1
+"540","ISL","IS","Iceland",1987,0,0
+"541","ISL","IS","Iceland",1988,3,3
+"542","ISL","IS","Iceland",1989,2,2
+"543","ISL","IS","Iceland",1990,1,1
+"544","ISL","IS","Iceland",1991,0,0
+"545","ISL","IS","Iceland",1992,3,3
+"546","ISL","IS","Iceland",1993,2,2
+"547","ISL","IS","Iceland",1994,1,1
+"548","ISL","IS","Iceland",1995,0,0
+"549","ISL","IS","Iceland",1996,3,3
+"550","ISL","IS","Iceland",1997,2,2
+"551","ISL","IS","Iceland",1998,1,1
+"552","ISL","IS","Iceland",1999,0,0
+"553","ISL","IS","Iceland",2000,3,3
+"554","ISL","IS","Iceland",2001,2,2
+"555","ISL","IS","Iceland",2002,1,1
+"556","ISL","IS","Iceland",2003,0,0
+"557","ISL","IS","Iceland",2004,3,3
+"558","ISL","IS","Iceland",2005,2,2
+"559","ISL","IS","Iceland",2006,1,1
+"560","ISL","IS","Iceland",2007,0,0
+"561","ISL","IS","Iceland",2008,3,3
+"562","ISL","IS","Iceland",2009,2,0
+"563","ISL","IS","Iceland",2010,3,3
+"564","ISL","IS","Iceland",2011,2,2
+"565","ISL","IS","Iceland",2012,1,1
+"566","ISL","IS","Iceland",2013,NA,0
+"567","IRL","IE","Ireland",1975,3,3
+"568","IRL","IE","Ireland",1976,2,2
+"569","IRL","IE","Ireland",1977,0,0
+"570","IRL","IE","Ireland",1978,4,4
+"571","IRL","IE","Ireland",1979,3,3
+"572","IRL","IE","Ireland",1980,2,2
+"573","IRL","IE","Ireland",1981,0,0
+"574","IRL","IE","Ireland",1982,0,0
+"575","IRL","IE","Ireland",1983,4,4
+"576","IRL","IE","Ireland",1984,3,3
+"577","IRL","IE","Ireland",1985,2,2
+"578","IRL","IE","Ireland",1986,1,1
+"579","IRL","IE","Ireland",1987,0,0
+"580","IRL","IE","Ireland",1988,4,4
+"581","IRL","IE","Ireland",1989,0,0
+"582","IRL","IE","Ireland",1990,4,4
+"583","IRL","IE","Ireland",1991,3,3
+"584","IRL","IE","Ireland",1992,0,0
+"585","IRL","IE","Ireland",1993,4,4
+"586","IRL","IE","Ireland",1994,3,3
+"587","IRL","IE","Ireland",1995,2,2
+"588","IRL","IE","Ireland",1996,1,1
+"589","IRL","IE","Ireland",1997,0,0
+"590","IRL","IE","Ireland",1998,4,4
+"591","IRL","IE","Ireland",1999,3,3
+"592","IRL","IE","Ireland",2000,2,2
+"593","IRL","IE","Ireland",2001,1,1
+"594","IRL","IE","Ireland",2002,0,0
+"595","IRL","IE","Ireland",2003,4,4
+"596","IRL","IE","Ireland",2004,3,3
+"597","IRL","IE","Ireland",2005,2,2
+"598","IRL","IE","Ireland",2006,1,1
+"599","IRL","IE","Ireland",2007,0,0
+"600","IRL","IE","Ireland",2008,4,4
+"601","IRL","IE","Ireland",2009,3,3
+"602","IRL","IE","Ireland",2010,2,2
+"603","IRL","IE","Ireland",2011,1,0
+"604","IRL","IE","Ireland",2012,4,4
+"605","IRL","IE","Ireland",2013,NA,3
+"606","ISR","IL","Israel",1975,2,2
+"607","ISR","IL","Israel",1976,1,1
+"608","ISR","IL","Israel",1977,0,0
+"609","ISR","IL","Israel",1978,3,3
+"610","ISR","IL","Israel",1979,2,2
+"611","ISR","IL","Israel",1980,1,1
+"612","ISR","IL","Israel",1981,0,0
+"613","ISR","IL","Israel",1982,3,3
+"614","ISR","IL","Israel",1983,2,2
+"615","ISR","IL","Israel",1984,1,0
+"616","ISR","IL","Israel",1985,0,3
+"617","ISR","IL","Israel",1986,2,2
+"618","ISR","IL","Israel",1987,1,1
+"619","ISR","IL","Israel",1988,0,0
+"620","ISR","IL","Israel",1989,3,3
+"621","ISR","IL","Israel",1990,2,2
+"622","ISR","IL","Israel",1991,1,1
+"623","ISR","IL","Israel",1992,0,0
+"624","ISR","IL","Israel",1993,3,3
+"625","ISR","IL","Israel",1994,2,2
+"626","ISR","IL","Israel",1995,1,1
+"627","ISR","IL","Israel",1996,0,0
+"628","ISR","IL","Israel",1997,3,3
+"629","ISR","IL","Israel",1998,2,2
+"630","ISR","IL","Israel",1999,0,0
+"631","ISR","IL","Israel",2000,3,3
+"632","ISR","IL","Israel",2001,2,2
+"633","ISR","IL","Israel",2002,1,1
+"634","ISR","IL","Israel",2003,0,0
+"635","ISR","IL","Israel",2004,3,3
+"636","ISR","IL","Israel",2005,2,2
+"637","ISR","IL","Israel",2006,1,0
+"638","ISR","IL","Israel",2007,3,3
+"639","ISR","IL","Israel",2008,2,2
+"640","ISR","IL","Israel",2009,1,0
+"641","ISR","IL","Israel",2010,3,3
+"642","ISR","IL","Israel",2011,2,2
+"643","ISR","IL","Israel",2012,1,1
+"644","ISR","IL","Israel",2013,NA,0
+"645","ITA","IT","Italy",1976,0,0
+"646","ITA","IT","Italy",1977,4,4
+"647","ITA","IT","Italy",1978,3,3
+"648","ITA","IT","Italy",1979,0,0
+"649","ITA","IT","Italy",1980,4,4
+"650","ITA","IT","Italy",1981,3,3
+"651","ITA","IT","Italy",1982,2,2
+"652","ITA","IT","Italy",1983,0,0
+"653","ITA","IT","Italy",1984,4,4
+"654","ITA","IT","Italy",1985,3,3
+"655","ITA","IT","Italy",1986,2,2
+"656","ITA","IT","Italy",1987,0,0
+"657","ITA","IT","Italy",1988,4,4
+"658","ITA","IT","Italy",1989,3,3
+"659","ITA","IT","Italy",1990,2,2
+"660","ITA","IT","Italy",1991,1,1
+"661","ITA","IT","Italy",1992,0,0
+"662","ITA","IT","Italy",1993,4,4
+"663","ITA","IT","Italy",1994,0,0
+"664","ITA","IT","Italy",1995,4,4
+"665","ITA","IT","Italy",1996,0,0
+"666","ITA","IT","Italy",1997,4,4
+"667","ITA","IT","Italy",1998,3,3
+"668","ITA","IT","Italy",1999,2,2
+"669","ITA","IT","Italy",2000,1,1
+"670","ITA","IT","Italy",2001,0,0
+"671","ITA","IT","Italy",2002,4,4
+"672","ITA","IT","Italy",2003,3,3
+"673","ITA","IT","Italy",2004,2,2
+"674","ITA","IT","Italy",2005,1,1
+"675","ITA","IT","Italy",2006,0,0
+"676","ITA","IT","Italy",2007,4,4
+"677","ITA","IT","Italy",2008,3,0
+"678","ITA","IT","Italy",2009,4,4
+"679","ITA","IT","Italy",2010,3,3
+"680","ITA","IT","Italy",2011,2,2
+"681","ITA","IT","Italy",2012,1,1
+"682","ITA","IT","Italy",2013,NA,0
+"683","JPN","JP","Japan",1975,1,1
+"684","JPN","JP","Japan",1976,0,0
+"685","JPN","JP","Japan",1977,3,3
+"686","JPN","JP","Japan",1978,2,2
+"687","JPN","JP","Japan",1979,0,0
+"688","JPN","JP","Japan",1980,0,0
+"689","JPN","JP","Japan",1981,3,3
+"690","JPN","JP","Japan",1982,2,2
+"691","JPN","JP","Japan",1983,0,0
+"692","JPN","JP","Japan",1984,3,3
+"693","JPN","JP","Japan",1985,2,2
+"694","JPN","JP","Japan",1986,0,0
+"695","JPN","JP","Japan",1987,3,3
+"696","JPN","JP","Japan",1988,2,2
+"697","JPN","JP","Japan",1989,1,1
+"698","JPN","JP","Japan",1990,0,0
+"699","JPN","JP","Japan",1991,3,3
+"700","JPN","JP","Japan",1992,2,2
+"701","JPN","JP","Japan",1993,0,0
+"702","JPN","JP","Japan",1994,3,3
+"703","JPN","JP","Japan",1995,2,2
+"704","JPN","JP","Japan",1996,0,0
+"705","JPN","JP","Japan",1997,3,3
+"706","JPN","JP","Japan",1998,2,2
+"707","JPN","JP","Japan",1999,1,1
+"708","JPN","JP","Japan",2000,0,0
+"709","JPN","JP","Japan",2001,3,3
+"710","JPN","JP","Japan",2002,2,2
+"711","JPN","JP","Japan",2003,1,0
+"712","JPN","JP","Japan",2004,0,3
+"713","JPN","JP","Japan",2005,3,0
+"714","JPN","JP","Japan",2006,2,3
+"715","JPN","JP","Japan",2007,1,2
+"716","JPN","JP","Japan",2008,0,1
+"717","JPN","JP","Japan",2009,3,0
+"718","JPN","JP","Japan",2010,3,3
+"719","JPN","JP","Japan",2011,3,2
+"720","JPN","JP","Japan",2012,2,0
+"721","JPN","JP","Japan",2013,NA,3
+"722","KOR","KR","Korea, Republic of",1975,2,2
+"723","KOR","KR","Korea, Republic of",1976,1,1
+"724","KOR","KR","Korea, Republic of",1977,0,0
+"725","KOR","KR","Korea, Republic of",1978,5,5
+"726","KOR","KR","Korea, Republic of",1979,4,4
+"727","KOR","KR","Korea, Republic of",1980,5,5
+"728","KOR","KR","Korea, Republic of",1981,0,0
+"729","KOR","KR","Korea, Republic of",1982,3,3
+"730","KOR","KR","Korea, Republic of",1983,2,2
+"731","KOR","KR","Korea, Republic of",1984,1,1
+"732","KOR","KR","Korea, Republic of",1985,0,0
+"733","KOR","KR","Korea, Republic of",1986,3,3
+"734","KOR","KR","Korea, Republic of",1987,0,0
+"735","KOR","KR","Korea, Republic of",1988,4,4
+"736","KOR","KR","Korea, Republic of",1989,3,3
+"737","KOR","KR","Korea, Republic of",1990,2,2
+"738","KOR","KR","Korea, Republic of",1991,1,1
+"739","KOR","KR","Korea, Republic of",1992,0,0
+"740","KOR","KR","Korea, Republic of",1993,4,4
+"741","KOR","KR","Korea, Republic of",1994,3,3
+"742","KOR","KR","Korea, Republic of",1995,2,2
+"743","KOR","KR","Korea, Republic of",1996,1,1
+"744","KOR","KR","Korea, Republic of",1997,0,0
+"745","KOR","KR","Korea, Republic of",1998,4,4
+"746","KOR","KR","Korea, Republic of",1999,3,3
+"747","KOR","KR","Korea, Republic of",2000,2,2
+"748","KOR","KR","Korea, Republic of",2001,1,1
+"749","KOR","KR","Korea, Republic of",2002,0,0
+"750","KOR","KR","Korea, Republic of",2003,4,4
+"751","KOR","KR","Korea, Republic of",2004,3,3
+"752","KOR","KR","Korea, Republic of",2005,2,2
+"753","KOR","KR","Korea, Republic of",2006,1,1
+"754","KOR","KR","Korea, Republic of",2007,0,0
+"755","KOR","KR","Korea, Republic of",2008,4,4
+"756","KOR","KR","Korea, Republic of",2009,3,3
+"757","KOR","KR","Korea, Republic of",2010,2,2
+"758","KOR","KR","Korea, Republic of",2011,1,1
+"759","KOR","KR","Korea, Republic of",2012,0,0
+"760","LVA","LV","Latvia",1993,0,0
+"761","LVA","LV","Latvia",1994,2,2
+"762","LVA","LV","Latvia",1995,0,0
+"763","LVA","LV","Latvia",1996,2,2
+"764","LVA","LV","Latvia",1997,1,1
+"765","LVA","LV","Latvia",1998,0,0
+"766","LVA","LV","Latvia",1999,3,3
+"767","LVA","LV","Latvia",2000,2,2
+"768","LVA","LV","Latvia",2001,1,1
+"769","LVA","LV","Latvia",2002,0,0
+"770","LVA","LV","Latvia",2003,3,3
+"771","LVA","LV","Latvia",2004,2,2
+"772","LVA","LV","Latvia",2005,3,1
+"773","LVA","LV","Latvia",2006,2,0
+"774","LVA","LV","Latvia",2007,1,3
+"775","LVA","LV","Latvia",2008,3,2
+"776","LVA","LV","Latvia",2009,2,1
+"777","LVA","LV","Latvia",2010,3,0
+"778","LVA","LV","Latvia",2011,NA,0
+"779","LVA","LV","Latvia",2012,3,3
+"780","LVA","LV","Latvia",2013,NA,2
+"781","LTU","LT","Lithuania",1992,NA,0
+"782","LTU","LT","Lithuania",1993,0,3
+"783","LTU","LT","Lithuania",1994,4,2
+"784","LTU","LT","Lithuania",1995,3,1
+"785","LTU","LT","Lithuania",1996,2,0
+"786","LTU","LT","Lithuania",1997,1,3
+"787","LTU","LT","Lithuania",1998,0,2
+"788","LTU","LT","Lithuania",1999,4,1
+"789","LTU","LT","Lithuania",2000,3,0
+"790","LTU","LT","Lithuania",2001,2,3
+"791","LTU","LT","Lithuania",2002,1,2
+"792","LTU","LT","Lithuania",2003,0,1
+"793","LTU","LT","Lithuania",2004,4,0
+"794","LTU","LT","Lithuania",2005,4,3
+"795","LTU","LT","Lithuania",2006,3,2
+"796","LTU","LT","Lithuania",2007,2,1
+"797","LTU","LT","Lithuania",2008,1,0
+"798","LTU","LT","Lithuania",2009,0,3
+"799","LTU","LT","Lithuania",2010,4,2
+"800","LTU","LT","Lithuania",2011,3,1
+"801","LTU","LT","Lithuania",2012,2,0
+"802","LTU","LT","Lithuania",2013,NA,3
+"803","LUX","LU","Luxembourg",1975,4,4
+"804","LUX","LU","Luxembourg",1976,3,3
+"805","LUX","LU","Luxembourg",1977,2,2
+"806","LUX","LU","Luxembourg",1978,1,1
+"807","LUX","LU","Luxembourg",1979,0,0
+"808","LUX","LU","Luxembourg",1980,4,4
+"809","LUX","LU","Luxembourg",1981,3,3
+"810","LUX","LU","Luxembourg",1982,2,2
+"811","LUX","LU","Luxembourg",1983,1,1
+"812","LUX","LU","Luxembourg",1984,0,0
+"813","LUX","LU","Luxembourg",1985,4,4
+"814","LUX","LU","Luxembourg",1986,3,3
+"815","LUX","LU","Luxembourg",1987,2,2
+"816","LUX","LU","Luxembourg",1988,1,1
+"817","LUX","LU","Luxembourg",1989,0,0
+"818","LUX","LU","Luxembourg",1990,4,4
+"819","LUX","LU","Luxembourg",1991,3,3
+"820","LUX","LU","Luxembourg",1992,2,2
+"821","LUX","LU","Luxembourg",1993,1,1
+"822","LUX","LU","Luxembourg",1994,0,0
+"823","LUX","LU","Luxembourg",1995,4,4
+"824","LUX","LU","Luxembourg",1996,3,3
+"825","LUX","LU","Luxembourg",1997,2,2
+"826","LUX","LU","Luxembourg",1998,1,1
+"827","LUX","LU","Luxembourg",1999,0,0
+"828","LUX","LU","Luxembourg",2000,4,4
+"829","LUX","LU","Luxembourg",2001,3,3
+"830","LUX","LU","Luxembourg",2002,2,2
+"831","LUX","LU","Luxembourg",2003,1,1
+"832","LUX","LU","Luxembourg",2004,0,0
+"833","LUX","LU","Luxembourg",2005,4,4
+"834","LUX","LU","Luxembourg",2006,3,3
+"835","LUX","LU","Luxembourg",2007,2,2
+"836","LUX","LU","Luxembourg",2008,1,1
+"837","LUX","LU","Luxembourg",2009,0,0
+"838","LUX","LU","Luxembourg",2010,4,4
+"839","LUX","LU","Luxembourg",2011,3,3
+"840","LUX","LU","Luxembourg",2012,2,2
+"841","MLT","MT","Malta",1975,1,1
+"842","MLT","MT","Malta",1976,0,0
+"843","MLT","MT","Malta",1977,4,4
+"844","MLT","MT","Malta",1978,3,3
+"845","MLT","MT","Malta",1979,2,2
+"846","MLT","MT","Malta",1980,1,1
+"847","MLT","MT","Malta",1981,0,0
+"848","MLT","MT","Malta",1982,4,4
+"849","MLT","MT","Malta",1983,3,3
+"850","MLT","MT","Malta",1984,2,2
+"851","MLT","MT","Malta",1985,1,1
+"852","MLT","MT","Malta",1986,4,4
+"853","MLT","MT","Malta",1987,0,0
+"854","MLT","MT","Malta",1988,4,4
+"855","MLT","MT","Malta",1989,3,3
+"856","MLT","MT","Malta",1990,2,2
+"857","MLT","MT","Malta",1991,1,1
+"858","MLT","MT","Malta",1992,0,0
+"859","MLT","MT","Malta",1993,4,4
+"860","MLT","MT","Malta",1994,3,3
+"861","MLT","MT","Malta",1995,2,2
+"862","MLT","MT","Malta",1996,0,0
+"863","MLT","MT","Malta",1997,4,4
+"864","MLT","MT","Malta",1998,0,0
+"865","MLT","MT","Malta",1999,4,4
+"866","MLT","MT","Malta",2000,3,3
+"867","MLT","MT","Malta",2001,2,2
+"868","MLT","MT","Malta",2002,1,1
+"869","MLT","MT","Malta",2003,0,0
+"870","MLT","MT","Malta",2004,4,4
+"871","MLT","MT","Malta",2005,3,3
+"872","MLT","MT","Malta",2006,2,2
+"873","MLT","MT","Malta",2007,1,1
+"874","MLT","MT","Malta",2008,0,0
+"875","MLT","MT","Malta",2009,4,4
+"876","MLT","MT","Malta",2010,3,3
+"877","MLT","MT","Malta",2011,2,2
+"878","MLT","MT","Malta",2012,1,1
+"879","NLD","NL","Netherlands",1975,1,1
+"880","NLD","NL","Netherlands",1976,0,0
+"881","NLD","NL","Netherlands",1977,0,0
+"882","NLD","NL","Netherlands",1978,3,3
+"883","NLD","NL","Netherlands",1979,2,2
+"884","NLD","NL","Netherlands",1980,1,1
+"885","NLD","NL","Netherlands",1981,0,0
+"886","NLD","NL","Netherlands",1982,0,0
+"887","NLD","NL","Netherlands",1983,3,3
+"888","NLD","NL","Netherlands",1984,2,2
+"889","NLD","NL","Netherlands",1985,1,1
+"890","NLD","NL","Netherlands",1986,0,0
+"891","NLD","NL","Netherlands",1987,3,3
+"892","NLD","NL","Netherlands",1988,2,2
+"893","NLD","NL","Netherlands",1989,0,0
+"894","NLD","NL","Netherlands",1990,3,3
+"895","NLD","NL","Netherlands",1991,2,2
+"896","NLD","NL","Netherlands",1992,1,1
+"897","NLD","NL","Netherlands",1993,3,3
+"898","NLD","NL","Netherlands",1994,0,0
+"899","NLD","NL","Netherlands",1995,3,3
+"900","NLD","NL","Netherlands",1996,2,2
+"901","NLD","NL","Netherlands",1997,1,1
+"902","NLD","NL","Netherlands",1998,0,0
+"903","NLD","NL","Netherlands",1999,3,3
+"904","NLD","NL","Netherlands",2000,2,2
+"905","NLD","NL","Netherlands",2001,1,1
+"906","NLD","NL","Netherlands",2002,0,0
+"907","NLD","NL","Netherlands",2003,3,0
+"908","NLD","NL","Netherlands",2004,3,3
+"909","NLD","NL","Netherlands",2005,2,2
+"910","NLD","NL","Netherlands",2006,1,0
+"911","NLD","NL","Netherlands",2007,3,3
+"912","NLD","NL","Netherlands",2008,2,2
+"913","NLD","NL","Netherlands",2009,1,1
+"914","NLD","NL","Netherlands",2010,0,0
+"915","NLD","NL","Netherlands",2011,3,3
+"916","NLD","NL","Netherlands",2012,2,0
+"917","NLD","NL","Netherlands",2013,NA,3
+"918","NZL","NZ","New Zealand",1975,0,0
+"919","NZL","NZ","New Zealand",1976,2,2
+"920","NZL","NZ","New Zealand",1977,1,1
+"921","NZL","NZ","New Zealand",1978,0,0
+"922","NZL","NZ","New Zealand",1979,2,2
+"923","NZL","NZ","New Zealand",1980,1,1
+"924","NZL","NZ","New Zealand",1981,0,0
+"925","NZL","NZ","New Zealand",1982,2,2
+"926","NZL","NZ","New Zealand",1983,1,1
+"927","NZL","NZ","New Zealand",1984,0,0
+"928","NZL","NZ","New Zealand",1985,2,2
+"929","NZL","NZ","New Zealand",1986,1,1
+"930","NZL","NZ","New Zealand",1987,0,0
+"931","NZL","NZ","New Zealand",1988,2,2
+"932","NZL","NZ","New Zealand",1989,1,1
+"933","NZL","NZ","New Zealand",1990,0,0
+"934","NZL","NZ","New Zealand",1991,2,2
+"935","NZL","NZ","New Zealand",1992,1,1
+"936","NZL","NZ","New Zealand",1993,0,0
+"937","NZL","NZ","New Zealand",1994,2,2
+"938","NZL","NZ","New Zealand",1995,1,1
+"939","NZL","NZ","New Zealand",1996,0,0
+"940","NZL","NZ","New Zealand",1997,2,2
+"941","NZL","NZ","New Zealand",1998,1,1
+"942","NZL","NZ","New Zealand",1999,0,0
+"943","NZL","NZ","New Zealand",2000,2,2
+"944","NZL","NZ","New Zealand",2001,1,1
+"945","NZL","NZ","New Zealand",2002,0,0
+"946","NZL","NZ","New Zealand",2003,2,2
+"947","NZL","NZ","New Zealand",2004,1,1
+"948","NZL","NZ","New Zealand",2005,0,0
+"949","NZL","NZ","New Zealand",2006,2,2
+"950","NZL","NZ","New Zealand",2007,1,1
+"951","NZL","NZ","New Zealand",2008,0,0
+"952","NZL","NZ","New Zealand",2009,2,2
+"953","NZL","NZ","New Zealand",2010,1,1
+"954","NZL","NZ","New Zealand",2011,0,0
+"955","NZL","NZ","New Zealand",2012,2,2
+"956","NOR","NO","Norway",1975,2,2
+"957","NOR","NO","Norway",1976,1,1
+"958","NOR","NO","Norway",1977,0,0
+"959","NOR","NO","Norway",1978,3,3
+"960","NOR","NO","Norway",1979,2,2
+"961","NOR","NO","Norway",1980,1,1
+"962","NOR","NO","Norway",1981,0,0
+"963","NOR","NO","Norway",1982,3,3
+"964","NOR","NO","Norway",1983,2,2
+"965","NOR","NO","Norway",1984,1,1
+"966","NOR","NO","Norway",1985,0,0
+"967","NOR","NO","Norway",1986,3,3
+"968","NOR","NO","Norway",1987,2,2
+"969","NOR","NO","Norway",1988,1,1
+"970","NOR","NO","Norway",1989,0,0
+"971","NOR","NO","Norway",1990,3,3
+"972","NOR","NO","Norway",1991,2,2
+"973","NOR","NO","Norway",1992,1,1
+"974","NOR","NO","Norway",1993,0,0
+"975","NOR","NO","Norway",1994,3,3
+"976","NOR","NO","Norway",1995,2,2
+"977","NOR","NO","Norway",1996,1,1
+"978","NOR","NO","Norway",1997,0,0
+"979","NOR","NO","Norway",1998,3,3
+"980","NOR","NO","Norway",1999,2,2
+"981","NOR","NO","Norway",2000,1,1
+"982","NOR","NO","Norway",2001,0,0
+"983","NOR","NO","Norway",2002,3,3
+"984","NOR","NO","Norway",2003,2,2
+"985","NOR","NO","Norway",2004,1,1
+"986","NOR","NO","Norway",2005,0,0
+"987","NOR","NO","Norway",2006,3,3
+"988","NOR","NO","Norway",2007,2,2
+"989","NOR","NO","Norway",2008,1,1
+"990","NOR","NO","Norway",2009,0,0
+"991","NOR","NO","Norway",2010,3,3
+"992","NOR","NO","Norway",2011,2,2
+"993","NOR","NO","Norway",2012,1,1
+"994","POL","PL","Poland",1990,0,0
+"995","POL","PL","Poland",1991,4,4
+"996","POL","PL","Poland",1992,3,3
+"997","POL","PL","Poland",1993,2,2
+"998","POL","PL","Poland",1994,1,1
+"999","POL","PL","Poland",1995,0,0
+"1000","POL","PL","Poland",1996,4,4
+"1001","POL","PL","Poland",1997,3,3
+"1002","POL","PL","Poland",1998,2,2
+"1003","POL","PL","Poland",1999,1,1
+"1004","POL","PL","Poland",2000,0,0
+"1005","POL","PL","Poland",2001,4,4
+"1006","POL","PL","Poland",2002,3,3
+"1007","POL","PL","Poland",2003,2,2
+"1008","POL","PL","Poland",2004,1,1
+"1009","POL","PL","Poland",2005,0,0
+"1010","POL","PL","Poland",2006,4,4
+"1011","POL","PL","Poland",2007,3,3
+"1012","POL","PL","Poland",2008,2,2
+"1013","POL","PL","Poland",2009,1,1
+"1014","POL","PL","Poland",2010,0,0
+"1015","POL","PL","Poland",2011,4,4
+"1016","POL","PL","Poland",2012,3,3
+"1017","PRT","PT","Portugal",1976,0,0
+"1018","PRT","PT","Portugal",1977,4,3
+"1019","PRT","PT","Portugal",1978,3,2
+"1020","PRT","PT","Portugal",1979,2,0
+"1021","PRT","PT","Portugal",1980,0,0
+"1022","PRT","PT","Portugal",1981,4,3
+"1023","PRT","PT","Portugal",1982,3,2
+"1024","PRT","PT","Portugal",1983,0,0
+"1025","PRT","PT","Portugal",1984,3,3
+"1026","PRT","PT","Portugal",1985,0,0
+"1027","PRT","PT","Portugal",1986,1,3
+"1028","PRT","PT","Portugal",1987,0,0
+"1029","PRT","PT","Portugal",1988,3,3
+"1030","PRT","PT","Portugal",1989,2,2
+"1031","PRT","PT","Portugal",1990,1,1
+"1032","PRT","PT","Portugal",1991,0,0
+"1033","PRT","PT","Portugal",1992,3,3
+"1034","PRT","PT","Portugal",1993,2,2
+"1035","PRT","PT","Portugal",1994,1,1
+"1036","PRT","PT","Portugal",1995,0,0
+"1037","PRT","PT","Portugal",1996,3,3
+"1038","PRT","PT","Portugal",1997,4,2
+"1039","PRT","PT","Portugal",1998,3,1
+"1040","PRT","PT","Portugal",1999,2,0
+"1041","PRT","PT","Portugal",2000,2,3
+"1042","PRT","PT","Portugal",2001,1,2
+"1043","PRT","PT","Portugal",2002,0,0
+"1044","PRT","PT","Portugal",2003,2,3
+"1045","PRT","PT","Portugal",2004,1,2
+"1046","PRT","PT","Portugal",2005,0,0
+"1047","PRT","PT","Portugal",2006,3,3
+"1048","PRT","PT","Portugal",2007,2,2
+"1049","PRT","PT","Portugal",2008,1,1
+"1050","PRT","PT","Portugal",2009,0,0
+"1051","PRT","PT","Portugal",2010,3,3
+"1052","PRT","PT","Portugal",2011,2,0
+"1053","PRT","PT","Portugal",2012,3,3
+"1054","PRT","PT","Portugal",2013,NA,2
+"1055","ROM","RO","Romania",1975,0,0
+"1056","ROM","RO","Romania",1976,3,3
+"1057","ROM","RO","Romania",1977,2,2
+"1058","ROM","RO","Romania",1978,1,1
+"1059","ROM","RO","Romania",1979,3,3
+"1060","ROM","RO","Romania",1980,0,0
+"1061","ROM","RO","Romania",1981,3,3
+"1062","ROM","RO","Romania",1982,2,2
+"1063","ROM","RO","Romania",1983,1,1
+"1064","ROM","RO","Romania",1984,3,3
+"1065","ROM","RO","Romania",1985,0,0
+"1066","ROM","RO","Romania",1986,3,3
+"1067","ROM","RO","Romania",1987,2,2
+"1068","ROM","RO","Romania",1988,1,1
+"1069","ROM","RO","Romania",1989,3,3
+"1070","ROM","RO","Romania",1991,3,3
+"1071","ROM","RO","Romania",1992,0,0
+"1072","ROM","RO","Romania",1993,3,3
+"1073","ROM","RO","Romania",1994,2,2
+"1074","ROM","RO","Romania",1995,1,1
+"1075","ROM","RO","Romania",1996,0,0
+"1076","ROM","RO","Romania",1997,3,3
+"1077","ROM","RO","Romania",1998,2,2
+"1078","ROM","RO","Romania",1999,1,1
+"1079","ROM","RO","Romania",2000,0,0
+"1080","ROM","RO","Romania",2001,3,3
+"1081","ROM","RO","Romania",2002,2,2
+"1082","ROM","RO","Romania",2003,1,1
+"1083","ROM","RO","Romania",2004,0,0
+"1084","ROM","RO","Romania",2005,4,3
+"1085","ROM","RO","Romania",2006,3,2
+"1086","ROM","RO","Romania",2007,2,1
+"1087","ROM","RO","Romania",2008,1,0
+"1088","ROM","RO","Romania",2009,0,3
+"1089","ROM","RO","Romania",2010,4,2
+"1090","ROM","RO","Romania",2011,3,1
+"1091","ROM","RO","Romania",2012,2,0
+"1092","ROM","RO","Romania",2013,NA,3
+"1093","SVK","SK","Slovakia",1993,3,3
+"1094","SVK","SK","Slovakia",1994,0,0
+"1095","SVK","SK","Slovakia",1995,3,3
+"1096","SVK","SK","Slovakia",1996,2,2
+"1097","SVK","SK","Slovakia",1997,1,1
+"1098","SVK","SK","Slovakia",1998,0,0
+"1099","SVK","SK","Slovakia",1999,3,3
+"1100","SVK","SK","Slovakia",2000,2,2
+"1101","SVK","SK","Slovakia",2001,1,1
+"1102","SVK","SK","Slovakia",2002,0,0
+"1103","SVK","SK","Slovakia",2003,3,3
+"1104","SVK","SK","Slovakia",2004,2,2
+"1105","SVK","SK","Slovakia",2005,1,1
+"1106","SVK","SK","Slovakia",2006,0,0
+"1107","SVK","SK","Slovakia",2007,3,3
+"1108","SVK","SK","Slovakia",2008,2,2
+"1109","SVK","SK","Slovakia",2009,1,1
+"1110","SVK","SK","Slovakia",2010,0,0
+"1111","SVK","SK","Slovakia",2011,3,3
+"1112","SVK","SK","Slovakia",2012,2,0
+"1113","SVK","SK","Slovakia",2013,NA,3
+"1114","SVN","SI","Slovenia",1992,0,0
+"1115","SVN","SI","Slovenia",1993,4,3
+"1116","SVN","SI","Slovenia",1994,3,2
+"1117","SVN","SI","Slovenia",1995,2,1
+"1118","SVN","SI","Slovenia",1996,1,0
+"1119","SVN","SI","Slovenia",1997,0,3
+"1120","SVN","SI","Slovenia",1998,4,2
+"1121","SVN","SI","Slovenia",1999,3,1
+"1122","SVN","SI","Slovenia",2000,2,0
+"1123","SVN","SI","Slovenia",2001,1,3
+"1124","SVN","SI","Slovenia",2002,0,2
+"1125","SVN","SI","Slovenia",2003,4,1
+"1126","SVN","SI","Slovenia",2004,3,0
+"1127","SVN","SI","Slovenia",2005,4,3
+"1128","SVN","SI","Slovenia",2006,3,2
+"1129","SVN","SI","Slovenia",2007,2,1
+"1130","SVN","SI","Slovenia",2008,1,0
+"1131","SVN","SI","Slovenia",2009,4,3
+"1132","SVN","SI","Slovenia",2010,3,2
+"1133","SVN","SI","Slovenia",2011,2,0
+"1134","SVN","SI","Slovenia",2012,4,3
+"1135","SVN","SI","Slovenia",2013,NA,2
+"1136","ESP","ES","Spain",1978,3,3
+"1137","ESP","ES","Spain",1979,0,0
+"1138","ESP","ES","Spain",1980,3,3
+"1139","ESP","ES","Spain",1981,2,2
+"1140","ESP","ES","Spain",1982,0,0
+"1141","ESP","ES","Spain",1983,3,3
+"1142","ESP","ES","Spain",1984,2,2
+"1143","ESP","ES","Spain",1985,1,1
+"1144","ESP","ES","Spain",1986,0,0
+"1145","ESP","ES","Spain",1987,3,3
+"1146","ESP","ES","Spain",1988,2,2
+"1147","ESP","ES","Spain",1989,1,0
+"1148","ESP","ES","Spain",1990,3,3
+"1149","ESP","ES","Spain",1991,2,2
+"1150","ESP","ES","Spain",1992,1,1
+"1151","ESP","ES","Spain",1993,0,0
+"1152","ESP","ES","Spain",1994,3,3
+"1153","ESP","ES","Spain",1995,2,2
+"1154","ESP","ES","Spain",1996,1,0
+"1155","ESP","ES","Spain",1997,3,3
+"1156","ESP","ES","Spain",1998,2,2
+"1157","ESP","ES","Spain",1999,1,1
+"1158","ESP","ES","Spain",2000,0,0
+"1159","ESP","ES","Spain",2001,3,3
+"1160","ESP","ES","Spain",2002,2,2
+"1161","ESP","ES","Spain",2003,1,1
+"1162","ESP","ES","Spain",2004,0,0
+"1163","ESP","ES","Spain",2005,3,3
+"1164","ESP","ES","Spain",2006,2,2
+"1165","ESP","ES","Spain",2007,1,1
+"1166","ESP","ES","Spain",2008,0,0
+"1167","ESP","ES","Spain",2009,3,3
+"1168","ESP","ES","Spain",2010,2,2
+"1169","ESP","ES","Spain",2011,1,0
+"1170","ESP","ES","Spain",2012,3,3
+"1171","ESP","ES","Spain",2013,NA,2
+"1172","SWE","SE","Sweden",1975,1,1
+"1173","SWE","SE","Sweden",1976,0,0
+"1174","SWE","SE","Sweden",1977,2,2
+"1175","SWE","SE","Sweden",1978,1,1
+"1176","SWE","SE","Sweden",1979,0,0
+"1177","SWE","SE","Sweden",1980,2,2
+"1178","SWE","SE","Sweden",1981,1,1
+"1179","SWE","SE","Sweden",1982,0,0
+"1180","SWE","SE","Sweden",1983,2,2
+"1181","SWE","SE","Sweden",1984,1,1
+"1182","SWE","SE","Sweden",1985,0,0
+"1183","SWE","SE","Sweden",1986,2,2
+"1184","SWE","SE","Sweden",1987,1,1
+"1185","SWE","SE","Sweden",1988,0,0
+"1186","SWE","SE","Sweden",1989,2,2
+"1187","SWE","SE","Sweden",1990,1,1
+"1188","SWE","SE","Sweden",1991,0,0
+"1189","SWE","SE","Sweden",1992,2,2
+"1190","SWE","SE","Sweden",1993,1,1
+"1191","SWE","SE","Sweden",1994,0,0
+"1192","SWE","SE","Sweden",1995,3,3
+"1193","SWE","SE","Sweden",1996,2,2
+"1194","SWE","SE","Sweden",1997,1,1
+"1195","SWE","SE","Sweden",1998,0,0
+"1196","SWE","SE","Sweden",1999,3,3
+"1197","SWE","SE","Sweden",2000,2,2
+"1198","SWE","SE","Sweden",2001,1,1
+"1199","SWE","SE","Sweden",2002,0,0
+"1200","SWE","SE","Sweden",2003,3,3
+"1201","SWE","SE","Sweden",2004,2,2
+"1202","SWE","SE","Sweden",2005,1,1
+"1203","SWE","SE","Sweden",2006,0,0
+"1204","SWE","SE","Sweden",2007,3,3
+"1205","SWE","SE","Sweden",2008,2,2
+"1206","SWE","SE","Sweden",2009,1,1
+"1207","SWE","SE","Sweden",2010,0,0
+"1208","SWE","SE","Sweden",2011,3,3
+"1209","SWE","SE","Sweden",2012,2,2
+"1210","CHE","CH","Switzerland",1975,0,0
+"1211","CHE","CH","Switzerland",1976,3,3
+"1212","CHE","CH","Switzerland",1977,2,2
+"1213","CHE","CH","Switzerland",1978,1,1
+"1214","CHE","CH","Switzerland",1979,0,0
+"1215","CHE","CH","Switzerland",1980,3,3
+"1216","CHE","CH","Switzerland",1981,2,2
+"1217","CHE","CH","Switzerland",1982,1,1
+"1218","CHE","CH","Switzerland",1983,0,0
+"1219","CHE","CH","Switzerland",1984,3,3
+"1220","CHE","CH","Switzerland",1985,2,2
+"1221","CHE","CH","Switzerland",1986,1,1
+"1222","CHE","CH","Switzerland",1987,0,0
+"1223","CHE","CH","Switzerland",1988,3,3
+"1224","CHE","CH","Switzerland",1989,2,2
+"1225","CHE","CH","Switzerland",1990,1,1
+"1226","CHE","CH","Switzerland",1991,0,0
+"1227","CHE","CH","Switzerland",1992,3,3
+"1228","CHE","CH","Switzerland",1993,2,2
+"1229","CHE","CH","Switzerland",1994,1,1
+"1230","CHE","CH","Switzerland",1995,0,0
+"1231","CHE","CH","Switzerland",1996,3,3
+"1232","CHE","CH","Switzerland",1997,2,2
+"1233","CHE","CH","Switzerland",1998,1,1
+"1234","CHE","CH","Switzerland",1999,0,0
+"1235","CHE","CH","Switzerland",2000,3,3
+"1236","CHE","CH","Switzerland",2001,2,2
+"1237","CHE","CH","Switzerland",2002,1,1
+"1238","CHE","CH","Switzerland",2003,0,0
+"1239","CHE","CH","Switzerland",2004,3,3
+"1240","CHE","CH","Switzerland",2005,2,2
+"1241","CHE","CH","Switzerland",2006,1,1
+"1242","CHE","CH","Switzerland",2007,0,0
+"1243","CHE","CH","Switzerland",2008,3,3
+"1244","CHE","CH","Switzerland",2009,2,2
+"1245","CHE","CH","Switzerland",2010,1,1
+"1246","CHE","CH","Switzerland",2011,0,0
+"1247","CHE","CH","Switzerland",2012,3,3
+"1248","GBR","GB","United Kingdom",1975,4,4
+"1249","GBR","GB","United Kingdom",1976,3,3
+"1250","GBR","GB","United Kingdom",1977,2,2
+"1251","GBR","GB","United Kingdom",1978,1,1
+"1252","GBR","GB","United Kingdom",1979,0,0
+"1253","GBR","GB","United Kingdom",1980,4,4
+"1254","GBR","GB","United Kingdom",1981,3,3
+"1255","GBR","GB","United Kingdom",1982,2,2
+"1256","GBR","GB","United Kingdom",1983,0,0
+"1257","GBR","GB","United Kingdom",1984,4,4
+"1258","GBR","GB","United Kingdom",1985,3,3
+"1259","GBR","GB","United Kingdom",1986,2,2
+"1260","GBR","GB","United Kingdom",1987,1,0
+"1261","GBR","GB","United Kingdom",1988,4,4
+"1262","GBR","GB","United Kingdom",1989,3,3
+"1263","GBR","GB","United Kingdom",1990,2,2
+"1264","GBR","GB","United Kingdom",1991,1,1
+"1265","GBR","GB","United Kingdom",1992,0,0
+"1266","GBR","GB","United Kingdom",1993,4,4
+"1267","GBR","GB","United Kingdom",1994,3,3
+"1268","GBR","GB","United Kingdom",1995,2,2
+"1269","GBR","GB","United Kingdom",1996,1,1
+"1270","GBR","GB","United Kingdom",1997,0,0
+"1271","GBR","GB","United Kingdom",1998,4,4
+"1272","GBR","GB","United Kingdom",1999,3,3
+"1273","GBR","GB","United Kingdom",2000,2,2
+"1274","GBR","GB","United Kingdom",2001,1,0
+"1275","GBR","GB","United Kingdom",2002,4,4
+"1276","GBR","GB","United Kingdom",2003,3,3
+"1277","GBR","GB","United Kingdom",2004,2,2
+"1278","GBR","GB","United Kingdom",2005,1,0
+"1279","GBR","GB","United Kingdom",2006,4,4
+"1280","GBR","GB","United Kingdom",2007,3,3
+"1281","GBR","GB","United Kingdom",2008,2,2
+"1282","GBR","GB","United Kingdom",2009,1,1
+"1283","GBR","GB","United Kingdom",2010,0,0
+"1284","GBR","GB","United Kingdom",2011,4,4
+"1285","GBR","GB","United Kingdom",2012,3,3
+"1286","GBR","GB","United Kingdom",2013,NA,2
+"1287","USA","US","United States",1975,1,1
+"1288","USA","US","United States",1976,0,0
+"1289","USA","US","United States",1977,3,3
+"1290","USA","US","United States",1978,2,2
+"1291","USA","US","United States",1979,1,1
+"1292","USA","US","United States",1980,0,0
+"1293","USA","US","United States",1981,3,3
+"1294","USA","US","United States",1982,2,2
+"1295","USA","US","United States",1983,1,1
+"1296","USA","US","United States",1984,0,0
+"1297","USA","US","United States",1985,3,3
+"1298","USA","US","United States",1986,2,2
+"1299","USA","US","United States",1987,1,1
+"1300","USA","US","United States",1988,0,0
+"1301","USA","US","United States",1989,3,3
+"1302","USA","US","United States",1990,2,2
+"1303","USA","US","United States",1991,1,1
+"1304","USA","US","United States",1992,0,0
+"1305","USA","US","United States",1993,3,3
+"1306","USA","US","United States",1994,2,2
+"1307","USA","US","United States",1995,1,1
+"1308","USA","US","United States",1996,0,0
+"1309","USA","US","United States",1997,3,3
+"1310","USA","US","United States",1998,2,2
+"1311","USA","US","United States",1999,1,1
+"1312","USA","US","United States",2000,0,0
+"1313","USA","US","United States",2001,3,3
+"1314","USA","US","United States",2002,2,2
+"1315","USA","US","United States",2003,1,1
+"1316","USA","US","United States",2004,0,0
+"1317","USA","US","United States",2005,3,3
+"1318","USA","US","United States",2006,2,2
+"1319","USA","US","United States",2007,1,1
+"1320","USA","US","United States",2008,0,0
+"1321","USA","US","United States",2009,3,3
+"1322","USA","US","United States",2010,2,2
+"1323","USA","US","United States",2011,1,1
+"1324","USA","US","United States",2012,0,0
