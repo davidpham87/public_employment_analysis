@@ -41,7 +41,7 @@ x <- eos[[1]][country.a]
 x[, egr := 100*eg/et, by='country'] # et: General Government employment, et: Total employment
 x[, egr_diff:= c(NA, diff(egr)), by='country'] # et: General Government employment, et: Total employment
 ## x <- x[TIME < 2014] # make sure there are no projections
-x <- x[TIME < 2012 & TIME >= 1960] # make sure there are no projections
+x <- x[TIME < 2012 & TIME >= 1990] # make sure there are no projections
 x[, egr_lagged:= c(NA, egr_diff[1:length(egr_diff)-1]), by='country'] # et: General Government employment, et: Total employment
 x[, TIME:=as.factor(TIME)]
 x[, country:=as.factor(country)]
@@ -161,7 +161,7 @@ ff.fiscal <-
   egr_diff ~ . - fiscal_transparency_score + fiscal_transparency_score*gdpv_annpct
 
 lassen.lm <- robustnessAnalysis(x.lassen, c(cols, 'fiscal_transparency_score'),
-                                '', ff.fiscal)
+                                '',  ff.fiscal)
 lassen.wo.lm <- robustnessAnalysis(as.data.table(lassen.lm$model), cols, '', ff)
 
 imf.gfs.lm <-
@@ -232,8 +232,9 @@ if (MAKE_PLOT){
 
   colnames(x.model.lm) <- gsub('\\_', '\\\\_', colnames(x.model.lm))
   y.fit <- y.fit.simple.lm
-  tikz('plot/model_fit_quality.tex', width=6, height=6)
-  gg <- compareValue(as.data.table(cbind(x.model.lm, y.fit)), y.fit='y.fit', egr='egr\\_diff')
+  tikz('plot/model_fit_quality.tex', width=8.5, height=6)
+  colnames(x.model.lm) <- gsub('egr\\\\_diff', 'Change in public\nemployment rate', colnames(x.model.lm))
+  gg <- compareValue(as.data.table(cbind(x.model.lm, y.fit)), y.fit='y.fit', egr='Change in public\nemployment rate')
   print(gg)
   dev.off()
 }

@@ -32,8 +32,8 @@
 * Model and Data
 ** Data
 
-   Following \cite{aaskoven2015fiscal}, the following variable were selected
-   from the Economic Outlook database to explain the public employment rate.
+   Following \cite{aaskoven2015fiscal}, the next variable were selected from
+   the Economic Outlook database to explain the public employment rate.
 
 #+CAPTION: Main variables for the regression
 | Variable                         | OECD code                         |
@@ -48,9 +48,8 @@
 | Net household dispossable income | ydrh                              |
 |----------------------------------+-----------------------------------|
 
-   Additionally, the following time series were retrieved to compare result of
-   the regression with \cite{aaskoven2015fiscal} and
-   \cite{alesina2000redistributive}:
+   Additionally, the below time series were retrieved to compare the results
+   from \cite{aaskoven2015fiscal} and \cite{alesina2000redistributive}:
 
 #+CAPTION: Additional variables for the regression
 | Variable                          | Source                           |
@@ -60,7 +59,7 @@
 | Gini index                        | \cite{toth2014chapter}           |
 | Fiscal transparency               | IMF, \cite{wang2015trends}       |
 | Laassen fiscal transparency Score | \cite{aaskoven2015fiscal}        |
-| Left or right sied government     | \cite{gandrud2014altreplication} |
+| Left or right side government     | \cite{gandrud2014altreplication} |
 | Year until next elections         | \cite{gandrud2015yrcurnt}        |
 |-----------------------------------+----------------------------------|
 
@@ -95,7 +94,7 @@
    G_{it} T_i$) without looking at the linear effect of $T_i$.
 
    After several attempts to find an acceptable model, the fixed effect with
-   autoregressive components looked promising. In this model, the difference of
+   auto-regressive components looked promising. In this model, the difference of
    the public employment are explained:
 
    \begin{align*}
@@ -150,6 +149,9 @@
    coefficient) nor fiscal transparency affected the main coefficient of the
    regression.
 
+   Comparing with \cite{aaskoven2015fiscal}, we get similar results, excluding
+   effect of fiscal transparency.
+
 ** Note on robustness
 
    The previous analysis should be repeated with more robust methods, e.g. by
@@ -178,7 +180,7 @@
   considerably between models.
 
   Concerning quarterly data, most of control variable are not reported on
-  quarterly basis in the oecd dataset \footnote{The dataset in Stata format
+  quarterly basis in the oecd data set \footnote{The data set in Stata format
   seemed to code quarters and date unconventionally.}.  A spline smoother has
   been applied to interpolated between points and obviously this affect the
   quality of the fits with quarterly data as the independent variable is too

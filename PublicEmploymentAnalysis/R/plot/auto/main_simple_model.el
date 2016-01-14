@@ -13,5 +13,7 @@
     "tikz"
     "pdflscape")
    (TeX-add-symbols
-    '("insertplot" 2))))
+    '("insertplot" 2))
+   (LaTeX-add-environments
+    '("innerlist" LaTeX-env-args ["argument"] 0))))
 
