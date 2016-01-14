@@ -1,6 +1,13 @@
 source('init.R')
 pckgs <- loadPackages()
 
+lvl2num <- function(x) as.numeric(levels(x)[x])
+showdiag <- function(lm.obj){
+  par(mfrow = c(2, 2))
+  plot(lm.obj)
+}
+
+
 MAKE_PLOT <- FALSE
 
 cols <- c('egr_diff', # public employement rate
@@ -15,6 +22,11 @@ cols <- c('egr_diff', # public employement rate
           'ydrh_to_gdpv' # Ratio of net money income per capita to gdp (volume)
           )
 
+# For dynamic model and plm
+## cols.dyn <- c('egr', 'TIME', 'gdpv_annpct', 'unr', 'ypgtq', 'lpop', 'country',
+##               'ydrh_to_gdpv')
+
+
 eos <- readRDS('../data/eo-data.rds')
 eo.desc <- readRDS('../data/eo-colnames-dt.rds')
 setkey(eo.desc, VARIABLE) # enable eo.desc['bsii'] => Balance of income, value, BOP basis
@@ -28,27 +40,19 @@ missing.country <- eos[[1]][, setdiff(unique(country), country.a)]
 x <- eos[[1]][country.a]
 x[, egr := 100*eg/et, by='country'] # et: General Government employment, et: Total employment
 x[, egr_diff:= c(NA, diff(egr)), by='country'] # et: General Government employment, et: Total employment
-x <- x[TIME < 2016 & TIME > 1990] # make sure there are no projections
+## x <- x[TIME < 2014] # make sure there are no projections
+x <- x[TIME < 2012 & TIME >= 1960] # make sure there are no projections
 x[, egr_lagged:= c(NA, egr_diff[1:length(egr_diff)-1]), by='country'] # et: General Government employment, et: Total employment
-time.numeric <- x$TIME
 x[, TIME:=as.factor(TIME)]
 x[, country:=as.factor(country)]
 x[, lpop := log(pop1574/1e6)] # log pop of millions
 x[, ydrh_to_gdpv:=100*ydrh/gdpv]
 x <- x[!is.na(egr)] # Non na observation
 
-library(mgcv)
-library(sfsmisc)
-library(nlme)
-
-par(mfrow=c(5,5))
-x[, { pacf(egr, main=.BY[[1]]); 0 }, by='country']
-
-showdiag <- function(lm.obj){
-  par(mfrow = c(2, 2))
-  plot(lm.obj)
+if (MAKE_PLOT){
+  par(mfrow=c(5,5))
+  x[, { pacf(egr, main=.BY[[1]]); 0 }, by='country']
 }
-
 
 ## Expand the formula
 x.lm <- lm(egr_diff~ ., data=x[, cols, with=FALSE])
@@ -56,39 +60,22 @@ x.lm.s <- summary(x.lm)
 x.lm.s
 
 x.model.lm <- na.omit(x[, c(cols, 'country'), with=FALSE])
-lvl2num <- function(x) as.numeric(levels(x)[x])
+
 x.model.lm$TIME <- x.model.lm[, lvl2num(TIME)]
 y.fit.simple.lm <- fitted(x.lm)
-
-
-DT <- copy(x[, cols, with=FALSE])
-library(plm)
-library(dynlm)
-data.plm <- as.data.frame(DT)
-form <- formula(terms(egr ~ ., data = data.plm))
-dform <- update(form, . ~ . + L(egr, 1))
-summary(dynlm(dform, na.omit(data.plm)))
-
-## x.gam <- gam(ff, data=x[, cols, with=FALSE])
-## plot(x.gam)
-## gam.check(x.gam)
-
-## dev.new()
-## par(mfrow=c(5,5))
-## x[, {pacf(egr, main=.BY[[1]]);0}, by='country']
-x[, TIME:=as.numeric(TIME)][, TIME:=time.numeric]
-form <- formula(terms(egr ~ ., data = x[, cols, with=FALSE]))
-x.gls <- gls(form, data=na.omit(x[, cols, with=FALSE]),
-             correlation=corAR1(0.9, ~ 1 | country, TRUE))
-anova(x.gls)
-eo.desc[cols]
 x.simple.model <- as.data.table(x.lm$model)
 
 ################################################################################
 ## Additional Data
 
+## execrlc
+## 1 is right 2 center 3 left
+
+x[, TIME:=lvl2num(TIME)] # Revert back because of joining data
+
 new.data.names <- new.data <-
-  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth')
+  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth', 'dpi_excecrlc', 'year_until_elections')
+
 new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
   lapply(function(dt) {
     dt[, V1:=NULL]
@@ -107,6 +94,8 @@ setnames(imf.gfs, c('ISO', 'Index Score'), c('country', 'imf_gfs'))
 x.new <- new.data[J(x)]
 x.new[, lpoptot:=log(pop)]
 x.new[, pop:=NULL]
+x.new[execrlc %in% c(0, NA, 2), execrlc:=NA]
+x.new[, execrlc:=factor(execrlc, labels=c('right', 'left'))]
 x.new <- merge(x.new, imf.gfs, by='country') # add img_gfs fiscal_scores
 
 new.var.names <- list(incomeineq='gini', pop='population',
@@ -116,16 +105,14 @@ new.var.names <- list(incomeineq='gini', pop='population',
 ################################################################################
 ### Robustness Analysis
 
-new.cols <- c('imf_gfs', 'incomeineq', 'lpoptot', 'gdp_per_capita')
+new.cols <- c('imf_gfs', 'incomeineq', 'lpoptot', 'gdp_per_capita', 'execrlc',
+              'yrcurnt_corrected')
+
 cols.extended <- c(cols, new.cols)
-# x.new[, fiscal_transparency:=scale(imf_gfs, scale=FALSE)]
 x.new[, imf_gfs:=scale(imf_gfs, scale=TRUE)]
 
 robustnessAnalysis <- function(data, cols, to.drop, formula=egr ~ .){
   cols.extended <- unselectVector(cols, to.drop)
-  ## x.lm <- gls(formula, data=na.omit(data[, cols, with=FALSE]),
-  ##             correlation=corAR1(0.9, ~ 1 | country, TRUE))
-  ## print(anova(x.lm))
   x.lm <- lm(formula, data[, cols.extended, with=FALSE])
   print(summary(x.lm))
   x.lm
@@ -141,8 +128,7 @@ country.wo.lm <- robustnessAnalysis(x.new, cols, 'country', ff)
 
 ## Not so much difference, but loss of 150 data points, so keep lpop.
 lpoptot.lm <- robustnessAnalysis(x.new, c(cols, 'lpoptot'), 'lpop', ff)
-lpop.lm <- completeLmData(lpoptot.lm, x.new, 'lpop') %>%
-  robustnessAnalysis(c(unselectVector(cols, 'lpop'), 'lpop'), 'lpoptot', ff)
+lpop.lm <- robustnessAnalysis(x.new[!is.na(lpoptot)], c(unselectVector(cols, 'lpop'), 'lpop'), '', ff)
 
 ## Income inquality is not significant and also limit the size of the dataset
 ## gdp_per_capita and lpop are represented by ydrh and lpoptot, hence we can drop them
@@ -171,14 +157,26 @@ x.imf.gfs <- merge(x.new, imf.gfs, by='country')
 setnames(x.lassen, 'Index Score', 'fiscal_transparency_score')
 setnames(x.imf.gfs, 'imf_gfs.y', 'fiscal_transparency_score')
 
-ff.fiscal <- egr_diff~ . - fiscal_transparency_score + fiscal_transparency_score*gdpv_annpct
-lassen.lm <- robustnessAnalysis(x.lassen, c(cols, 'fiscal_transparency_score'), '',
-                                ff.fiscal)
+ff.fiscal <-
+  egr_diff ~ . - fiscal_transparency_score + fiscal_transparency_score*gdpv_annpct
+
+lassen.lm <- robustnessAnalysis(x.lassen, c(cols, 'fiscal_transparency_score'),
+                                '', ff.fiscal)
 lassen.wo.lm <- robustnessAnalysis(as.data.table(lassen.lm$model), cols, '', ff)
 
-imf.gfs.lm <- robustnessAnalysis(x.imf.gfs, c(cols, 'fiscal_transparency_score'), '',
-                                ff.fiscal)
+imf.gfs.lm <-
+  robustnessAnalysis(x.imf.gfs, c(cols, 'fiscal_transparency_score'),
+                     '',  ff.fiscal)
 imf.gfs.wo.lm <- robustnessAnalysis(as.data.table(imf.gfs.lm$model), cols, '', ff)
+
+## Left or right goverment
+govrlc.lm <- robustnessAnalysis(x.new, c(cols, 'execrlc'), '', ff)
+govrlc.wo.lm <- robustnessAnalysis(as.data.table(govrlc.lm$model), cols, '', ff)
+
+## Years until election
+yrcurnt.lm <- robustnessAnalysis(x.new, c(cols, 'yrcurnt_corrected'), '', ff)
+yrcurnt.wo.lm <- robustnessAnalysis(as.data.table(yrcurnt.lm$model), cols, '', ff)
+
 
 ################################################################################
 ## Plots
@@ -187,7 +185,7 @@ descriptions <- list(`gdpv\\_annpct`='GDP growth',
                      unr='Unemployment rate',
                      ypgtq='Total disbursements, general government, in percent of GDP',
                      egr='Public employment rate',
-                     lpop='Log of population in million',
+                     lpop='Log of adult population in million',
                      `ydrh\\_to\\_gdpv`='Household net income, in percent of GDP',
                      `gdp\\_per\\_capita`='GDP per capita in USD Millions',
                      `fiscal\\_transparency`='IMF GFS Index',
@@ -195,7 +193,9 @@ descriptions <- list(`gdpv\\_annpct`='GDP growth',
                      lpoptot='Log of total population in million',
                      'TIME'='Time',
                      egr_diff='Change in Public Employment Rate (CPER)',
-                     egr_lagged='Lagged change in Public Employment Rate')
+                     egr_lagged='Lagged change in Public Employment Rate',
+                     execrlc='Left or right government',
+                     yrcurnt_corrected='Years until election')
 
 ## Data plots
 if (MAKE_PLOT){
@@ -272,31 +272,34 @@ description <-
          fiscal_transparency_score='Fiscal Transparency',
          'gini_toth'='Gini coefficient (Toth 2015)',
          egr_diff='Change in Public Employment Rate (CPER)',
-         egr_lagged='Lagged change in Public Employment Rate'),
+         egr_lagged='Lagged change in Public Employment Rate',
+         yrcurnt_corrected='Years left until election',
+         execrlcleft='Left government effect'),
     descriptions)
 
 x.lm$model$TIME <- lvl2num(x.lm$model$TIME)
 queryList(description, colnames(x.lm$model)) %>% {
   stargazer(x.lm$model, out='model_output/simple_statistic.tex',
             covariate.labels=.,
-            font.size='footnotesize')
+            font.size='footnotesize', title='Data statistics')
 }
 
-toTexModel <- function(li.lm, title, out, dep.names='Public employment rate'){
+description[['egr_lagged']] <- NA
+toTexModel <- function(li.lm, title, out, dep.name='Difference in public employment rate'){
   cov.labs <- na.omit(queryList(description, names(coef(li.lm[[1]]))[-1]))
   argx <- c(li.lm, list(title=title, out=out, covariate.labels=cov.labs,
-                        dep.var.labels=dep.name, omit=c('TIME', 'country', 'egr_lagged'),
+                        dep.var.labels=dep.name, omit=c('TIME', 'egr_lagged'),
                         omit.labels = c('Year fixed-effect',
-                                        'Country fixed-effect', 'Auto-correlation effect')))
+                                        'Auto-correlation effect')))
   do.call(stargazer, argx)
 }
 
-dep.name <- 'Public employment rate'
+dep.name <- 'Difference in public employment rate'
 toTexModel(list(x.lm),
            'Main variable result',
            'model_output/simple_lm.tex')
 toTexModel(list(lpoptot.lm, lpop.lm),
-           'Robustness of log of working population',
+           'Robustness of log of adult population',
            'model_output/simple_lm_lpop.tex')
 toTexModel(list(incomeineq.lm, incomeineq.wo.lm),
            'Effect of income inequality',
@@ -316,5 +319,10 @@ toTexModel(list(lassen.lm, lassen.wo.lm),
 toTexModel(list(imf.gfs.lm, imf.gfs.wo.lm),
            'Effect of Lassen Fiscal Transparency index',
            'model_output/simple_lm_imf_transparency.tex')
-
+toTexModel(list(govrlc.lm, govrlc.wo.lm),
+           'Effect of Government Political Side',
+           'model_output/simple_lm_govrlc.tex')
+toTexModel(list(yrcurnt.lm, yrcurnt.wo.lm),
+           'Effect of years left until election',
+           'model_output/simple_lm_yrcurnt.tex')
 ################################################################################

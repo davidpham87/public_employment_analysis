@@ -44,7 +44,8 @@ eo.q[, lpop_interpolated:=log(pop1574_interpolated)]
 ## New Data
 
 new.data.names <- new.data <-
-  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth')
+  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth', 'dpi_excecrlc', 'year_until_elections')
+
 new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
   lapply(function(dt) {
     dt[, V1:=NULL]
@@ -66,12 +67,12 @@ eo.q[is.na(gdpv_annpct), gdpv_annpct:=gdpv_annpct_interpolated]
 x <- eo.q
 setkey(x, 'country')
 x <- x[country.q]
-x <- x[TIME< 2016]
+x <- x[TIME< 2013 & TIME >= 1990]
 time.numeric <- x$TIME
 x[, TIME:=as.factor(TIME)]
 x[, QUARTER:=as.factor(QUARTER)]
 x[, YEAR:= as.numeric(YEAR)]
-x[, egr := eg/et] # et: General Government employment, et: Total employment
+x[, egr := 100*eg/et] # et: General Government employment, et: Total employment
 x[, egr_diff:= c(NA, diff(egr)), by='country'] # et: General Government employment, et: Total employment
 x[, egr_lagged:= c(NA, egr_diff[1:length(egr_diff)-1]), by='country'] # et: General Government employment, et: Total employment
 x[, country:=as.factor(country)]
@@ -95,31 +96,6 @@ showdiag <- function(lm.obj){
   plot(lm.obj)
 }
 showdiag(x.lm)
-
-## library(dynlm)
-## cols.dynlm <- c('egr', # public employement rate
-##                 'YEAR',
-##                 'QUARTER',
-##                 'gdpv_annpct', # gdp growth
-##                 'unr', # 'unemployment rate'
-##                 'ypgtq_interpolated', # Total disburrsements, general government
-##                 ## 'pop1574', # population proxy (aged from 15 to 74)
-##                 'lpop_interpolated', # log population
-##                                         # 'country',
-##                 ## 'ydrh' # net money income per capita
-##                                         # 'ydrh_to_gdpv', # interpolated value
-##                 'gdp_per_capita_interpolated'
-##                 )
-## DT <- copy(x[, cols.dynlm, with=FALSE])
-## data.plm <- na.omit(as.data.frame(DT))
-## form <- formula(terms(d(egr, 1) ~ ., data = data.plm))
-## dform <- update(form, . ~ . + L(egr, 1) + L(unr, 1))
-
-## data.plm <- do.call(cbind, lapply(data.plm, zoo))
-## summary(x.dynlm <- dynlm(dform, data.plm))
-
-
-
 
 robustnessAnalysis <- function(data, cols, to.drop, formula=egr ~ .){
   cols.extended <- unselectVector(cols, to.drop)
@@ -155,6 +131,25 @@ imf.gfs.wo.lm <- robustnessAnalysis(as.data.table(imf.gfs.lm$model), cols, '', f
 par(mfrow = c(2,2))
 plot(imf.gfs.lm)
 
+## Left or right goverment
+setkey(new.data, country)
+
+new.data[, TIME:=as.double(TIME)]
+new.data[, execrlc:=as.double(execrlc)]
+new.data[, yrcurnt_corrected:=as.double(yrcurnt_corrected)]
+
+x.new[, TIME:=lvl2num(TIME)]
+
+x.new <- interpolateQuarterColumn(x.new, new.data, 'execrlc', 2012)
+x.new <- interpolateQuarterColumn(x.new, new.data, 'yrcurnt_corrected', 2012)
+
+govrlc.lm <- robustnessAnalysis(x.new, c(cols, 'execrlc_interpolated'), '', ff)
+govrlc.wo.lm <- robustnessAnalysis(as.data.table(govrlc.lm$model), cols, '', ff)
+
+## Years until election
+yrcurnt.lm <- robustnessAnalysis(x.new, c(cols, 'yrcurnt_corrected_interpolated'), '', ff)
+yrcurnt.wo.lm <- robustnessAnalysis(as.data.table(yrcurnt.lm$model), cols, '', ff)
+
 ################################################################################
 ### Residuals are really bad when using no difference
 ### New methods: diff all variable and study the difference
@@ -179,7 +174,7 @@ descriptions <- list(`gdpv\\_annpct`='GDP growth',
                      'TIME'='Time',
                      egr_diff='Change in Public Employment Rate (CPER)',
                      egr_lagged='Lagged change in Public Employment Rate',
-                     unr_lagged='Lagged Unemployment rate'
+                     unr_lagged='Lagged unemployment rate'
                      )
 
 ## Data plots
@@ -269,28 +264,30 @@ description <-
          'gini_toth'='Gini coefficient (Toth 2015)',
          egr_diff='Difference with previous public employment rate (CPER)',
          egr_lagged='Lagged of difference in public employment rate',
-         lpop_interpolated='Log of working population (interpolated)',
+         lpop_interpolated='Log of adult population (interpolated)',
          QUARTER='Quarter',
-         YEAR='Year'),
+         YEAR='Year',
+         execrlc_interpolated='Left Side Government',
+         yrcurnt_corrected_interpolated='Years until next election'),
     descriptions)
 
 x.lm$model$TIME <- lvl2num(x.lm$model$TIME)
 queryList(description, colnames(x.lm$model)) %>% {
   stargazer(x.lm$model, out='model_output/simple_statistic_quarterly.tex',
             covariate.labels=.,
-            font.size='footnotesize')
+            font.size='footnotesize', title='Data statistics')
 }
 
 description[['egr_lagged']] <- NA
 description[['YEAR']] <- NA
 
-toTexModel <- function(li.lm, title, out, dep.names='Difference in Public employment rate'){
+toTexModel <- function(li.lm, title, out, dep.name='Difference in public employment rate'){
   cov.labs <- na.omit(queryList(description, names(coef(li.lm[[1]]))[-1]))
 
   argx <- c(li.lm, list(title=title, out=out, covariate.labels=cov.labs,
-                        dep.var.labels=dep.name, omit=c('YEAR', 'country', 'egr_lagged', 'QUARTER'),
+                        dep.var.labels=dep.name, omit=c('YEAR','egr_lagged', 'QUARTER'),
                         omit.labels = c('Year fixed-effect',
-                                        'Country fixed-effect', 'Auto-correlation effect', 'Quarter effect')))
+                                        'Auto-correlation effect', 'Seasonal effect')))
   do.call(stargazer, argx)
 }
 
@@ -304,3 +301,11 @@ toTexModel(list(lassen.lm, lassen.wo.lm),
 toTexModel(list(imf.gfs.lm, imf.gfs.wo.lm),
            'Effect of IMF GFS Score',
            'model_output/simple_lm_imf_quarterly.tex')
+toTexModel(list(govrlc.lm, govrlc.wo.lm),
+           'Effect of Government Political Side',
+           'model_output/simple_lm_govrlc_quarterly.tex')
+toTexModel(list(yrcurnt.lm, yrcurnt.wo.lm),
+           'Effect of Government Political Side',
+           'model_output/simple_lm_yrcurnt_quarterly.tex')
+
+## Years until election

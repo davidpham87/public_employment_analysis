@@ -14,5 +14,7 @@
     "tikz"
     "pdflscape")
    (TeX-add-symbols
-    '("insertmodel" 2))))
+    '("insertmodel" 2))
+   (LaTeX-add-environments
+    '("innerlist" LaTeX-env-args ["argument"] 0))))
 

@@ -1,2 +1,7 @@
 *.Rhistory
 */papers/*.pdf
+*.aux
+*.log
+*.lot
+*.toc
+*.el

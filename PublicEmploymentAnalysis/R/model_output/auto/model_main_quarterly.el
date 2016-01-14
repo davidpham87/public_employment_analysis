@@ -4,7 +4,7 @@
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("article" "a4paper" "10pt")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("geometry" "margin=2.5cm")))
+                     '(("geometry" "margin=2cm")))
    (TeX-run-style-hooks
     "latex2e"
     "simple_statistic_quarterly"
@@ -14,5 +14,7 @@
     "tikz"
     "pdflscape")
    (TeX-add-symbols
-    '("insertmodel" 2))))
+    '("insertmodel" 2))
+   (LaTeX-add-environments
+    '("innerlist" LaTeX-env-args ["argument"] 0))))
 

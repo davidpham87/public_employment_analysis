@@ -14,112 +14,182 @@
 
 * Summary
 
+  Using the 2015 OECD Economic Outlook database, factors explaining public
+  employment rate within countries were uncovered.  The analysis with annual
+  data emphasizes /GDP growth/ as the main contributor of the public employment
+  rate, whereas with quarterly data, the /unemployment rate/ contributed the most.
+
+  Neither fiscal transparency nor income inequality were retained as
+  significant variables in the analysis (with annual and quarterly
+  data). Results were mixed with the variables /political direction of the executive
+  government/ and /the period left until the next official elections/.
+
+  Missing data (variables and frequency) made the analysis challenging and
+  using smoother and adaptive analysis might lead to over-interpretation: The
+  adjustment of the period the analysis might considerably impact the
+  regression coefficients.
 
 * Model and Data
-
 ** Data
 
-Following \cite{aaskoven2015fiscal}, the following variable were selected from
-the Economic Outlook database to explain the public employment rate:
+   Following \cite{aaskoven2015fiscal}, the following variable were selected
+   from the Economic Outlook database to explain the public employment rate.
 
-| Variable                         | Oecd code   |
-|----------------------------------+-------------|
-| country                          | country     |
-| government employment            | eg          |
-| total employment                 | et          |
-| GDP growth                       | gdpv_annpct |
-| unemployment rate                | unr         |
-| government spending              | ypgtq       |
-| adult population                 | pop1574     |
-| Net household dispossable income | ydrh        |
-|----------------------------------+-------------|
+#+CAPTION: Main variables for the regression
+| Variable                         | OECD code                         |
+|----------------------------------+-----------------------------------|
+| Country                          | country                           |
+| Government employment            | eg                                |
+| Total employment                 | et                                |
+| GDP growth                       | $\textrm{gdpv\_}\textrm{annpct}$  |
+| Unemployment rate                | unr                               |
+| Government spending              | ypgtq                             |
+| adult population                 | pop1574                           |
+| Net household dispossable income | ydrh                              |
+|----------------------------------+-----------------------------------|
 
-Additionally, the following time series were retrieved to compare result of the
-regression with \cite{aaskoven2015fiscal} and \cite{alesina2000redistributive}:
+   Additionally, the following time series were retrieved to compare result of
+   the regression with \cite{aaskoven2015fiscal} and
+   \cite{alesina2000redistributive}:
 
-| Data                              | Source                         |
-|-----------------------------------+--------------------------------|
-| GPD per capita                    | OECD \cite{@oecd2015gdp}       |
-| gini index                        | OECD \cite{oecd2015inequality} |
-| gini index                        | \cite{toth2014chapter}         |
-| Fiscal Transparency               | IMF \cite{wang2015trends}      |
-| Laassen Fiscal Transparency Score | \cite{aaskoven2015fiscal}      |
-|-----------------------------------+--------------------------------|
+#+CAPTION: Additional variables for the regression
+| Variable                          | Source                           |
+|-----------------------------------+----------------------------------|
+| GPD per capita                    | \cite{oecd2015gdp}               |
+| Gini index                        | \cite{oecd2015inequality}        |
+| Gini index                        | \cite{toth2014chapter}           |
+| Fiscal transparency               | IMF, \cite{wang2015trends}       |
+| Laassen fiscal transparency Score | \cite{aaskoven2015fiscal}        |
+| Left or right sied government     | \cite{gandrud2014altreplication} |
+| Year until next elections         | \cite{gandrud2015yrcurnt}        |
+|-----------------------------------+----------------------------------|
 
-Unfortunately, these data had an annual frequency only. Note that the IMF
-fiscal transparency data provides time series for the last ten years.
-
+   Unfortunately, these data had an annual frequency only. Note that the IMF
+   fiscal transparency data provides time series for the last ten years.  For the
+   analysis described here, only data from 1990 up to 2012 (included) were
+   considered.
 
 ** Model
 
-\cite{aaskoven2015fiscal} explains the level of public employment with gdp
-growth with an additional nonlinear effect provided by the fiscal transparency
-score of a country, namely
+   \cite{aaskoven2015fiscal} explains the level of public employment with gdp
+   growth with an additional nonlinear effect provided by the fiscal
+   transparency score of a country, namely
 
-\begin{align*}
-Y_{i,t} = \alpha + \beta_1 G_{i,t} + \beta_2 G_{i,t} T_i + \beta_3 X_{i,t} + \eta_i + \tau_t + \varepsilon_{i,t},
-\end{align*}
+   \begin{align*}
+   Y_{i,t} = \alpha + \beta_1 G_{i,t} + \beta_2 G_{i,t} T_i + \beta_3 X_{i,t} +
+   \eta_i + \tau_t + \varepsilon_{i,t},
+   \end{align*}
 
-where the variables are
-+ $Y_{i,t}$, the public employment;
-+ $G_{i,t}$, GDP growth;
-+ $T_{i}$, fiscal transparency;
-+ $X$ is the vector of control variables;
-+ $\eta_i$, country fixed effect;
-+ $\tau_t$, year fixed effect.
+   where the variables are
+   + $Y_{i,t}$, the public employment;
+   + $G_{i,t}$, GDP growth;
+   + $T_{i}$, fiscal transparency;
+   + $X$ is the vector of control variables;
+   + $\eta_i$, country fixed effect;
+   + $\tau_t$, year fixed effect.
 
-However, with the data from the OECD, the diagnostic plots of this model are
-quite disturbing: residuals show a clear correlation and tails of the
-distribution clearly deviate from the Gaussian assumption. Moreover, in my
-opinion, it is quite controversial to add a nonlinear effect ($\beta_2 G_{it}
-T_i$) without looking at the linear effect of $T_i$.
+   However, with the data from the OECD, the diagnostic plots of this model are
+   quite disturbing: residuals show a clear correlation and tails of the
+   distribution clearly deviate from the Gaussian assumption. Moreover, in my
+   opinion, it is quite controversial to add a nonlinear effect ($\beta_2
+   G_{it} T_i$) without looking at the linear effect of $T_i$.
 
-After several attempts to find an acceptable model, the fixed effect with
-autoregressive components looked promising. In this model, the difference of
-the public employment are explained:
+   After several attempts to find an acceptable model, the fixed effect with
+   autoregressive components looked promising. In this model, the difference of
+   the public employment are explained:
 
-\begin{align*}
-\Delta Y_{i,t} = Y_{i,t} - Y{i,t-1}= \alpha + \rho Y_{i, t-1} + \beta_1 G_{it} + \beta_2 X{i, t} + \beta_3 X_{i, t-1} + \tau_t + \varepsilon_{it},
-\end{align*}
+   \begin{align*}
+   \Delta Y_{i,t} = Y_{i,t} - Y_{i,t-1} = \alpha + \rho Y_{i, t-1} +
+   \beta_1 G_{it} + \beta_2 X_{i, t} + \beta_3 X_{i, t-1} + \tau_t + \varepsilon_{it},
+   \end{align*}
 
-where the variable are same as previously. Controls variables (in $X_{it}$)were:
+   where the variable are same as previously. Controls variables (in $X_{it}$)
+   were:
 
-- Unemployment rate;
-- Log of adult population (aged between 15-74 years old);
-- Government expenses;
-- Net household disposable income in percent of GDP.
+   - Unemployment rate;
+   - Log of adult population (aged between 15-74 years old);
+   - Government expenses;
+   - Net household disposable income in percent of GDP.
 
-Robustness has been studied by adding and deleting the following variables from the predictors
+   Robustness has been studied by adding and deleting the following variables
+   from the predictors.
 
-- Total population;
-- GDP per capita;
-- Gini coefficient;
-- Fiscal transparency scores (IMF time series, Lassen scores and IMF scores).
+   - Total population;
+   - GDP per capita;
+   - Gini coefficient;
+   - Fiscal transparency scores (IMF time series, Lassen scores and IMF
+     scores);
+   - Government political side;
+   - Years until next official elections.
 
-Result can be found in appendix.
+   Detailed results are found in appendix.
+
+** Results
+
+   With annual data, gdp growth was definitively the main contributor for
+   explaining changes in public employment rate.  Government expenditure and
+   unemployment rate were not always significant in the regression.  It highly
+   depends on which the period of data included in the analysis.  More
+   precisely, their regression coefficient often lies around the $10\%$-level
+   of rejection \footnote{Nevertheless, with so many predictors and regression,
+   one should consider adjusting the significance threshold.}.  Political side
+   of the government and the period until the next official election were not
+   significant with the period of the analysis (1990-2012).  However, when
+   including all variables from 1960 onward, government political direction is
+   significant at the $1\%$-level and years left until election at the
+   10\%-level.
+
+   Concerning quarterly data, only unemployment rate was consistently
+   statistically significant, whereas GDP growth almost never (probably
+   seasonal effect were taken adjusted in GDP growth).  Political side of
+   government and years left until the next election were statistically
+   significant (at the 10\%-level) depending on the period of the analysis.
+
+   Note that with quarterly data some predictors are interpolated, hence the
+   model can hardly predict shocks. Neither income inequality (Gini
+   coefficient) nor fiscal transparency affected the main coefficient of the
+   regression.
+
+** Note on robustness
+
+   The previous analysis should be repeated with more robust methods, e.g. by
+   scaling the variable, using cross-validation and bootstrapped estimators of
+   the errors, using other statistical methods (CART, LASSO or
+   GLM).  Nevertheless, using these alternative render interpretation more
+   difficult.  Additionally, missing methods (as in \cite{alt2014isn}) could be
+   applied have better predictors.
+
+   If all the data from the OECD database are included in the regression, that
+   some variables are then statistically significant, one should study this
+   effect.
+
+   In robustness analysis, as complete-case analysis is performed, the number
+   of observation varies significantly.
 
 * Challenges with the data
 
-  The data present some challenges: missingness among variable and among frequency.
+  The data present some challenges: missingness among variable and among
+  frequency.
 
   As observations are not always present for all variables for a country at a
   fixed year, the common approach in regression analysis is to keep only
-  complete-case. This can obviously lead to some bias. In this study, when
+  complete-case.  This can obviously lead to some bias.  In this study, when
   doing robustness analysis, it is possible that the size of the data set vary
   considerably between models.
 
   Concerning quarterly data, most of control variable are not reported on
   quarterly basis in the oecd dataset \footnote{The dataset in Stata format
-  seemed to be corrupted}. A spline smoother has been applied to interpolated
-  between points and obviously this affect the quality of the fits with
-  quarterly data as the independent variable is too smooth.
+  seemed to code quarters and date unconventionally.}.  A spline smoother has
+  been applied to interpolated between points and obviously this affect the
+  quality of the fits with quarterly data as the independent variable is too
+  smooth.
 
 ** Note about the data
 
    Fiscal transparency is interacted with gdp growth as it should
    contribute as a good factor. Here are the Lassen Scores as in \cite{aaskoven2015fiscal}
 
-#+CAPTION: Transcription of fiscal transparency scores from \cite{aaskoven2015fiscal}.
+#+CAPTION: Fiscal transparency scores from \cite{aaskoven2015fiscal}.
 | Country          | Fiscal Score   |
 |------------------+----------------|
 | Greece           | 1              |
@@ -144,7 +214,8 @@ Result can be found in appendix.
 | New Zealand      | 10             |
 
 
-Here is the list of countries belonging in the OECD database. A cross tells if public employment data were available.
+   Here is the list of countries belonging in the OECD database. A cross tells
+   if public employment data were available.
 
 #+CAPTION: Availability of public employment data inside the Economic Outlook 98 data set.
 
@@ -194,17 +265,12 @@ Here is the list of countries belonging in the OECD database. A cross tells if p
 | United States                | x        | x         |
 |------------------------------+----------+-----------|
 
-
-** What remains to be done
-   - One has to find data and time series about the political side of the
-     government.
-
 * Note
 
   The original variables were selected because of the prior distribution we had
-  on them. Advanced statistical methods should be tried to discover if any other
-  predictors could be better. For example, in quarterly data, Lasso method
-  selected the variable *Net exports, contribution to growth* as potential
-  variable.
+  on them. Advanced statistical methods should be tried to discover if any
+  other predictors could be better. For example, in quarterly data, Lasso
+  method selected the variable /Net exports, contribution to growth/ as a
+  potential variable.
 
 * Bibliography

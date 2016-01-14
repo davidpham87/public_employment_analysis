@@ -162,7 +162,7 @@ interpolateQuarterColumn <- function(eo.q, eo.a, col, max.time){
 
   col.new <- paste0(col, '_annual_data')
   col.q <- paste0(col, '_interpolated')
-  setnames(eo.a, col, col.new)
+  tryCatch(setnames(eo.a, col, col.new), error=function(e) NA)
   eo.q <- merge(eo.q, eo.a[, c('country', 'TIME', col.new), with=FALSE], all.x=TRUE)
   eo.q[, (col.q):=interpolateQuarter(TIME, get(col.new), get('max.time')), by='country']
   eo.q[, (col.new):=NULL]

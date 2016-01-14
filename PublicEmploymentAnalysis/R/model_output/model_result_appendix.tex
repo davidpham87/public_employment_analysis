@@ -2,18 +2,29 @@
 % All LaTeX documents including
 % tikz() output must use this
 % package!
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[margin=2cm]{geometry}
 \usepackage{tikz}
 \usepackage{pdflscape}
 
 \newcommand{\insertmodel}[2]{
   \input{#1}
-
 }
+
+\author{David Pham}
+\title{Appendix to Public Employment Analysis with OECD Economic Outlook Data}
 
 \begin{document}
 
+\maketitle
+\tableofcontents
+\listoftables
+\section{Annual Data}
+
+Description of annual data.
+
 \input{simple_statistic}
+
+\subsection{Linear model output}
 
 \insertmodel{simple_lm.tex}
 
@@ -34,5 +45,26 @@
 \insertmodel{simple_lm_govrlc.tex}
 
 \insertmodel{simple_lm_yrcurnt.tex}
+
+\clearpage
+
+\section{Quarterly Data}
+
+Description of quarterly data.
+\input{simple_statistic_quarterly.tex}
+
+\clearpage
+
+\subsection{Linear model output}
+
+\insertmodel{simple_lm_quarterly.tex}
+
+\insertmodel{simple_lm_lassen_quarterly.tex}
+
+\insertmodel{simple_lm_imf_quarterly.tex}
+
+\insertmodel{simple_lm_govrlc_quarterly.tex}
+
+\insertmodel{simple_lm_yrcurnt_quarterly.tex}
 
 \end{document}

@@ -2,13 +2,12 @@
 % All LaTeX documents including
 % tikz() output must use this
 % package!
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[margin=2cm]{geometry}
 \usepackage{tikz}
 \usepackage{pdflscape}
 
 \newcommand{\insertmodel}[2]{
   \input{#1}
-
 }
 
 \begin{document}
@@ -20,5 +19,9 @@
 \insertmodel{simple_lm_lassen_quarterly.tex}
 
 \insertmodel{simple_lm_imf_quarterly.tex}
+
+\insertmodel{simple_lm_govrlc_quarterly.tex}
+
+\insertmodel{simple_lm_yrcurnt_quarterly.tex}
 
 \end{document}
