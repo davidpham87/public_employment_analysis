@@ -18,6 +18,10 @@ library(mice)
 library(impute)
 library(magrittr)
 library(parallel)
+library(lattice)
+library(ggplot2)
+library(ecp)
+library(changepoint)
 
 MAKE_PLOTS <- TRUE
 MAX_YEAR_EXTRAPOLATION <- 2016
@@ -60,7 +64,7 @@ eo.q[, lpop_interpolated:=log(pop1574_interpolated)]
 ## New Data
 
 new.data.names <- new.data <-
-  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth', 'dpi_excecrlc', 'year_until_elections')
+  c('gini', 'population', 'gdp_capita', 'imf_gfs_scores', 'gini_toth')
 
 new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
   lapply(function(dt) {
@@ -77,19 +81,24 @@ eo.q <- interpolateQuarterColumn(eo.q, new.data, 'gdp_per_capita', MAX_YEAR_EXTR
 # Patch the missing part of gdpv_annpct
 eo.q[is.na(gdpv_annpct), gdpv_annpct:=gdpv_annpct_interpolated]
 
+DT <- fread('../data/execrlc_govfrac_yrcurnt_quartery_cleaned.csv')
+DT[, V1:=NULL]
+setnames(DT, 'location', 'country')
+eo.q <- merge(eo.q, DT, by=c('country', 'TIME'), all=TRUE)
 ################################################################################
 
 # x is the data set with annual observation for eg
-x <- eo.q
+x <- copy(eo.q)
 setkey(x, 'country')
 x <- x[country.q]
-x <- x[TIME< 2013 & TIME >= 1990]
+x <- x[TIME< 2013 & TIME > 1989.75]
 time.numeric <- x$TIME
 x[, TIME.NUMERIC:=time.numeric]
 x[, TIME:=as.factor(TIME)]
 x[, QUARTER:=as.factor(QUARTER)]
 x[, YEAR:= as.numeric(YEAR)]
 x[, egr := 100*eg/lf] # et: General Government employment, lf: Total labor force
+## x[, egr_lagged:= c(NA, egr[1:length(egr)-1]), by='country']
 x[, egr_diff:= c(NA, diff(egr)), by='country'] # et: General Government employment, et: Total employment
 x[, egr_lagged:= c(NA, egr_diff[1:length(egr_diff)-1]), by='country'] # et: General Government employment, et: Total employment
 x[, country:=as.factor(country)]
@@ -101,38 +110,88 @@ dev.new()
 xyplot(egr ~ TIME.NUMERIC | country,
        na.omit(x[, c(cols, 'egr', 'country', 'TIME.NUMERIC'), with=F]),
        type='l')
+
 xyplot(egr_diff~ TIME.NUMERIC | country,
        na.omit(x[, c(cols, 'egr', 'country', 'TIME.NUMERIC'), with=F]),
        type='l')
 
+
 ################################################################################
-# Bai and Perron Filter: Structural break
-x[, egr.cluster:=e.divisive(as.matrix(egr_diff, ncol=1), min.size=24)$cluster, by='country']
+## Bai and Perron Filter: Structural break
+## using ecp algorithm
+
+pdf('plot/egr_structural_breaks_mean_bai_perron.pdf', 16, 9)
+par(mfrow=c(5, 4))
+x[, {plot(cpt.mean(zoo(egr, order.by=TIME.NUMERIC), method='PELT'), main=.BY[[1]]); 0}, by='country']
+dev.off()
+
+pdf('plot/egr_structural_breaks_var_bai_perron.pdf', 16, 9)
+par(mfrow=c(5, 4))
+x[, {plot(cpt.var(zoo(egr, order.by=TIME.NUMERIC), method='PELT'), main=.BY[[1]]); 0}, by='country']
+dev.off()
+
+
+x[, egr.cluster.16:=e.divisive(as.matrix(egr_diff, ncol=1), min.size=16)$cluster, by='country']
+x[, egr.cluster.20:=e.divisive(as.matrix(egr_diff, ncol=1), min.size=20)$cluster, by='country']
+x[, egr.cluster.24:=e.divisive(as.matrix(egr_diff, ncol=1), min.size=24)$cluster, by='country']
+
 x.plot <- copy(x)
-x.plot[, egr.cluster.chg:= c(0, as.numeric(diff(egr.cluster)==1))]
+x.plot[, egr.cluster.16.chg:= c(0, as.numeric(diff(egr.cluster.16)==1))]
+x.plot[, egr.cluster.20.chg:= c(0, as.numeric(diff(egr.cluster.20)==1))]
+x.plot[, egr.cluster.24.chg:= c(0, as.numeric(diff(egr.cluster.24)==1))]
 
-par(mfrow=c(2,2))
-ggplot(x.plot, aes(TIME.NUMERIC, egr, color=factor(egr.cluster))) +
+pdf('plot/egr_structural_breaks.pdf', 16, 9, TRUE)
+ggplot(x.plot, aes(TIME.NUMERIC, egr, color=factor(egr.cluster.16))) +
   geom_line() +
   geom_vline(aes(xintercept=vl),
-             x.plot[egr.cluster.chg==1, list(country, vl=TIME.NUMERIC)],
+             x.plot[egr.cluster.16.chg==1, list(country, vl=TIME.NUMERIC)],
              linetype='longdash') +
-  facet_wrap(~ country, scale='free_y') + theme_bw() + scale_color_brewer(palette='Set1')
+  facet_wrap(~ country) + theme_bw() + scale_color_brewer(palette='Set1') +
+  ggtitle("Structural breaks for public employment (minimum cluster size: 4 years)")
 
-ggplot(x.plot, aes(TIME.NUMERIC, egr_diff, color=factor(egr.cluster))) +
+ggplot(x.plot, aes(TIME.NUMERIC, egr, color=factor(egr.cluster.20))) +
   geom_line() +
   geom_vline(aes(xintercept=vl),
-             x.plot[egr.cluster.chg==1, list(country, vl=TIME.NUMERIC)],
+             x.plot[egr.cluster.20.chg==1, list(country, vl=TIME.NUMERIC)],
              linetype='longdash') +
-  facet_wrap(~ country) + theme_bw() + scale_color_brewer(palette='Set1')
+  facet_wrap(~ country) + theme_bw() + scale_color_brewer(palette='Set1') +
+  ggtitle("Structural breaks for public employment (minimum cluster size: 5 years)")
+
+
+ggplot(x.plot, aes(TIME.NUMERIC, egr, color=factor(egr.cluster.24))) +
+  geom_line() +
+  geom_vline(aes(xintercept=vl),
+             x.plot[egr.cluster.24.chg==1, list(country, vl=TIME.NUMERIC)],
+             linetype='longdash') +
+  facet_wrap(~ country) + theme_bw() + scale_color_brewer(palette='Set1') +
+  ggtitle("Structural breaks for public employment (minimum cluster size: 6 years)")
+
+
+ggplot(x.plot, aes(TIME.NUMERIC, egr, color=factor(egr.cluster.20))) +
+  geom_line() +
+  geom_vline(aes(xintercept=vl),
+             x.plot[egr.cluster.20.chg==1, list(country, vl=TIME.NUMERIC)],
+             linetype='longdash') +
+  facet_wrap(~ country, scale='free_y') + theme_bw() +
+  scale_color_brewer(palette='Set1') +
+  ggtitle("Structural breaks for public employment (minimum cluster size: 5 years)")
+
+
+ggplot(x.plot, aes(TIME.NUMERIC, egr_diff, color=factor(egr.cluster.20))) +
+  geom_line() +
+  geom_vline(aes(xintercept=vl),
+             x.plot[egr.cluster.20.chg==1, list(country, vl=TIME.NUMERIC)],
+             linetype='longdash') +
+  facet_wrap(~ country) + theme_bw() + scale_color_brewer(palette='Set1') +
+  ggtitle("Structural breaks in ploted with the difference (minimum cluster size: 5 years)")
+dev.off()
+
 
 ################################################################################
 ## Using changepoint to test if result are comparable
-
 ################################################################################
-
-
-
+## The problem in the regression is the noise is to small
+## values are practically constant.
 
 ## Keep data for plotting
 lvl2num <- function(x) as.numeric(levels(x)[x])
@@ -140,7 +199,7 @@ x.model.lm <- na.omit(x[, c(cols, 'country', 'TIME'), with=FALSE])
 x.model.lm$TIME <- lvl2num(x.model.lm$TIME)
 
 ## Simple lm model
-x.lm <- lm(egr_diff ~ ., x[, cols, with=FALSE])
+x.lm <- lm(egr_diff ~ ., x[, c(cols), with=FALSE])
 summary(x.lm)
 y.fit.simple.lm <- fitted(x.lm)
 
@@ -171,7 +230,7 @@ x.imf.gfs <- merge(x.new, imf.gfs, by='country')
 setnames(x.lassen, 'Index Score', 'fiscal_transparency_score')
 setnames(x.imf.gfs, 'imf_gfs', 'fiscal_transparency_score')
 
-ff <- egr_diff~ .
+ff <- egr_diff ~ .
 ff.fiscal <- egr_diff~ . - fiscal_transparency_score + fiscal_transparency_score*gdpv_annpct
 lassen.lm <- robustnessAnalysis(x.lassen, c(cols, 'fiscal_transparency_score'), '',
                                 ff.fiscal)
@@ -185,23 +244,18 @@ par(mfrow = c(2,2))
 plot(imf.gfs.lm)
 
 ## Left or right goverment
-setkey(new.data, country)
-
-new.data[, TIME:=as.double(TIME)]
-new.data[, execrlc:=as.double(execrlc)]
-new.data[, yrcurnt_corrected:=as.double(yrcurnt_corrected)]
-
-x.new[, TIME:=lvl2num(TIME)]
-
-x.new <- interpolateQuarterColumn(x.new, new.data, 'execrlc', 2012)
-x.new <- interpolateQuarterColumn(x.new, new.data, 'yrcurnt_corrected', 2012)
-
-govrlc.lm <- robustnessAnalysis(x.new, c(cols, 'execrlc_interpolated'), '', ff)
+## Quality of data to be discussed
+ff <- egr_diff ~ .
+govrlc.lm <- robustnessAnalysis(x, c(cols, 'execrlc'), '', ff)
 govrlc.wo.lm <- robustnessAnalysis(as.data.table(govrlc.lm$model), cols, '', ff)
 
 ## Years until election
-yrcurnt.lm <- robustnessAnalysis(x.new, c(cols, 'yrcurnt_corrected_interpolated'), '', ff)
+yrcurnt.lm <- robustnessAnalysis(x, c(cols, 'yrcurnt'), '', ff)
 yrcurnt.wo.lm <- robustnessAnalysis(as.data.table(yrcurnt.lm$model), cols, '', ff)
+
+## Government fractionalization
+govfrac.lm <- robustnessAnalysis(x, c(cols, 'govfrac'), '', ff)
+govfrac.wo.lm <- robustnessAnalysis(as.data.table(govrlc.lm$model), cols, '', ff)
 
 ################################################################################
 ### Residuals are really bad when using no difference
@@ -320,8 +374,9 @@ description <-
          lpop_interpolated='Log of adult population (interpolated)',
          QUARTER='Quarter',
          YEAR='Year',
-         execrlc_interpolated='Left Side Government',
-         yrcurnt_corrected_interpolated='Years until next election'),
+         execrlc='Left Side Government',
+         govfrac='Government fractionalization',
+         yrcurnt='Years until next election'),
     descriptions)
 
 x.lm$model$TIME <- lvl2num(x.lm$model$TIME)
@@ -355,10 +410,12 @@ toTexModel(list(imf.gfs.lm, imf.gfs.wo.lm),
            'Effect of IMF GFS Score',
            'model_output/simple_lm_imf_quarterly.tex')
 toTexModel(list(govrlc.lm, govrlc.wo.lm),
-           'Effect of Government Political Side',
+           'Effect of Government Political Orientation',
            'model_output/simple_lm_govrlc_quarterly.tex')
 toTexModel(list(yrcurnt.lm, yrcurnt.wo.lm),
-           'Effect of Government Political Side',
+           'Effect of Years before Next Election',
            'model_output/simple_lm_yrcurnt_quarterly.tex')
-
+toTexModel(list(govfrac.lm, govfrac.wo.lm),
+           'Effect of Government Fractionalization',
+           'model_output/simple_lm_govfrac_quarterly.tex')
 ## Years until election
