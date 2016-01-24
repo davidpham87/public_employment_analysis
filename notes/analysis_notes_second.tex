@@ -1,0 +1,170 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=3cm]{geometry}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Analysis of Public Employment Rate},
+            pdfauthor={David Pham},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+\title{Analysis of Public Employment Rate ($2^{nd}$)}
+\author{David Pham}
+\date{2016-01-13}
+
+\usepackage[style=alphabetic,backend=biber]{biblatex}
+\bibliography{biblio.bib}
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\begin{document}
+\maketitle
+
+\section{Summary}\label{summary}
+
+In order to study quarterly data, precise election data had to be
+retrieved for several countries and some time series had to be updated.
+Two methodologies have been applied to find structural breaks, but their
+results do not provide clear signal for the analysis, due to the lack of
+variability of the public employment rate. Finally, a baseline model is
+proposed for continuing the analysis.
+
+\section{Data}\label{data}
+
+Some amount of work has been invested to get precise quarterly data. The
+exact election date were retrieved from wikipedia, and the time until
+the next election has a quarterly frequency. The time series from
+government political orientation and government fractionalization are
+updated as well to match the election dates.
+
+The working document can be found
+\href{https://github.com/davidpham87/public_employment_analysis/blob/master/PublicEmploymentAnalysis/data/manual_data_entry/transform_yearly_to_quarterly_elections.org}{here}
+and the resulting csv on
+\href{https://github.com/davidpham87/public_employment_analysis/blob/master/PublicEmploymentAnalysis/data/execrlc_govfrac_yrcurnt_quartery_cleaned.csv}{github.com}
+as well.
+
+\section{Bai and Perron structural
+breaks}\label{bai-and-perron-structural-breaks}
+
+Two methodology has been applied to detect structural break changes.
+However, they do not always coincide and the break are not common to all
+countries. There are some liberty and variability of the location of the
+changes depending on the tuning parameters (size of clusters).
+
+\section{Impact of quarterly data for the data
+analysis}\label{impact-of-quarterly-data-for-the-data-analysis}
+
+The variability of \texttt{egrlf} is so small that linear regression has
+an almost perfect fit by only using country dummy variables. Hence, it
+is compulsory to analyze the difference of \texttt{egrlf} and to
+understand which variables can explain the variability. However, this
+methods and the frequency of the data greatly diminish the signal to
+noise ratio (the adjusted r squared is at ten percent at best).
+
+\section{Union of explanatory and control
+variables}\label{union-of-explanatory-and-control-variables}
+
+\cite{aaskoven2015fiscal} and \cite{alt2014isn} use the following
+variables as control variables:
+
+\begin{longtable}[c]{@{}lll@{}}
+\toprule
+Variable & \cite{aaskoven2015fiscal} &
+\cite{alesina2000redistributive}\tabularnewline
+\midrule
+\endhead
+GDP Growth & x &\tabularnewline
+GDP per capita & x &\tabularnewline
+Money income & & x\tabularnewline
+Unemployment rate & x & x\tabularnewline
+Government spending & x & x\tabularnewline
+Log of population & & x\tabularnewline
+\bottomrule
+\end{longtable}
+
+The next variable are used to explain the variation of \texttt{egrlf}:
+
+\begin{longtable}[c]{@{}llll@{}}
+\toprule
+Variable & \cite{aaskoven2015fiscal} & \cite{alesina2000redistributive}
+& \cite{alt2014isn}\tabularnewline
+\midrule
+\endhead
+Fiscal transparency & x & &\tabularnewline
+Government political orientation & x & &\tabularnewline
+Years until next election & x & & x\tabularnewline
+Measures of inequality & & x &\tabularnewline
+Fiscal rules & & x & x\tabularnewline
+Potential GDP gap (Boom and Slump) & & & x\tabularnewline
+\bottomrule
+\end{longtable}
+
+From the above tables and some regression, for quarterly data the
+following baseline model is proposed. The dependent variable is the
+change in \texttt{egrlf} and the control variables are
+
+\begin{itemize}
+\tightlist
+\item
+  Autocorrelation with lag one.
+\item
+  GDP growth, QoQ, lagged one quarter;
+\item
+  Change in unemployment rate (absolute difference), QoQ;
+\item
+  Government expenditure (GEXP) in percent of GDP (interpolated from
+  annual data);
+\item
+  Changes in GEXP;
+\item
+  Log of adult population;
+\item
+  Change in GDP per capita in USD, QoQ.
+\end{itemize}
+
+\printbibliography
+
+\end{document}
+
+% Local Variables:
+% TeX-engine: xetex
+% End:

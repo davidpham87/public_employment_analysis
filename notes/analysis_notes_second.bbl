@@ -1,0 +1,88 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.5 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{anyt}{anyt}
+    \entry{aaskoven2015fiscal}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5071011b67716406fa0d603d459a58c7}{Aaskoven}{A\bibinitperiod}{Lasse}{L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{5071011b67716406fa0d603d459a58c7}
+      \strng{fullhash}{5071011b67716406fa0d603d459a58c7}
+      \field{labelalpha}{Aas15}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy, submitted}
+      \field{title}{Fiscal Transparency and Public Employment: Evidence from the OECD}
+      \field{year}{2015}
+    \endentry
+    \entry{alesina2000redistributive}{article}{}
+      \name{author}{3}{}{%
+        {{hash=64e826b22be55f993a32de8986e58901}{Alesina}{A\bibinitperiod}{Alberto}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=e6f927753cbe4bee93ce326993af9677}{Baqir}{B\bibinitperiod}{Reza}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=d5d3ec5e8da6af82163184f502c8adca}{Easterly}{E\bibinitperiod}{William}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{fe12c1e117e36d73f7f9f4a21774dcb1}
+      \strng{fullhash}{fe12c1e117e36d73f7f9f4a21774dcb1}
+      \field{labelalpha}{ABE00}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Urban Economics}
+      \field{number}{2}
+      \field{title}{Redistributive public employment}
+      \field{volume}{48}
+      \field{year}{2000}
+      \field{pages}{219\bibrangedash 241}
+      \range{pages}{23}
+    \endentry
+    \entry{alt2014isn}{article}{}
+      \name{author}{3}{}{%
+        {{hash=8c589121aa2f2605515a7d0e7bc3bb9c}{Alt}{A\bibinitperiod}{James}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=fe92164743cbeaa9352fad740e2fa120}{Lassen}{L\bibinitperiod}{David\bibnamedelima Dreyer}{D\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
+        {{hash=41631b83898aeae518b3997bd8ff47e6}{Wehner}{W\bibinitperiod}{Joachim}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge Univ Press}%
+      }
+      \strng{namehash}{4e1b7de4643baa10e1d2fa092fa3d483}
+      \strng{fullhash}{4e1b7de4643baa10e1d2fa092fa3d483}
+      \field{labelalpha}{ALW14}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{British Journal of Political Science}
+      \field{number}{04}
+      \field{title}{It isn't just about Greece: domestic politics, transparency and fiscal gimmickry in Europe}
+      \field{volume}{44}
+      \field{year}{2014}
+      \field{pages}{707\bibrangedash 716}
+      \range{pages}{10}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

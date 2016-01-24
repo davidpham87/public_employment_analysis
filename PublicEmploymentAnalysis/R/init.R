@@ -1,4 +1,5 @@
-PCKGS <- c('data.table',
+PCKGS <- c('DescTools',
+           'data.table',
            'readstata13',
            'magrittr',
            'ggplot2',
@@ -9,7 +10,6 @@ PCKGS <- c('data.table',
            'rpart',
            'glmnet',
            'parallel',
-           'DescTools',
            'plm',
            'plotly')
 

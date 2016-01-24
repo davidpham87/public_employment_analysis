@@ -1,0 +1,89 @@
+#+TITLE: Analysis of Public Employment Rate
+#+AUTHOR: David Pham
+#+EMAIL: davidpham87@gmail.com
+#+DATE: 2016-01-13
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper]
+#+LATEX_HEADER: \usepackage[margin=3.5cm]{geometry}
+#+LATEX_HEADER: \bibliographystyle{chicago}% ---> Hampel,F., E.Ronchetti,... W.Stahel(1986) ...
+#+LATEX_HEADER: \bibliography{biblio.bib}
+#+SETUPFILE: ~/.emacs.d/packs/lang-code/lib/org-html-themes/setup/theme-readtheorg.setup
+#+HTML_HEAD: <style> pre.src {background: #3F3F3F; color: #DCDCCC;} </style>
+#+OPTIONS: ^:{}
+#+BIBLIOGRAPHY: biblio plain
+
+* Summary
+
+  In order to study quarterly data, precise election data had to be retrieved
+  for several countries and some time series had to be updated. Two
+  methodologies have been applied to find structural breaks, but their results
+  do not provide clear signal for the analysis, due to the lack of variability
+  of the public employment rate. Finally, a baseline model is proposed for
+  continuing the analysis.
+
+* Data
+
+  Some amount of work has been invested to get precise quarterly data. The
+  exact election date were retrieved from wikipedia, and the time until the
+  next election has a quarterly frequency. The time series from government
+  political orientation and government fractionalization are updated as well to
+  match the election dates.
+
+  The working document can be found [[https://github.com/davidpham87/public_employment_analysis/blob/master/PublicEmploymentAnalysis/data/manual_data_entry/transform_yearly_to_quarterly_elections.org][here]] and the resulting csv on [[https://github.com/davidpham87/public_employment_analysis/blob/master/PublicEmploymentAnalysis/data/execrlc_govfrac_yrcurnt_quartery_cleaned.csv][github.com]] as
+  well.
+
+* Bai and Perron structural breaks
+
+  Two methodology has been applied to detect structural break changes. However,
+  they do not always coincide and the break are not common to all
+  countries. There are some liberty and variability of the location of the
+  changes depending on the tuning parameters (size of clusters).
+
+* Impact of quarterly data for the data analysis
+
+  The variability of =egrlf= is so small that linear regression has an almost
+  perfect fit by only using country dummy variables. Hence, it is compulsory to
+  analyze the difference of =egrlf= and to understand which variables can
+  explain the variability. However, this methods and the frequency of the data
+  greatly diminish the signal to noise ratio (the adjusted r squared is at ten
+  percent at best).
+
+* Union of explanatory and control variables
+
+  \cite{aaskoven2015fiscal} and \cite{alt2014isn} uses the following variables
+  as control variables:
+
+  | Variable            | \cite{aaskoven2015fiscal} | \cite{alesina2000redistributive} |
+  |---------------------+---------------------------+----------------------------------|
+  | GDP Growth          | x                         |                                  |
+  | GDP per capita      | x                         |                                  |
+  | Money income        |                           | x                                |
+  | Unemployment rate   | x                         | x                                |
+  | Government spending | x                         | x                                |
+  | Log of population   |                           | x                                |
+
+  The next variable are used to explain the variation of =egrlf=:
+
+  | Variable                           | \cite{aaskoven2015fiscal} | \cite{alesina2000redistributive} | \cite{alt2014isn} |
+  |------------------------------------+---------------------------+----------------------------------+-------------------|
+  | Fiscal transparency                | x                         |                                  |                   |
+  | Government political orientation   | x                         |                                  |                   |
+  | Years until next election          | x                         |                                  | x                 |
+  | Measures of inequality             |                           | x                                |                   |
+  | Fiscal rules                       |                           | x                                | x                 |
+  | Potential GDP gap (Boom and Slump) |                           |                                  | x                 |
+
+  From the above tables and some regression, for quarterly data the following
+  baseline model is proposed. The dependent variable is the change in =egrlf= and
+  the control variables are
+
+  - Autocorrelation with lag one.
+  - GDP growth, QoQ, lagged one quarter;
+  - Change in unemployment rate (absolute difference), QoQ;
+  - Government expenditure (GEXP) in percent of GDP (interpolated from annual
+    data);
+  - Changes in GEXP;
+  - Log of adult population;
+  - Change in GDP per capita in USD, QoQ.
+
+* Bibliography

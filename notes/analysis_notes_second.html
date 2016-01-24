@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Analysis of Public Employment Rate</title>
+<!-- 2016-01-24 Son 01:01 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="David Pham" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<style> pre.src {background: #3F3F3F; color: #DCDCCC;} </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Analysis of Public Employment Rate</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Summary</a></li>
+<li><a href="#sec-2">2. Data</a></li>
+<li><a href="#sec-3">3. Bai and Perron structural breaks</a></li>
+<li><a href="#sec-4">4. Impact of quarterly data for the data analysis</a></li>
+<li><a href="#sec-5">5. Union of explanatory and control variables</a></li>
+<li><a href="#sec-6">6. Bibliography</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Summary</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+In order to study quarterly data, precise election data had to be retrieved
+for several countries and some time series had to be updated. Two
+methodologies have been applied to find structural breaks, but their results
+do not provide clear signal for the analysis, due to the lack of variability
+of the public employment rate. Finally, a baseline model is proposed for
+continuing the analysis.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Data</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Some amount of work has been invested to get precise quarterly data. The
+exact election date were retrieved from wikipedia, and the time until the
+next election has a quarterly frequency. The time series from government
+political orientation and government fractionalization are updated as well to
+match the election dates.
+</p>
+
+<p>
+The working document can be found <a href="https://github.com/davidpham87/public_employment_analysis/blob/master/PublicEmploymentAnalysis/data/manual_data_entry/transform_yearly_to_quarterly_elections.org">here</a> and the resulting csv on <a href="https://github.com/davidpham87/public_employment_analysis/blob/master/PublicEmploymentAnalysis/data/execrlc_govfrac_yrcurnt_quartery_cleaned.csv">github.com</a> as
+well.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Bai and Perron structural breaks</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Two methodology has been applied to detect structural break changes. However,
+they do not always coincide and the break are not common to all
+countries. There are some liberty and variability of the location of the
+changes depending on the tuning parameters (size of clusters).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Impact of quarterly data for the data analysis</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The variability of <code>egrlf</code> is so small that linear regression has an almost
+perfect fit by only using country dummy variables. Hence, it is compulsory to
+analyze the difference of <code>egrlf</code> and to understand which variables can
+explain the variability. However, this methods and the frequency of the data
+greatly diminish the signal to noise ratio (the adjusted r squared is at ten
+percent at best).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Union of explanatory and control variables</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+\cite{aaskoven2015fiscal} and \cite{alt2014isn} uses the following variables
+as control variables:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Variable</th>
+<th scope="col" class="left">\cite{aaskoven2015fiscal}</th>
+<th scope="col" class="left">\cite{alesina2000redistributive}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">GDP Growth</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">GDP per capita</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Money income</td>
+<td class="left">&#xa0;</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Unemployment rate</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Government spending</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Log of population</td>
+<td class="left">&#xa0;</td>
+<td class="left">x</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The next variable are used to explain the variation of <code>egrlf</code>:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Variable</th>
+<th scope="col" class="left">\cite{aaskoven2015fiscal}</th>
+<th scope="col" class="left">\cite{alesina2000redistributive}</th>
+<th scope="col" class="left">\cite{alt2014isn}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Fiscal transparency</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Government political orientation</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Years until next election</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Measures of inequality</td>
+<td class="left">&#xa0;</td>
+<td class="left">x</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Fiscal rules</td>
+<td class="left">&#xa0;</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Potential GDP gap (Boom and Slump)</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">x</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+From the above tables and some regression, for quarterly data the following
+baseline model is proposed. The dependent variable is the change in <code>egrlf</code> and
+the control variables are
+</p>
+
+<ul class="org-ul">
+<li>Autocorrelation with lag one.
+</li>
+<li>GDP growth, QoQ, lagged one quarter;
+</li>
+<li>Change in unemployment rate (absolute difference), QoQ;
+</li>
+<li>Government expenditure (GEXP) in percent of GDP (interpolated from annual
+data);
+</li>
+<li>Changes in GEXP;
+</li>
+<li>Log of adult population;
+</li>
+<li>Change in GDP per capita in USD, QoQ.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Bibliography</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2016-01-13</p>
+<p class="author">Author: David Pham</p>
+<p class="date">Created: 2016-01-24 Son 01:01</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

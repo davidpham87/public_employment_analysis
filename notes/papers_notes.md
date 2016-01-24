@@ -131,7 +131,7 @@ with $\theta$ is random variable taking either $\theta_L$ or $\theta_H$ with $0 
   the public project for any value of $\theta$ if the action does not prevent
   them from winning the next election.
 * Voters ignore which type are the politicians, however they have perception
-  (priors) about the incumbent and the challanger. 
+  (priors) about the incumbent and the challenger. 
 * Depending on the priors of the voters for the incumbent, if he favors the
   poors, he might or not implement the public project even though it is not
   efficient.

@@ -1,0 +1,15 @@
+[0] Config.pm:325> INFO - This is Biber 2.1
+[0] Config.pm:328> INFO - Logfile is 'analysis_notes_second.blg'
+[34] biber:276> INFO - === Son Jan 24, 2016, 01:33:21
+[34] Biber.pm:334> INFO - Reading 'analysis_notes_second.bcf'
+[141] Biber.pm:646> INFO - Found 3 citekeys in bib section 0
+[161] Biber.pm:2978> INFO - Processing section 0
+[181] Biber.pm:3116> INFO - Looking for bibtex format file 'biblio.bib' for section 0
+[183] bibtex.pm:1010> INFO - Decoding LaTeX character macros into UTF-8
+[185] bibtex.pm:884> INFO - Found BibTeX data source 'biblio.bib'
+[233] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[233] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[233] Biber.pm:2855> INFO - Sorting list 'anyt' of type 'entry' with scheme 'anyt' and locale 'en-US'
+[233] Biber.pm:2859> INFO - No sort tailoring available for locale 'en-US'
+[237] bbl.pm:505> INFO - Writing 'analysis_notes_second.bbl' with encoding 'UTF-8'
+[238] bbl.pm:596> INFO - Output to analysis_notes_second.bbl
