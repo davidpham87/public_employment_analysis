@@ -18,14 +18,13 @@
 
 
 \refsection{0}
-  \sortlist{anyt}{anyt}
+  \sortlist{nty}{nty}
     \entry{aaskoven2015fiscal}{article}{}
       \name{author}{1}{}{%
         {{hash=5071011b67716406fa0d603d459a58c7}{Aaskoven}{A\bibinitperiod}{Lasse}{L\bibinitperiod}{}{}{}{}}%
       }
       \strng{namehash}{5071011b67716406fa0d603d459a58c7}
       \strng{fullhash}{5071011b67716406fa0d603d459a58c7}
-      \field{labelalpha}{Aas15}
       \field{sortinit}{A}
       \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelnamesource}{author}
@@ -45,7 +44,6 @@
       }
       \strng{namehash}{fe12c1e117e36d73f7f9f4a21774dcb1}
       \strng{fullhash}{fe12c1e117e36d73f7f9f4a21774dcb1}
-      \field{labelalpha}{ABE00}
       \field{sortinit}{A}
       \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelnamesource}{author}
@@ -69,7 +67,6 @@
       }
       \strng{namehash}{4e1b7de4643baa10e1d2fa092fa3d483}
       \strng{fullhash}{4e1b7de4643baa10e1d2fa092fa3d483}
-      \field{labelalpha}{ALW14}
       \field{sortinit}{A}
       \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelnamesource}{author}
