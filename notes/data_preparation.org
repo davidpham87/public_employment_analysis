@@ -1,0 +1,73 @@
+#+Title: Data for Public Employement Analysis
+#+LATEX_HEADER: \usepackage{lmodern}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage{pdflscape}
+#+LATEX_HEADER: \usepackage[margin=3cm]{geometry}
+#+OPTIONS: ^:nil
+
+* New variable in the data set
+
++ GDP per capita (log): GDPVD (PPP, in USD) over population in log. Formula:
+  $log(GDPVD/POP)$, where $POP$ is interpolated from annual data (source: OECD).
++ Government revenue (defined as percent of GDP) . Formula: $100\cdot YRG/GDPVD$,
+  with $YRG$ interpolated from annual data (why not $YRGT$?).
++ Net lending NLG as % of GDP (interpolated from annual data). Formula:
+  $100\cdot NLG/GDPVD$, with $NLG$ interpolated from annual data.
++ GAP (gdp output gap). Formula: $100 \cdot (GDPV/GDPVTR-1)$. Already exist in
+  the data base.
++ GAPLFP (deviation from trend of labor force).
++ Inequality SWIID data set: please note that the mean of the imputation is
+  considered (and not the 100 imputations from the data set). CAUTION: data
+  should be used only up to 2010 as there are no further data for Canada, Japan
+  and Ireland (please check the graphics).
+
+* Unclear points
+
++ I did not compute GDPVDTR (Potential of total economy, at 2010 PPP,
+  USD. Formula: $GDPVD/GDPV \cdot GDPDTR$. as I am not sure how we could use
+  it. The output gap variable is already in %.
++ Market outcome vs Net outcome: In my notes, I wrote that we should use
+  the difference of these two variables but I could not remember where I could
+  find the data.
+
+* Data
+
+  The table provides a short description of the most relevant variable for the
+  analysis. There are two version, one with all the variable from the oecd
+  economic outlook data set and one with only the required variable for the
+  regressions.
+
+#+LaTeX: \begin{landscape}
+
+#+ATTR_LATEX: :environment longtable :booktabs
+#+CAPTION: Most relevant variables of the design matrix for the public employment analysis. Note that all column names are written with underscore letters in the csv file.
+| Variable Name                    | Description                                      | Source (if not OECD) |
+|----------------------------------+--------------------------------------------------+----------------------|
+| TIME                             | Time as numeric value (e.g. 2000-Q3 is 2000.5)   |                      |
+| country                          | ISO formatted country (e.g. France is FRA)       |                      |
+| egr                              | Employment Rate as a percentage of labor force   |                      |
+| execrlc                          | Executive government political direction         | World Bank           |
+| fiscal_transparency_interpolated | IMF GFS fiscal transparency score                | IMF                  |
+| gap_interpolated                 | Output GAP as $100 \cdot (GDPV/GDPVTR-1)$        |                      |
+| gaplfp_interpolated              | Deviation from labor force trend                 |                      |
+| gdp_per_capita_log               | Log of gdp per capita (in log dollars/person).   |                      |
+| gdpvd                            | GDP, 2010 PPP in USD.                            |                      |
+| gdpv_yoy_annpct                  | GDPV Growth, YoY in %                            |                      |
+| gini_market_interpolated         | Gini coefficient before tax and subsidies        | SWIID                |
+| gini_net_interpolated            | Gini coefficient after tax and subsidies         | SWIID                |
+| gini_red_abs                     | Reduction of gini coefficient, absolute          | SWIID                |
+| gini_red_abs                     | Reduction of gini coefficient, relative in %     | SWIID                |
+| government_revenue               | Government revenue in % of GDPV                  |                      |
+| govfrac                          | Government fractionalization (defined by the WB) | World Bank           |
+| is_election_date                 | 1 if an election is organized during the quarter | World Bank           |
+| lpop_interpolated                | Log of population.                               |                      |
+| nlg_to_gdpv                      | Net lending in % of gdpv                         |                      |
+| pop_interpolated                 | Population in million of persons.                |                      |
+| QUARTER                          | Quarter of the observation                       |                      |
+| unr                              | Unemployment rate                                |                      |
+| YEAR                             | Year of the observation                          |                      |
+| yrcurnt                          | Years until the next official election           | World Bank           |
+|----------------------------------+--------------------------------------------------+----------------------|
+
+
+#+LaTeX: \end{landscape}

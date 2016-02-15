@@ -1,0 +1,115 @@
+% Created 2016-02-15 Mon 05:00
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{pdflscape}
+\usepackage[margin=3cm]{geometry}
+\author{David Pham}
+\date{\today}
+\title{Data for Public Employement Analysis}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{New variable in the data set}
+\label{sec-1}
+
+\begin{itemize}
+\item GDP per capita (log): GDPVD (PPP, in USD) over population in log. Formula:
+$log(GDPVD/POP)$, where $POP$ is interpolated from annual data (source: OECD).
+\item Government revenue (defined as percent of GDP) . Formula: $100\cdot YRG/GDPVD$,
+with $YRG$ interpolated from annual data (why not $YRGT$?).
+\item Net lending NLG as \% of GDP (interpolated from annual data). Formula:
+$100\cdot NLG/GDPVD$, with $NLG$ interpolated from annual data.
+\item GAP (gdp output gap). Formula: $100 \cdot (GDPV/GDPVTR-1)$.
+\item GAPLFP (deviation from trend of labor force).
+\item Inequality SWIID data set: please note that the mean of the imputation is
+considered (and not the 100 imputations from the data set). CAUTION: data
+should be used only up to 2010 as there are no further data for Canada, Japan
+and Ireland (please check the graphics).
+\end{itemize}
+
+\section{Unclear points}
+\label{sec-2}
+
+\begin{itemize}
+\item I did not compute GDPVDTR (Potential of total economy, at 2010 PPP,
+USD. Formula: $GDPVD/GDPV \cdot GDPDTR$. as I am not sure how we could use
+it. The output gap variable is already in \%.
+\item Market outcome vs Net outcome: In my notes, I wrote that we should use
+the difference of these two variables but I could not remember where I could
+find the data.
+\end{itemize}
+
+\section{Data}
+\label{sec-3}
+
+The table provides a short description of the most relevant variable for the
+analysis. There are two version, one with all the variable from the oecd
+economic outlook data set and one with only the required variable for the
+regressions.
+
+\begin{landscape}
+
+\begin{longtable}{lll}
+\caption{Most relevant variables of the design matrix for the public employment analysis. Note that all column names are written with underscore letters in the csv file.}
+\\
+Variable Name & Description & Source (if not OECD)\\
+\hline
+\endhead
+\hline\multicolumn{3}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+TIME & Time as numeric value (e.g. 2000-Q3 is 2000.5) & \\
+country & ISO formatted country (e.g. France is FRA) & \\
+egr & Employment Rate as a percentage of labor force & \\
+execrlc & Executive government political direction & World Bank\\
+fiscal\_transparency\_interpolated & IMF GFS fiscal transparency score & IMF\\
+gap\_interpolated & Output GAP as $100 \cdot (GDPV/GDPVTR-1)$ & \\
+gaplfp\_interpolated & Deviation from labor force trend & \\
+gdp\_per\_capita\_log & Log of gdp per capita (in log dollars/person). & \\
+gdpvd & GDP, 2010 PPP in USD. & \\
+gdpv\_yoy\_annpct & GDPV Growth, YoY in \% & \\
+gini\_market\_interpolated & Gini coefficient before tax and subsidies & SWIID\\
+gini\_net\_interpolated & Gini coefficient after tax and subsidies & SWIID\\
+gini\_red\_abs & Reduction of gini coefficient, absolute & SWIID\\
+gini\_red\_abs & Reduction of gini coefficient, relative in \% & SWIID\\
+government\_revenue & Government revenue in \% of GDPV & \\
+govfrac & Government fractionalization (defined by the WB) & World Bank\\
+is\_election\_date & 1 if an election is organized during the quarter & World Bank\\
+lpop\_interpolated & Log of population. & \\
+nlg\_to\_gdpv & Net lending in \% of gdpv & \\
+pop\_interpolated & Population in million of persons. & \\
+QUARTER & Quarter of the observation & \\
+unr & Unemployment rate & \\
+YEAR & Year of the observation & \\
+yrcurnt & Years until the next official election & World Bank\\
+\hline
+\end{longtable}
+
+
+\end{landscape}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

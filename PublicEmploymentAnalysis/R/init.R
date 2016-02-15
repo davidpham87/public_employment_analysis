@@ -11,7 +11,8 @@ PCKGS <- c('DescTools',
            'glmnet',
            'parallel',
            'plm',
-           'plotly')
+           'plotly',
+           'tempdisagg')
 
 loadPackages <- function(){
   lapply(PCKGS, require, character.only=TRUE)
@@ -144,19 +145,29 @@ imputeDataSoftImpute <- function(dataset, ...){
 ################################################################################
 ### Quarterly Functions
 
-interpolateQuarter <- function(t, y, max.time=2016){
+##' Expects annual regular data with t being the year
+interpolateQuarter <- function(t, y, max.time=2016, method.interpolation=NULL){
   data <- na.omit(data.table(t, y))
-  tout <- t[t >= min(data$t) & t <= max.time]
+  tout <- t
+  t.idx <- data[, tout >= min(t) & tout <= max.time]
+  tout <- tout[t.idx]
   tryCatch({
-    yout <- spline(data$t, data$y, xout=tout)$y
-    c(rep(NA, times=length(t[t<min(data$t)])),
-      yout,
-      rep(NA, times=length(t[t>max.time])))
+    if (is.null(method.interpolation)){
+      yout <- spline(data$t, data$y, xout=tout)$y
+    } else {
+      y.ts <- ts(data$y, start=min(data$t))
+      y.td <- td(y.ts ~ 1, conversion='sum', to='quarterly', method=method.interpolation)
+      yout <- as.numeric(predict(y.td))
+    }
+    res <- c(rep(NA, times=length(t[t<min(data$t)])),
+             yout,
+             rep(NA, times=length(t[t>max.time])))
+    return(res)
   }, error = function(e) y)
 }
 
 
-interpolateQuarterColumn <- function(eo.q, eo.a, col, max.time){
+interpolateQuarterColumn <- function(eo.q, eo.a, col, max.time, method.interpolation=NULL){
   setkey(eo.a, country, TIME)
   setkey(eo.q, country, TIME)
 
@@ -164,7 +175,7 @@ interpolateQuarterColumn <- function(eo.q, eo.a, col, max.time){
   col.q <- paste0(col, '_interpolated')
   tryCatch(setnames(eo.a, col, col.new), error=function(e) NA)
   eo.q <- merge(eo.q, eo.a[, c('country', 'TIME', col.new), with=FALSE], all.x=TRUE)
-  eo.q[, (col.q):=interpolateQuarter(TIME, get(col.new), get('max.time')), by='country']
+  eo.q[, (col.q):=interpolateQuarter(TIME, get(col.new), get('max.time'), get('method.interpolation')), by='country']
   eo.q[, (col.new):=NULL]
   eo.q
 }
