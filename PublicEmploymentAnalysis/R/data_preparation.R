@@ -130,7 +130,7 @@ eo.q <- merge(eo.q, DT, by=c('country', 'TIME'), all=TRUE)
 x <- copy(eo.q)
 setkey(x, 'country')
 x <- x[country.q]
-x <- x[TIME< 2013 & TIME > 1989.75]
+x <- x[TIME< 2013 & TIME > 1984.75]
 x[, country:=as.factor(country)]
 time.numeric <- x$TIME
 x[, TIME.NUMERIC:=time.numeric]
@@ -140,8 +140,8 @@ x[, YEAR:= as.factor(YEAR)]
 
 x[, egr := 100*eg/lf] # et: General Government employment, lf: Total labor force
 
-x[, government_revenue:=100*yrg_interpolated/gdpv_interpolated, by='country']
-x[, nlg_to_gdpv:=100*nlg_interpolated/gdpv, by='country']
+x[, government_revenue:=100*yrg_interpolated/gdpv_interpolated, by='country'] # TODO gdp and not gdpv
+x[, nlg_to_gdpv:=100*nlg_interpolated/gdp, by='country'] # TODO change to gdp and not gdpv
 
 x[, gdp_per_capita:=gdpvd/pop_interpolated/1e6]
 x[, gdp_per_capita_log:=log(gdp_per_capita)]
