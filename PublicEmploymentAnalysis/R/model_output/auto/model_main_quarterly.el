@@ -14,5 +14,6 @@
     "tikz"
     "pdflscape")
    (TeX-add-symbols
-    '("insertmodel" 2))))
+    '("insertmodel" 2)))
+ :latex)
 

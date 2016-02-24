@@ -1,0 +1,1823 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>transform_yearly_to_quarterly_elections</title>
+<!-- 2016-02-22 Mon 00:39 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="David Pham" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">transform_yearly_to_quarterly_elections</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Country with quarterly data</a></li>
+<li><a href="#sec-2">2. Transformation of data from yearly to quarterly precision</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Country with quarterly data</h2>
+<div class="outline-text-2" id="text-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Country</th>
+<th scope="col" class="left">ISO CODE</th>
+<th scope="col" class="left">Annually</th>
+<th scope="col" class="left">Quarterly</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Belgium</td>
+<td class="left">BEL</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Canada</td>
+<td class="left">CAN</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Czech Republic</td>
+<td class="left">CZE</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Denmark</td>
+<td class="left">DNK</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Estonia</td>
+<td class="left">EST</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Finland</td>
+<td class="left">FIN</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">France</td>
+<td class="left">FRA</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Hungary</td>
+<td class="left">HUN</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Ireland</td>
+<td class="left">IRL</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Japan</td>
+<td class="left">JPN</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Lithuania</td>
+<td class="left">LTU</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Luxembourg</td>
+<td class="left">LUX</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Netherlands</td>
+<td class="left">NLD</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Norway</td>
+<td class="left">NOR</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Poland</td>
+<td class="left">POL</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">Sweden</td>
+<td class="left">SWE</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">United Kingdom</td>
+<td class="left">GBR</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+
+<tr>
+<td class="left">United States</td>
+<td class="left">USA</td>
+<td class="left">x</td>
+<td class="left">x</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Transformation of data from yearly to quarterly precision</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The goal of this document is to track the transformation needed to analyze quarterly data.
+Dates to find
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Exact election timing</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">location</th>
+<th scope="col" class="right">year</th>
+<th scope="col" class="left">quarter</th>
+<th scope="col" class="right">TIME</th>
+<th scope="col" class="right">execrlc<sub>before</sub></th>
+<th scope="col" class="right">execrlc<sub>elected</sub></th>
+<th scope="col" class="right">govfrac</th>
+<th scope="col" class="right">yrcurnt<sub>next</sub></th>
+<th scope="col" class="left">source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">BEL</td>
+<td class="right">1987</td>
+<td class="left">Q4</td>
+<td class="right">1987.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.687954</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Belgian_general_election,_1987">https://en.wikipedia.org/wiki/Belgian_general_election,_1987</a></td>
+</tr>
+
+<tr>
+<td class="left">BEL</td>
+<td class="right">1991</td>
+<td class="left">Q4</td>
+<td class="right">1991.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.779172</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Belgian_general_election,_1991">https://en.wikipedia.org/wiki/Belgian_general_election,_1991</a></td>
+</tr>
+
+<tr>
+<td class="left">BEL</td>
+<td class="right">1995</td>
+<td class="left">Q2</td>
+<td class="right">1995.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.738515</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Belgian_federal_election,_1995">https://en.wikipedia.org/wiki/Belgian_federal_election,_1995</a></td>
+</tr>
+
+<tr>
+<td class="left">BEL</td>
+<td class="right">1999</td>
+<td class="left">Q2</td>
+<td class="right">1999.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.827804</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Belgian_federal_election,_1999">https://en.wikipedia.org/wiki/Belgian_federal_election,_1999</a></td>
+</tr>
+
+<tr>
+<td class="left">BEL</td>
+<td class="right">2003</td>
+<td class="left">Q2</td>
+<td class="right">2003.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.827804</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Belgian_federal_election,_2003">https://en.wikipedia.org/wiki/Belgian_federal_election,_2003</a></td>
+</tr>
+
+<tr>
+<td class="left">BEL</td>
+<td class="right">2007</td>
+<td class="left">Q2</td>
+<td class="right">2007.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.785921</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Belgian_federal_election,_2007">https://en.wikipedia.org/wiki/Belgian_federal_election,_2007</a></td>
+</tr>
+
+<tr>
+<td class="left">BEL</td>
+<td class="right">2010</td>
+<td class="left">Q2</td>
+<td class="right">2010.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.790099</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Belgian_federal_election,_2010">https://en.wikipedia.org/wiki/Belgian_federal_election,_2010</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">1988</td>
+<td class="left">Q4</td>
+<td class="right">1988.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_1988">https://en.wikipedia.org/wiki/Canadian_federal_election,_1988</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">1993</td>
+<td class="left">Q4</td>
+<td class="right">1993.75</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_1993">https://en.wikipedia.org/wiki/Canadian_federal_election,_1993</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">1997</td>
+<td class="left">Q2</td>
+<td class="right">1997.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_1997">https://en.wikipedia.org/wiki/Canadian_federal_election,_1997</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">2000</td>
+<td class="left">Q4</td>
+<td class="right">2000.75</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_2000">https://en.wikipedia.org/wiki/Canadian_federal_election,_2000</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">2004</td>
+<td class="left">Q2</td>
+<td class="right">2004.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_2004">https://en.wikipedia.org/wiki/Canadian_federal_election,_2004</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">2006</td>
+<td class="left">Q1</td>
+<td class="right">2006.00</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_2006">https://en.wikipedia.org/wiki/Canadian_federal_election,_2006</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">2008</td>
+<td class="left">Q4</td>
+<td class="right">2008.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_2008">https://en.wikipedia.org/wiki/Canadian_federal_election,_2008</a></td>
+</tr>
+
+<tr>
+<td class="left">CAN</td>
+<td class="right">2011</td>
+<td class="left">Q2</td>
+<td class="right">2011.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Canadian_federal_election,_2011">https://en.wikipedia.org/wiki/Canadian_federal_election,_2011</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">1986</td>
+<td class="left">Q2</td>
+<td class="right">1986.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">NA</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_1986">https://en.wikipedia.org/wiki/Czech_legislative_election,_1986</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">1990</td>
+<td class="left">Q2</td>
+<td class="right">1990.25</td>
+<td class="right">1</td>
+<td class="right">0</td>
+<td class="right">NA</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_1990">https://en.wikipedia.org/wiki/Czech_legislative_election,_1990</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">1992</td>
+<td class="left">Q2</td>
+<td class="right">1992.25</td>
+<td class="right">0</td>
+<td class="right">1</td>
+<td class="right">0.501094</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_1992">https://en.wikipedia.org/wiki/Czech_legislative_election,_1992</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">1996</td>
+<td class="left">Q2</td>
+<td class="right">1996.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.442125</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_1996">https://en.wikipedia.org/wiki/Czech_legislative_election,_1996</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">1998</td>
+<td class="left">Q2</td>
+<td class="right">1998.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.370262</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_1998">https://en.wikipedia.org/wiki/Czech_legislative_election,_1998</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">2002</td>
+<td class="left">Q2</td>
+<td class="right">2002.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_2002">https://en.wikipedia.org/wiki/Czech_legislative_election,_2002</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">2006</td>
+<td class="left">Q2</td>
+<td class="right">2006.25</td>
+<td class="right">2</td>
+<td class="right">0</td>
+<td class="right">0.429703</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_2006">https://en.wikipedia.org/wiki/Czech_legislative_election,_2006</a></td>
+</tr>
+
+<tr>
+<td class="left">CZE</td>
+<td class="right">2010</td>
+<td class="left">Q2</td>
+<td class="right">2010.25</td>
+<td class="right">0</td>
+<td class="right">0</td>
+<td class="right">0.326667</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Czech_legislative_election,_2010">https://en.wikipedia.org/wiki/Czech_legislative_election,_2010</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">1988</td>
+<td class="left">Q2</td>
+<td class="right">1988.25</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.609724</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_1988">https://en.wikipedia.org/wiki/Danish_general_election,_1988</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">1990</td>
+<td class="left">Q4</td>
+<td class="right">1990.75</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.609724</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_1990">https://en.wikipedia.org/wiki/Danish_general_election,_1990</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">1994</td>
+<td class="left">Q3</td>
+<td class="right">1994.50</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.384831</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_1994">https://en.wikipedia.org/wiki/Danish_general_election,_1994</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">1998</td>
+<td class="left">Q1</td>
+<td class="right">1998.00</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.449880</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_1998">https://en.wikipedia.org/wiki/Danish_general_election,_1998</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">2001</td>
+<td class="left">Q4</td>
+<td class="right">2001.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.449880</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_2001">https://en.wikipedia.org/wiki/Danish_general_election,_2001</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">2005</td>
+<td class="left">Q1</td>
+<td class="right">2005.00</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.350548</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_2005">https://en.wikipedia.org/wiki/Danish_general_election,_2005</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">2007</td>
+<td class="left">Q4</td>
+<td class="right">2007.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.387578</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_2007">https://en.wikipedia.org/wiki/Danish_general_election,_2007</a></td>
+</tr>
+
+<tr>
+<td class="left">DNK</td>
+<td class="right">2011</td>
+<td class="left">Q3</td>
+<td class="right">2011.50</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.620020</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Danish_general_election,_2011">https://en.wikipedia.org/wiki/Danish_general_election,_2011</a></td>
+</tr>
+
+<tr>
+<td class="left">EST</td>
+<td class="right">1992</td>
+<td class="left">Q3</td>
+<td class="right">1992.50</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">NA</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_1992">https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_1992</a></td>
+</tr>
+
+<tr>
+<td class="left">EST</td>
+<td class="right">1995</td>
+<td class="left">Q1</td>
+<td class="right">1995.00</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.622532</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_1995">https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_1995</a></td>
+</tr>
+
+<tr>
+<td class="left">EST</td>
+<td class="right">1999</td>
+<td class="left">Q1</td>
+<td class="right">1999.00</td>
+<td class="right">0</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_1999">https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_1999</a></td>
+</tr>
+
+<tr>
+<td class="left">EST</td>
+<td class="right">2003</td>
+<td class="left">Q1</td>
+<td class="right">2003.00</td>
+<td class="right">0</td>
+<td class="right">0</td>
+<td class="right">0.486957</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_2003">https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_2003</a></td>
+</tr>
+
+<tr>
+<td class="left">EST</td>
+<td class="right">2007</td>
+<td class="left">Q1</td>
+<td class="right">2007.00</td>
+<td class="right">0</td>
+<td class="right">0</td>
+<td class="right">0.645763</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_2007">https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_2007</a></td>
+</tr>
+
+<tr>
+<td class="left">EST</td>
+<td class="right">2011</td>
+<td class="left">Q1</td>
+<td class="right">2011.00</td>
+<td class="right">0</td>
+<td class="right">0</td>
+<td class="right">0.615254</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_2011">https://en.wikipedia.org/wiki/Estonian_parliamentary_election,_2011</a></td>
+</tr>
+
+<tr>
+<td class="left">FIN</td>
+<td class="right">1987</td>
+<td class="left">Q1</td>
+<td class="right">1987.00</td>
+<td class="right">3</td>
+<td class="right">2</td>
+<td class="right">0.664002</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1987">https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1987</a></td>
+</tr>
+
+<tr>
+<td class="left">FIN</td>
+<td class="right">1991</td>
+<td class="left">Q1</td>
+<td class="right">1991.00</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.596573</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1991">https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1991</a></td>
+</tr>
+
+<tr>
+<td class="left">FIN</td>
+<td class="right">1995</td>
+<td class="left">Q1</td>
+<td class="right">1995.00</td>
+<td class="right">2</td>
+<td class="right">3</td>
+<td class="right">0.596573</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1995">https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1995</a></td>
+</tr>
+
+<tr>
+<td class="left">FIN</td>
+<td class="right">1999</td>
+<td class="left">Q1</td>
+<td class="right">1999.00</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.717084</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1999">https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_1999</a></td>
+</tr>
+
+<tr>
+<td class="left">FIN</td>
+<td class="right">2003</td>
+<td class="left">Q1</td>
+<td class="right">2003.00</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.572797</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_2003">https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_2003</a></td>
+</tr>
+
+<tr>
+<td class="left">FIN</td>
+<td class="right">2007</td>
+<td class="left">Q1</td>
+<td class="right">2007.00</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.572797</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_2007">https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_2007</a></td>
+</tr>
+
+<tr>
+<td class="left">FIN</td>
+<td class="right">2011</td>
+<td class="left">Q2</td>
+<td class="right">2011.25</td>
+<td class="right">2</td>
+<td class="right">1</td>
+<td class="right">0.659226</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_2011">https://en.wikipedia.org/wiki/Finnish_parliamentary_election,_2011</a></td>
+</tr>
+
+<tr>
+<td class="left">FRA</td>
+<td class="right">1988</td>
+<td class="left">Q2</td>
+<td class="right">1988.25</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.631088</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/French_legislative_election,_1988">https://en.wikipedia.org/wiki/French_legislative_election,_1988</a></td>
+</tr>
+
+<tr>
+<td class="left">FRA</td>
+<td class="right">1993</td>
+<td class="left">Q1</td>
+<td class="right">1993.00</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.091520</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/French_legislative_election,_1993">https://en.wikipedia.org/wiki/French_legislative_election,_1993</a></td>
+</tr>
+
+<tr>
+<td class="left">FRA</td>
+<td class="right">1997</td>
+<td class="left">Q2</td>
+<td class="right">1997.25</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.498352</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/French_legislative_election,_1997">https://en.wikipedia.org/wiki/French_legislative_election,_1997</a></td>
+</tr>
+
+<tr>
+<td class="left">FRA</td>
+<td class="right">2002</td>
+<td class="left">Q2</td>
+<td class="right">2002.25</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.414661</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/French_legislative_election,_2002">https://en.wikipedia.org/wiki/French_legislative_election,_2002</a></td>
+</tr>
+
+<tr>
+<td class="left">FRA</td>
+<td class="right">2007</td>
+<td class="left">Q2</td>
+<td class="right">2007.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.139999</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/French_legislative_election,_2007">https://en.wikipedia.org/wiki/French_legislative_election,_2007</a></td>
+</tr>
+
+<tr>
+<td class="left">FRA</td>
+<td class="right">2012</td>
+<td class="left">Q2</td>
+<td class="right">2012.25</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.123085</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/French_legislative_election,_2012">https://en.wikipedia.org/wiki/French_legislative_election,_2012</a></td>
+</tr>
+
+<tr>
+<td class="left">GBR</td>
+<td class="right">1987</td>
+<td class="left">Q2</td>
+<td class="right">1987.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_Kingdom_general_election,_1987">https://en.wikipedia.org/wiki/United_Kingdom_general_election,_1987</a></td>
+</tr>
+
+<tr>
+<td class="left">GBR</td>
+<td class="right">1992</td>
+<td class="left">Q2</td>
+<td class="right">1992.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_Kingdom_general_election,_1992">https://en.wikipedia.org/wiki/United_Kingdom_general_election,_1992</a></td>
+</tr>
+
+<tr>
+<td class="left">GBR</td>
+<td class="right">1997</td>
+<td class="left">Q2</td>
+<td class="right">1997.25</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_Kingdom_general_election,_1997">https://en.wikipedia.org/wiki/United_Kingdom_general_election,_1997</a></td>
+</tr>
+
+<tr>
+<td class="left">GBR</td>
+<td class="right">2001</td>
+<td class="left">Q2</td>
+<td class="right">2001.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_Kingdom_general_election,_2001">https://en.wikipedia.org/wiki/United_Kingdom_general_election,_2001</a></td>
+</tr>
+
+<tr>
+<td class="left">GBR</td>
+<td class="right">2005</td>
+<td class="left">Q2</td>
+<td class="right">2005.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_Kingdom_general_election,_2005">https://en.wikipedia.org/wiki/United_Kingdom_general_election,_2005</a></td>
+</tr>
+
+<tr>
+<td class="left">GBR</td>
+<td class="right">2010</td>
+<td class="left">Q2</td>
+<td class="right">2010.25</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_Kingdom_general_election,_2010">https://en.wikipedia.org/wiki/United_Kingdom_general_election,_2010</a></td>
+</tr>
+
+<tr>
+<td class="left">HUN</td>
+<td class="right">1985</td>
+<td class="left">Q2</td>
+<td class="right">1985.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1985">https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1985</a></td>
+</tr>
+
+<tr>
+<td class="left">HUN</td>
+<td class="right">1990</td>
+<td class="left">Q2</td>
+<td class="right">1990.25</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1990">https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1990</a></td>
+</tr>
+
+<tr>
+<td class="left">HUN</td>
+<td class="right">1994</td>
+<td class="left">Q2</td>
+<td class="right">1994.25</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.402287</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1994">https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1994</a></td>
+</tr>
+
+<tr>
+<td class="left">HUN</td>
+<td class="right">1998</td>
+<td class="left">Q2</td>
+<td class="right">1998.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.377247</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1998">https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_1998</a></td>
+</tr>
+
+<tr>
+<td class="left">HUN</td>
+<td class="right">2002</td>
+<td class="left">Q2</td>
+<td class="right">2002.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.467978</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_2002">https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_2002</a></td>
+</tr>
+
+<tr>
+<td class="left">HUN</td>
+<td class="right">2006</td>
+<td class="left">Q2</td>
+<td class="right">2006.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.182536</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_2006">https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_2006</a></td>
+</tr>
+
+<tr>
+<td class="left">HUN</td>
+<td class="right">2010</td>
+<td class="left">Q2</td>
+<td class="right">2010.25</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_2010">https://en.wikipedia.org/wiki/Hungarian_parliamentary_election,_2010</a></td>
+</tr>
+
+<tr>
+<td class="left">IRL</td>
+<td class="right">1989</td>
+<td class="left">Q2</td>
+<td class="right">1989.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.000000</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Irish_general_election,_1989">https://en.wikipedia.org/wiki/Irish_general_election,_1989</a></td>
+</tr>
+
+<tr>
+<td class="left">IRL</td>
+<td class="right">1992</td>
+<td class="left">Q4</td>
+<td class="right">1992.75</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.135763</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Irish_general_election,_1992">https://en.wikipedia.org/wiki/Irish_general_election,_1992</a></td>
+</tr>
+
+<tr>
+<td class="left">IRL</td>
+<td class="right">1997</td>
+<td class="left">Q2</td>
+<td class="right">1997.25</td>
+<td class="right">1</td>
+<td class="right">2</td>
+<td class="right">0.541102</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Irish_general_election,_1997">https://en.wikipedia.org/wiki/Irish_general_election,_1997</a></td>
+</tr>
+
+<tr>
+<td class="left">IRL</td>
+<td class="right">2002</td>
+<td class="left">Q2</td>
+<td class="right">2002.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.095062</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Irish_general_election,_2002">https://en.wikipedia.org/wiki/Irish_general_election,_2002</a></td>
+</tr>
+
+<tr>
+<td class="left">IRL</td>
+<td class="right">2007</td>
+<td class="left">Q2</td>
+<td class="right">2007.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.165475</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Irish_general_election,_2007">https://en.wikipedia.org/wiki/Irish_general_election,_2007</a></td>
+</tr>
+
+<tr>
+<td class="left">IRL</td>
+<td class="right">2011</td>
+<td class="left">Q1</td>
+<td class="right">2011.00</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.174008</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Irish_general_election,_2011">https://en.wikipedia.org/wiki/Irish_general_election,_2011</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">1986</td>
+<td class="left">Q3</td>
+<td class="right">1986.50</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_1986">https://en.wikipedia.org/wiki/Japanese_general_election,_1986</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">1990</td>
+<td class="left">Q1</td>
+<td class="right">1990.00</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_1990">https://en.wikipedia.org/wiki/Japanese_general_election,_1990</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">1993</td>
+<td class="left">Q3</td>
+<td class="right">1993.50</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.242457</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_1993">https://en.wikipedia.org/wiki/Japanese_general_election,_1993</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">1996</td>
+<td class="left">Q4</td>
+<td class="right">1996.75</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.472081</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_1996">https://en.wikipedia.org/wiki/Japanese_general_election,_1996</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">2000</td>
+<td class="left">Q2</td>
+<td class="right">2000.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_2000">https://en.wikipedia.org/wiki/Japanese_general_election,_2000</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">2003</td>
+<td class="left">Q4</td>
+<td class="right">2003.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.247943</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_2003">https://en.wikipedia.org/wiki/Japanese_general_election,_2003</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">2005</td>
+<td class="left">Q3</td>
+<td class="right">2005.50</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.239653</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_2005">https://en.wikipedia.org/wiki/Japanese_general_election,_2005</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">2009</td>
+<td class="left">Q3</td>
+<td class="right">2009.50</td>
+<td class="right">1</td>
+<td class="right">0</td>
+<td class="right">0.172154</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_2009">https://en.wikipedia.org/wiki/Japanese_general_election,_2009</a></td>
+</tr>
+
+<tr>
+<td class="left">JPN</td>
+<td class="right">2012</td>
+<td class="left">Q4</td>
+<td class="right">2012.75</td>
+<td class="right">0</td>
+<td class="right">1</td>
+<td class="right">0.061524</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Japanese_general_election,_2012">https://en.wikipedia.org/wiki/Japanese_general_election,_2012</a></td>
+</tr>
+
+<tr>
+<td class="left">LTU</td>
+<td class="right">1992</td>
+<td class="left">Q4</td>
+<td class="right">1992.75</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">NA</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_1992">https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_1992</a></td>
+</tr>
+
+<tr>
+<td class="left">LTU</td>
+<td class="right">1996</td>
+<td class="left">Q4</td>
+<td class="right">1996.75</td>
+<td class="right">3</td>
+<td class="right">0</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_1996">https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_1996</a></td>
+</tr>
+
+<tr>
+<td class="left">LTU</td>
+<td class="right">2000</td>
+<td class="left">Q4</td>
+<td class="right">2000.75</td>
+<td class="right">0</td>
+<td class="right">1</td>
+<td class="right">0.461348</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2000">https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2000</a></td>
+</tr>
+
+<tr>
+<td class="left">LTU</td>
+<td class="right">2004</td>
+<td class="left">Q4</td>
+<td class="right">2004.75</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">NA</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2004">https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2004</a></td>
+</tr>
+
+<tr>
+<td class="left">LTU</td>
+<td class="right">2008</td>
+<td class="left">Q4</td>
+<td class="right">2008.75</td>
+<td class="right">3</td>
+<td class="right">0</td>
+<td class="right">0.604114</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2008">https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2008</a></td>
+</tr>
+
+<tr>
+<td class="left">LTU</td>
+<td class="right">2012</td>
+<td class="left">Q4</td>
+<td class="right">2012.75</td>
+<td class="right">0</td>
+<td class="right">0</td>
+<td class="right">0.622468</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2012">https://en.wikipedia.org/wiki/Lithuanian_parliamentary_election,_2012</a></td>
+</tr>
+
+<tr>
+<td class="left">LUX</td>
+<td class="right">1989</td>
+<td class="left">Q2</td>
+<td class="right">1989.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.507246</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Luxembourg_general_election,_1989">https://en.wikipedia.org/wiki/Luxembourg_general_election,_1989</a></td>
+</tr>
+
+<tr>
+<td class="left">LUX</td>
+<td class="right">1994</td>
+<td class="left">Q2</td>
+<td class="right">1994.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.507692</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Luxembourg_general_election,_1994">https://en.wikipedia.org/wiki/Luxembourg_general_election,_1994</a></td>
+</tr>
+
+<tr>
+<td class="left">LUX</td>
+<td class="right">1999</td>
+<td class="left">Q2</td>
+<td class="right">1999.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.507824</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Luxembourg_general_election,_1999">https://en.wikipedia.org/wiki/Luxembourg_general_election,_1999</a></td>
+</tr>
+
+<tr>
+<td class="left">LUX</td>
+<td class="right">2004</td>
+<td class="left">Q2</td>
+<td class="right">2004.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.497984</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Luxembourg_general_election,_2004">https://en.wikipedia.org/wiki/Luxembourg_general_election,_2004</a></td>
+</tr>
+
+<tr>
+<td class="left">LUX</td>
+<td class="right">2009</td>
+<td class="left">Q2</td>
+<td class="right">2009.25</td>
+<td class="right">2</td>
+<td class="right">2</td>
+<td class="right">0.477952</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Luxembourg_general_election,_2009">https://en.wikipedia.org/wiki/Luxembourg_general_election,_2009</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">1989</td>
+<td class="left">Q3</td>
+<td class="right">1989.50</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.450000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_1989">https://en.wikipedia.org/wiki/Dutch_general_election,_1989</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">1994</td>
+<td class="left">Q2</td>
+<td class="right">1994.25</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.416842</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_1994">https://en.wikipedia.org/wiki/Dutch_general_election,_1994</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">1998</td>
+<td class="left">Q2</td>
+<td class="right">1998.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.663880</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_1998">https://en.wikipedia.org/wiki/Dutch_general_election,_1998</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">2002</td>
+<td class="left">Q2</td>
+<td class="right">2002.25</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.616839</td>
+<td class="right">1</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_2002">https://en.wikipedia.org/wiki/Dutch_general_election,_2002</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">2003</td>
+<td class="left">Q1</td>
+<td class="right">2003.00</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.615653</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_2003">https://en.wikipedia.org/wiki/Dutch_general_election,_2003</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">2006</td>
+<td class="left">Q4</td>
+<td class="right">2006.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.551606</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_2006">https://en.wikipedia.org/wiki/Dutch_general_election,_2006</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">2010</td>
+<td class="left">Q2</td>
+<td class="right">2010.25</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.568671</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_2010">https://en.wikipedia.org/wiki/Dutch_general_election,_2010</a></td>
+</tr>
+
+<tr>
+<td class="left">NLD</td>
+<td class="right">2012</td>
+<td class="left">Q3</td>
+<td class="right">2012.50</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.572464</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Dutch_general_election,_2012">https://en.wikipedia.org/wiki/Dutch_general_election,_2012</a></td>
+</tr>
+
+<tr>
+<td class="left">NOR</td>
+<td class="right">1989</td>
+<td class="left">Q3</td>
+<td class="right">1989.50</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.145591</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_1989">https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_1989</a></td>
+</tr>
+
+<tr>
+<td class="left">NOR</td>
+<td class="right">1993</td>
+<td class="left">Q3</td>
+<td class="right">1993.50</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.256572</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_1993">https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_1993</a></td>
+</tr>
+
+<tr>
+<td class="left">NOR</td>
+<td class="right">1997</td>
+<td class="left">Q3</td>
+<td class="right">1997.50</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_1997">https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_1997</a></td>
+</tr>
+
+<tr>
+<td class="left">NOR</td>
+<td class="right">2001</td>
+<td class="left">Q3</td>
+<td class="right">2001.50</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.570267</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_2001">https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_2001</a></td>
+</tr>
+
+<tr>
+<td class="left">NOR</td>
+<td class="right">2005</td>
+<td class="left">Q3</td>
+<td class="right">2005.50</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.505553</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_2005">https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_2005</a></td>
+</tr>
+
+<tr>
+<td class="left">NOR</td>
+<td class="right">2009</td>
+<td class="left">Q3</td>
+<td class="right">2009.50</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.468057</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_2009">https://en.wikipedia.org/wiki/Norwegian_parliamentary_election,_2009</a></td>
+</tr>
+
+<tr>
+<td class="left">POL</td>
+<td class="right">1990</td>
+<td class="left">Q4</td>
+<td class="right">1990.75</td>
+<td class="right">3</td>
+<td class="right">0</td>
+<td class="right">0.704386</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Polish_presidential_election,_1990">https://en.wikipedia.org/wiki/Polish_presidential_election,_1990</a></td>
+</tr>
+
+<tr>
+<td class="left">POL</td>
+<td class="right">1995</td>
+<td class="left">Q4</td>
+<td class="right">1995.75</td>
+<td class="right">0</td>
+<td class="right">3</td>
+<td class="right">0.493345</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Polish_presidential_election,_1995">https://en.wikipedia.org/wiki/Polish_presidential_election,_1995</a></td>
+</tr>
+
+<tr>
+<td class="left">POL</td>
+<td class="right">2000</td>
+<td class="left">Q3</td>
+<td class="right">2000.75</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.244034</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Polish_presidential_election,_2000">https://en.wikipedia.org/wiki/Polish_presidential_election,_2000</a></td>
+</tr>
+
+<tr>
+<td class="left">POL</td>
+<td class="right">2005</td>
+<td class="left">Q4</td>
+<td class="right">2005.75</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.273640</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Polish_presidential_election,_2005">https://en.wikipedia.org/wiki/Polish_presidential_election,_2005</a></td>
+</tr>
+
+<tr>
+<td class="left">POL</td>
+<td class="right">2010</td>
+<td class="left">Q3</td>
+<td class="right">2010.50</td>
+<td class="right">1</td>
+<td class="right">2</td>
+<td class="right">0.225907</td>
+<td class="right">5</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Polish_presidential_election,_2010">https://en.wikipedia.org/wiki/Polish_presidential_election,_2010</a></td>
+</tr>
+
+<tr>
+<td class="left">SWE</td>
+<td class="right">1988</td>
+<td class="left">Q3</td>
+<td class="right">1988.50</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.191773</td>
+<td class="right">3</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Swedish_general_election,_1988">https://en.wikipedia.org/wiki/Swedish_general_election,_1988</a></td>
+</tr>
+
+<tr>
+<td class="left">SWE</td>
+<td class="right">1991</td>
+<td class="left">Q3</td>
+<td class="right">1991.50</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.210324</td>
+<td class="right">3</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Swedish_general_election,_1991">https://en.wikipedia.org/wiki/Swedish_general_election,_1991</a></td>
+</tr>
+
+<tr>
+<td class="left">SWE</td>
+<td class="right">1994</td>
+<td class="left">Q3</td>
+<td class="right">1994.50</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.688270</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Swedish_general_election,_1994">https://en.wikipedia.org/wiki/Swedish_general_election,_1994</a></td>
+</tr>
+
+<tr>
+<td class="left">SWE</td>
+<td class="right">1998</td>
+<td class="left">Q3</td>
+<td class="right">1998.50</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Swedish_general_election,_1998">https://en.wikipedia.org/wiki/Swedish_general_election,_1998</a></td>
+</tr>
+
+<tr>
+<td class="left">SWE</td>
+<td class="right">2002</td>
+<td class="left">Q3</td>
+<td class="right">2002.50</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.468783</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Swedish_general_election,_2002">https://en.wikipedia.org/wiki/Swedish_general_election,_2002</a></td>
+</tr>
+
+<tr>
+<td class="left">SWE</td>
+<td class="right">2006</td>
+<td class="left">Q3</td>
+<td class="right">2006.50</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.401102</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Swedish_general_election,_2006">https://en.wikipedia.org/wiki/Swedish_general_election,_2006</a></td>
+</tr>
+
+<tr>
+<td class="left">SWE</td>
+<td class="right">2010</td>
+<td class="left">Q3</td>
+<td class="right">2010.50</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.637148</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/Swedish_general_election,_2010">https://en.wikipedia.org/wiki/Swedish_general_election,_2010</a></td>
+</tr>
+
+<tr>
+<td class="left">USA</td>
+<td class="right">1988</td>
+<td class="left">Q4</td>
+<td class="right">1988.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_1988">https://en.wikipedia.org/wiki/United_States_presidential_election,_1988</a></td>
+</tr>
+
+<tr>
+<td class="left">USA</td>
+<td class="right">1992</td>
+<td class="left">Q4</td>
+<td class="right">1992.75</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_1992">https://en.wikipedia.org/wiki/United_States_presidential_election,_1992</a></td>
+</tr>
+
+<tr>
+<td class="left">USA</td>
+<td class="right">1996</td>
+<td class="left">Q4</td>
+<td class="right">1996.75</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_1996">https://en.wikipedia.org/wiki/United_States_presidential_election,_1996</a></td>
+</tr>
+
+<tr>
+<td class="left">USA</td>
+<td class="right">2000</td>
+<td class="left">Q4</td>
+<td class="right">2000.75</td>
+<td class="right">3</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_2000">https://en.wikipedia.org/wiki/United_States_presidential_election,_2000</a></td>
+</tr>
+
+<tr>
+<td class="left">USA</td>
+<td class="right">2004</td>
+<td class="left">Q4</td>
+<td class="right">2004.75</td>
+<td class="right">1</td>
+<td class="right">1</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_2004">https://en.wikipedia.org/wiki/United_States_presidential_election,_2004</a></td>
+</tr>
+
+<tr>
+<td class="left">USA</td>
+<td class="right">2008</td>
+<td class="left">Q4</td>
+<td class="right">2008.75</td>
+<td class="right">1</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_2008">https://en.wikipedia.org/wiki/United_States_presidential_election,_2008</a></td>
+</tr>
+
+<tr>
+<td class="left">USA</td>
+<td class="right">2012</td>
+<td class="left">Q4</td>
+<td class="right">2012.75</td>
+<td class="right">3</td>
+<td class="right">3</td>
+<td class="right">0.000000</td>
+<td class="right">4</td>
+<td class="left"><a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_2012">https://en.wikipedia.org/wiki/United_States_presidential_election,_2012</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: David Pham</p>
+<p class="date">Created: 2016-02-22 Mon 00:39</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

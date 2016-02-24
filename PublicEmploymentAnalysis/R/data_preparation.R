@@ -28,7 +28,7 @@ cols.to.save <- c(
   'gini_market_interpolated',
   'gini_net_interpolated',
   'gini_red_abs',
-  'gini_red_abs',
+  'gini_red_rel',
   'gap_interpolated',
   'gaplfp_interpolated',
   'execrlc',

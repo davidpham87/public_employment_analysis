@@ -1,0 +1,21 @@
+\message{ !name(model_main_quarterly.tex)}\documentclass[a4paper, 10pt]{article}
+% All LaTeX documents including
+% tikz() output must use this
+% package!
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+\usepackage{pdflscape}
+
+\newcommand{\insertmodel}[2]{
+  \input{#1}
+}
+
+\begin{document}
+
+\message{ !name(model_main_quarterly.tex) !offset(11) }
+\insertmodel{simple_lm_gini_quarterly.tex}
+
+% 
+\message{ !name(model_main_quarterly.tex) !offset(11) }
+
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.12.23)  24 JAN 2016 00:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.1.19)  21 FEB 2016 18:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -382,6 +382,12 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
 )
 \openout1 = `model_main_quarterly.aux'.
 
@@ -501,36 +507,23 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 7.
 )
-(./simple_lm_lassen_quarterly.tex) (./simple_lm_imf_quarterly.tex
-Overfull \hbox (4.51237pt too wide) in paragraph at lines 7--54
- [][] 
- []
+(./simple_lm_imf_quarterly.tex) (./simple_lm_govrlc_quarterly.tex)
+(./simple_lm_yrcurnt_quarterly.tex) (./simple_lm_nlg_quarterly.tex)
+(./simple_lm_gini_quarterly.tex) (./simple_lm_gini_red__quarterly.tex) [1
 
-) (./simple_lm_govrlc_quarterly.tex
-Overfull \hbox (0.72076pt too wide) in paragraph at lines 7--51
- [][] 
- []
-
-) (./simple_lm_yrcurnt_quarterly.tex
-Overfull \hbox (0.72076pt too wide) in paragraph at lines 7--51
- [][] 
- []
-
-) [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7]
 (./model_main_quarterly.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 11758 strings out of 495000
- 237123 string characters out of 6181168
- 300493 words of memory out of 5000000
- 14766 multiletter control sequences out of 15000+600000
+ 11764 strings out of 493085
+ 237293 string characters out of 6136917
+ 320305 words of memory out of 5000000
+ 15016 multiletter control sequences out of 15000+600000
  5809 words of font info for 21 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 1141 hyphenation exceptions out of 8191
  55i,10n,54p,430b,269s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
@@ -540,10 +533,10 @@ ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmti10.pfb>
-Output written on model_main_quarterly.pdf (5 pages, 94337 bytes).
+Output written on model_main_quarterly.pdf (7 pages, 95047 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
+ 63 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
