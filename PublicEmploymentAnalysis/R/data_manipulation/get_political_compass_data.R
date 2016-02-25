@@ -1,12 +1,39 @@
+# Get data from OECD and parse them into csv
+setwd('../')
+source('init.R')
+loadPackages()
+
 library(readstata13)
 library(data.table)
-data <- as.data.table(read.dta13('../../data/alt_lassen_wehner_transparency_data.dta'))
-data <- as.data.table(read.dta13('../../data/wdi.dta'))
-data <- as.data.table(read.dta13('../../data/rest.dta'))
-data <- as.data.table(read.dta13('../../data/dpi.dta'))
-data <- data[, list(ifs, year, execrlc)] # 1 right, 2 center, 3 left
-data[execrlc < 0 , execrlc:=NA]
+
+iso.country <- fread('../data/countries_iso.csv')
+
+# data <- as.data.table(read.dta13('../data/alt_lassen_wehner_transparency_data.dta'))
+data <- as.data.table(read.dta13('../data/wdi.dta'))
+setnames(data, 'NAMES_STD', 'country')
+data <- merge(iso.country, data, by='country', all=TRUE)
+
+
+data.rest <- as.data.table(read.dta13('../data/rest.dta'))
+setnames(data.rest, 'ccode', 'iso')
+data <- merge(data, data.rest, by=c('iso', 'year'), all=TRUE)
+
+data.dpi <- as.data.table(read.dta13('../data/dpi.dta', generate.factors=T))
+setnames(data.dpi, 'NAMES_STD', 'country')
+data <- merge(data, data.dpi, by=c('country', 'year'), all=TRUE)
+
+load('../data/SWIIDv5_0.RData')
+dt.swiid <- rbindlist(swiid)
+dt.swiid <- merge(iso.country, dt.swiid, by='country') # lucky there are match!
+
+cols <- c("year", "iso", "ny_gdp_totl_rt_zs", "RevenueIndex",
+          "EmploymentIndex", "RegulationIndex", "SubsidisationIndex",
+          "dateleg", "dateexec", "legelec", "exelec", "auton", "muni", "state",
+          "stconst", "left", "parlsys")
+
+data <- data[, cols, with=F]
+# data[execrlc < 0 , execrlc:=NA]
 setnames(data, c('ifs', 'year'), c('location', 'time'))
-write.csv(data, '../../data/dpi_excecrlc_cleaned.csv')
+write.csv(data, '../data/dpi_excecrlc_cleaned.csv')
 
 ## Caution: Have to renamed some column (country and time in the other data set)
