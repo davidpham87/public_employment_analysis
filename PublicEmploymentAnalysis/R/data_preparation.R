@@ -10,13 +10,15 @@ MAX_YEAR_EXTRAPOLATION <- 2014
 
 cols <- c(# 'egr_diff', # public employement rate
   'gdpvd',
-  'gdp_per_capita_log',
+  'gdp_per_capita',
   'gdpv_yoy_annpct', # gdp growth
   'QUARTER',
   'unr',
-  'lpop_interpolated', # log population
+  'population_interpolated',
   'government_revenue',# yrg over gdpvd
-  'nlg_to_gdpv' # net landing in % of gdp
+  'openness',
+  'wage_share',
+  'nlg_to_gdp' # net landing in % of gdp
 )
 
 cols.to.save <- c(
@@ -51,7 +53,7 @@ eos[[2]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.q 
 ## Splines for interpoalting between years
 
 cols.interpolation.denton.cholette <-
-  c('yrg', 'nlg', 'gdpv', 'gdpvd')
+  c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage')
 
 cols.interpolation.splines <-
   c('unr', 'gap', 'gaplfp')
@@ -95,7 +97,7 @@ eo.q[, gdpv_yoy_annpct:=c(NA, NA, NA, NA,
 ## SWIID provides measures of gini
 
 new.data.names <- new.data <-
-  c('population', 'imf_gfs_scores', 'SWIID')
+  c('population', 'imf_gfs_scores', 'SWIID', 'wdi_rest_federalism')
 
 # SWIID
 
@@ -110,11 +112,23 @@ new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
 setnames(new.data, 'location', 'country')
 setkeyv(eo.a, c('country', 'TIME'))
 
-for (col in c('pop', 'gini_net', 'gini_market', 'fiscal_transparency')){
+cols.to.add <-
+  c('pop', 'gini_net', 'gini_market', 'fiscal_transparency',
+    "ny_gdp_totl_rt_zs", "revenueindex", "employmentindex", "regulationindex",
+    "subsidisationindex", "auton", "stconst", "parlsys")
+
+new.data[, auton:=as.double(auton)]
+new.data[, stconst:=as.double(stconst)]
+new.data[, parlsys:=as.double(parlsys)]
+
+for (col in cols.to.add){
   eo.q <- interpolateQuarterColumn(eo.q, new.data, col, MAX_YEAR_EXTRAPOLATION)
 }
 
+
+eo.q[, stconst_interpolated:=as.integer(stconst_interpolated)]
 eo.q[, lpop_interpolated:=log(pop_interpolated)]
+setnames(eo.q, 'pop_interpolated', 'population_interpolated')
 eo.q[, gini_red_abs:=(gini_market_interpolated - gini_net_interpolated)]
 eo.q[, gini_red_rel:=100*gini_red_abs/gini_net_interpolated]
 
@@ -140,11 +154,15 @@ x[, YEAR:= as.factor(YEAR)]
 
 x[, egr := 100*eg/lf] # et: General Government employment, lf: Total labor force
 
-x[, government_revenue:=100*yrg_interpolated/gdpv_interpolated, by='country'] # TODO gdp and not gdpv
-x[, nlg_to_gdpv:=100*nlg_interpolated/gdp, by='country'] # TODO change to gdp and not gdpv
+x[, government_revenue:=100*yrg_interpolated/gdp, by='country'] # TODO gdp and not gdpv
+x[, nlg_to_gdp:=100*nlg_interpolated/gdp, by='country'] # TODO change to gdp and not gdpv
 
-x[, gdp_per_capita:=gdpvd/pop_interpolated/1e6]
+x[, wage_share:=100*wage/gdp]
+x[, openness:=100*(xgs+mgs)/gdp]
+
+x[, gdp_per_capita:=gdpvd/population_interpolated/1e6]
 x[, gdp_per_capita_log:=log(gdp_per_capita)]
+setnames(x, 'ny_gdp_totl_rt_zs_interpolated', 'natural_ressource_rent')
 
 ################################################################################
 ## LAGs might be useful in the future
@@ -243,6 +261,13 @@ if (MAKE_PLOTS){
          x[, c('fiscal_transparency_interpolated', 'country', 'TIME.NUMERIC'), with=F],
          type='l', main='IMF Fiscal Transparency Score')
 
+  xyplot(openness ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'openness', 'country', 'TIME.NUMERIC'), with=F]),
+         type='l', main='Openness')
+
+  xyplot(wage_share~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'wage_share', 'country', 'TIME.NUMERIC'), with=F]),
+         type='l', main='Openness')
 
   dev.off()
 }

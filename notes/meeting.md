@@ -21,17 +21,19 @@ $100*nlg/gdpvd$, with nlg interpolated from annual data.
 
 # Meeting on 2016-02-22
 
-+ Joining dataset: federalism. Natural resources rents % of GDP. (WDI). World development institution. Rest database.
-+ Openness: (Import + Export)/GDPV. OECD Data base (XGS + MGS)/GDP for openness.
-+ Government revenue $100*YRG/GDP$.
-+ Net Lending should be $100*NLG/GDP$.
-+ Data from 1985.
-+ Wage share -> wage/gdp.
-+ Levels and not logs for data prepration
-+ Gini relative ratio.
-+ At least one model with the three determinants. 
-+ Let's stick GDP Growth.
-+ Interaction effect.
-+ Take difference as dependent variable, but lagged level.
-+ Nickel bias (ICKKL bias). GMM.
-+ Lagged variables on the right hand side.
++ [x] Joining dataset: federalism. 
++ [x] Natural resources rents % of GDP (WDI). World development institution. 
++ [x] Rest database.
++ [x] Openness: OECD Data base (XGS + MGS)/GDP for openness.
++ [x] Government revenue $100*YRG/GDP$.
++ [x] Net Lending should be $100*NLG/GDP$.
++ [x] Data from 1985.
++ [x] Wage share -> wage/gdp.
++ [x] Levels and not logs for data prepration
++ [x] Gini relative ratio.
++ [ ] At least one model with the three determinants. 
++ [ ] Let's stick GDP Growth.
++ [ ] Interaction effect.
++ [ ] Take difference as dependent variable, but lagged level.
++ [ ] Nickel bias (ICKKL bias). GMM.
++ [ ] Lagged variables on the right hand side.

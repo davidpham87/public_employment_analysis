@@ -26,14 +26,19 @@ load('../data/SWIIDv5_0.RData')
 dt.swiid <- rbindlist(swiid)
 dt.swiid <- merge(iso.country, dt.swiid, by='country') # lucky there are match!
 
-cols <- c("year", "iso", "ny_gdp_totl_rt_zs", "RevenueIndex",
+cols <- c("iso", 'year', "ny_gdp_totl_rt_zs", "RevenueIndex",
           "EmploymentIndex", "RegulationIndex", "SubsidisationIndex",
-          "dateleg", "dateexec", "legelec", "exelec", "auton", "muni", "state",
-          "stconst", "left", "parlsys")
+          "auton", "stconst",  "parlsys")
 
-data <- data[, cols, with=F]
+data <- data[, cols, with=F][order(iso)]
+data <- data[!is.na(iso) & !is.na(year)]
+
 # data[execrlc < 0 , execrlc:=NA]
-setnames(data, c('ifs', 'year'), c('location', 'time'))
-write.csv(data, '../data/dpi_excecrlc_cleaned.csv')
+data[auton < 0, auton:=NA]
+data[stconst < 0, stconst:=NA]
+data[parlsys < 0, parlsys:=NA]
+
+setnames(data, c('iso', 'year'), c('location', 'time'))
+write.csv(data, '../data/wdi_rest_federalism_cleaned.csv')
 
 ## Caution: Have to renamed some column (country and time in the other data set)
