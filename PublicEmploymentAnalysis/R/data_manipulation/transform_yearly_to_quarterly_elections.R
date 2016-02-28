@@ -40,6 +40,7 @@ fillData <- function(DT.old){
   DT[, execrlc_elected:=zoo::na.locf(execrlc_elected)]
   DT[, govfrac:=zoo::na.locf(govfrac)]
   DT[is.na(is_election_date), is_election_date:=0]
+  DT[is.na(surprise_election), surprise_election:=0]
 }
 
 
@@ -77,7 +78,7 @@ as.data.frame(y[, list(location, time, yrcurnt_corrected, execrlc, execrlc_lead,
 x <- fread('../../data/execrlc_govfrac_yrcurnt_quartery.csv')
 x[, source:=NULL] # no need to know where the origin of the data
 x[, is_election_date:=1] # to track election terms
-
+x[, surprise_election:=as.numeric(gsub("0x0", 1, (gsub("", 0, surprise_election))))]
 setkey(x, location)
 
 DT <- copy(x)

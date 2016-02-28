@@ -56,15 +56,15 @@ cols.interpolation.denton.cholette <-
   c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage')
 
 cols.interpolation.splines <-
-  c('unr', 'gap', 'gaplfp')
+    c('unr', 'gap', 'gaplfp')
 
 eo.a <- copy(eos[[1]])
 eo.q <- copy(eos[[2]])
 
-pdf('plot/quarterly_vs_annual_levels', 12, 8)
-xyplot(yrg ~ TIME | country, eo.a[country=='USA'], type='l', main='YRG quarterly')
-xyplot(yrg ~ TIME | country, eo.q[country=='USA'], type='l', main='YRG annual')
-dev.off()
+## pdf('plot/quarterly_vs_annual_levels', 12, 8)
+## xyplot(yrg ~ TIME | country, eo.a[country=='USA'], type='l', main='YRG quarterly')
+## xyplot(yrg ~ TIME | country, eo.q[country=='USA'], type='l', main='YRG annual')
+## dev.off()
 
 ## NOTE: the function add a _interpolated at the end of the variables in
 ## cols.interpolation
@@ -73,6 +73,7 @@ eo.q <- Reduce(
   function(x, y) interpolateQuarterColumn(x, eo.a, y, MAX_YEAR_EXTRAPOLATION, 'denton-cholette'),
   cols.interpolation.denton.cholette, init=eo.q)
 
+## TODO debug denton chollette
 
 eo.q <- Reduce(
   function(x, y) interpolateQuarterColumn(x, eo.a, y, MAX_YEAR_EXTRAPOLATION),
@@ -112,19 +113,34 @@ new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
 setnames(new.data, 'location', 'country')
 setkeyv(eo.a, c('country', 'TIME'))
 
-cols.to.add <-
-  c('pop', 'gini_net', 'gini_market', 'fiscal_transparency',
-    "ny_gdp_totl_rt_zs", "revenueindex", "employmentindex", "regulationindex",
-    "subsidisationindex", "auton", "stconst", "parlsys")
+cols.to.add.chollette <-
+  c("ny_gdp_totl_rt_zs", "revenueindex", "employmentindex", "regulationindex",
+    "subsidisationindex")
 
+# TODO add columns left/execl, authon, muni.
+cols.to.add <-
+  c('pop', 'gini_net', 'gini_market', 'fiscal_transparency', "stconst", "parlsys")
+
+cols.to.add.locf <- c('muni', 'state', 'author', "auton", 'left')
+
+new.data[, author:=as.double(author)]
 new.data[, auton:=as.double(auton)]
 new.data[, stconst:=as.double(stconst)]
 new.data[, parlsys:=as.double(parlsys)]
+
+for (col in cols.to.add.chollette){
+  eo.q <- interpolateQuarterColumn(eo.q, new.data, col, MAX_YEAR_EXTRAPOLATION, 'denton-cholette')
+}
 
 for (col in cols.to.add){
   eo.q <- interpolateQuarterColumn(eo.q, new.data, col, MAX_YEAR_EXTRAPOLATION)
 }
 
+for (col in cols.to.add.locf){
+  eo.q <- interpolateQuarterColumn(eo.q, new.data, col, MAX_YEAR_EXTRAPOLATION, 'locf')
+}
+
+## Fill forwards for muni and state
 
 eo.q[, stconst_interpolated:=as.integer(stconst_interpolated)]
 eo.q[, lpop_interpolated:=log(pop_interpolated)]
@@ -144,7 +160,7 @@ eo.q <- merge(eo.q, DT, by=c('country', 'TIME'), all=TRUE)
 x <- copy(eo.q)
 setkey(x, 'country')
 x <- x[country.q]
-x <- x[TIME< 2013 & TIME > 1984.75]
+# x <- x[TIME< 2013 & TIME > 1984.75]
 x[, country:=as.factor(country)]
 time.numeric <- x$TIME
 x[, TIME.NUMERIC:=time.numeric]
@@ -233,11 +249,6 @@ if (MAKE_PLOTS){
          x[, c(cols, 'gdp_per_capita', 'country', 'TIME.NUMERIC'), with=F],
          type='l', main='GDP per capita')
 
-
-  xyplot(government_revenue~ TIME.NUMERIC | country,
-         x[, c(cols, 'government_revenue', 'country', 'TIME.NUMERIC'), with=F],
-         type='l', main='Government revenue')
-
   ## For Gini: JPN and CAD -> Data stops in 2007. Hence the number afterwards
   ## are not trustable.
 
@@ -265,9 +276,29 @@ if (MAKE_PLOTS){
          na.omit(x[, c(cols, 'openness', 'country', 'TIME.NUMERIC'), with=F]),
          type='l', main='Openness')
 
-  xyplot(wage_share~ TIME.NUMERIC | country,
+  xyplot(wage_share ~ TIME.NUMERIC | country,
          na.omit(x[, c(cols, 'wage_share', 'country', 'TIME.NUMERIC'), with=F]),
-         type='l', main='Openness')
+         type='l', main='Wage share')
+
+  xyplot(yrcurnt ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'yrcurnt', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Years until next election')
+
+  xyplot(parlsys_interpolated ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'parlsys_interpolated', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Parlsys')
+
+  xyplot(auton_interpolated ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'auton_interpolated', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Auton')
+
+  xyplot(natural_ressource_rent ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'natural_ressource_rent', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Natural Ressource Rent', type='l')
+
+  xyplot(left_interpolated~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'left_interpolated', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Left', type='l')
 
   dev.off()
 }
