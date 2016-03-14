@@ -36,6 +36,7 @@ fillData <- function(DT.old){
       set(DT, i, cols['yrcurnt_next'], DT[i-1, yrcurnt_next - 0.25])
     }
   }
+  DT[, left:=zoo::na.locf(left)]
   DT[, execrlc_before:=zoo::na.locf(execrlc_before)]
   DT[, execrlc_elected:=zoo::na.locf(execrlc_elected)]
   DT[, govfrac:=zoo::na.locf(govfrac)]
@@ -47,30 +48,30 @@ fillData <- function(DT.old){
 ## all(splitTime('2008.75') == list(2008, 'Q4'))
 
 
-execrlc <- fread('../../data/dpi_excecrlc_cleaned.csv')[, V1:=NULL]
-govfrac <- fread('../../data/dpi_govfrac_cleaned.csv')[, V1:=NULL]
-yrcurnt <- fread('../../data/year_until_elections_cleaned.csv')[, V1:=NULL]
-yrcurnt <- yrcurnt[, list(location, time, yrcurnt_corrected)]
+## execrlc <- fread('../../data/dpi_excecrlc_cleaned.csv')[, V1:=NULL]
+## govfrac <- fread('../../data/dpi_govfrac_cleaned.csv')[, V1:=NULL]
+## yrcurnt <- fread('../../data/year_until_elections_cleaned.csv')[, V1:=NULL]
+## yrcurnt <- yrcurnt[, list(location, time, yrcurnt_corrected)]
 
-country <- c("BEL", "CAN", "CZE", "DNK", "EST", "FIN", "FRA", "GBR", "HUN",
-             "IRL", "JPN", "LTU", "LUX", "NLD", "NOR", "POL", "SWE", "USA")
+## country <- c("BEL", "CAN", "CZE", "DNK", "EST", "FIN", "FRA", "GBR", "HUN",
+##              "IRL", "JPN", "LTU", "LUX", "NLD", "NOR", "POL", "SWE", "USA")
 
-setkey(yrcurnt, location, time)
-setkey(govfrac, location, time)
-setkey(execrlc, location, time)
+## setkey(yrcurnt, location, time)
+## setkey(govfrac, location, time)
+## setkey(execrlc, location, time)
 
-## Join them
+## ## Join them
 
-x <- merge(merge(govfrac, execrlc, all=TRUE), yrcurnt, all=TRUE)
-x <- x[country][time>=1985] # Need some data before 1990
-x[, yrcurnt_diff:= c(NA, diff(yrcurnt_corrected)), by='location']
-x[, yrcurnt_lag := c(NA, butlast(yrcurnt_corrected)), by='location']
-x[, yrcurnt_lead := c(yrcurnt_corrected[-1], NA), by='location']
-x[, execrlc_lead := c(execrlc[-1], NA), by='location']
-## Wants to see which dates on has to find
-## yrcurnt_corrected means election years
-y <- x[yrcurnt_corrected==0]
-as.data.frame(y[, list(location, time, yrcurnt_corrected, execrlc, execrlc_lead, govfrac=round(govfrac, 6), yrcurnt_lead+1)])
+## x <- merge(merge(govfrac, execrlc, all=TRUE), yrcurnt, all=TRUE)
+## x <- x[country][time>=1985] # Need some data before 1990
+## x[, yrcurnt_diff:= c(NA, diff(yrcurnt_corrected)), by='location']
+## x[, yrcurnt_lag := c(NA, butlast(yrcurnt_corrected)), by='location']
+## x[, yrcurnt_lead := c(yrcurnt_corrected[-1], NA), by='location']
+## x[, execrlc_lead := c(execrlc[-1], NA), by='location']
+## ## Wants to see which dates on has to find
+## ## yrcurnt_corrected means election years
+## y <- x[yrcurnt_corrected==0]
+## as.data.frame(y[, list(location, time, yrcurnt_corrected, execrlc, execrlc_lead, govfrac=round(govfrac, 6), yrcurnt_lead+1)])
 
 ## Manualy entry of data
 ## Retake data from the manual entry

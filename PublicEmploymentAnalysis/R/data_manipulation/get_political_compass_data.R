@@ -29,7 +29,7 @@ dt.swiid <- merge(iso.country, dt.swiid, by='country') # lucky there are match!
 
 cols <- c("iso", 'year', "ny_gdp_totl_rt_zs", "RevenueIndex",
           "EmploymentIndex", "RegulationIndex", "SubsidisationIndex",
-          'muni', 'state', 'left', 'author', "auton", "stconst",  "parlsys")
+          'muni', 'state', 'author', "auton", "stconst",  "parlsys")
 
 data <- data[, cols, with=F][order(iso)]
 data <- data[!is.na(iso) & !is.na(year)]

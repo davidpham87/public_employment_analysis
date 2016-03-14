@@ -33,10 +33,20 @@ cols.to.save <- c(
   'gini_red_rel',
   'gap_interpolated',
   'gaplfp_interpolated',
-  'execrlc',
+  'left',
   'govfrac',
   'yrcurnt', # year until next election
-  'is_election_date' # If the quarter is an election quarter
+  'is_election_date', # If the quarter is an election quarter
+  "natural_ressource_rent",
+  "revenueindex_interpolated",
+  "employmentindex_interpolated",
+  "regulationindex_interpolated",
+  "subsidisationindex_interpolated",
+  'muni_interpolated',
+  'state_interpolated',
+  'author_interpolated',
+  "auton_interpolated",
+  "self_employment_rate"
   ) %>% sort %>% {c('TIME', .)}
 
 
@@ -48,15 +58,19 @@ eo.desc <- readRDS('../data/eo-colnames-dt.rds')
 setkey(eo.desc, VARIABLE) # enamble eo.desc['bsii'] => Balance of income, value, BOP basis
 eos[[2]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.q # get non.missing country
 
-
 ################################################################################
 ## Splines for interpoalting between years
 
 cols.interpolation.denton.cholette <-
   c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage')
-
 cols.interpolation.splines <-
-    c('unr', 'gap', 'gaplfp')
+  c('unr', 'gap', 'gaplfp', 'es', 'lf')
+
+
+## cols.interpolation.denton.cholette <- c()
+## cols.interpolation.splines <-
+##   c(c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage'),
+##     c('unr', 'gap', 'gaplfp', 'es'))
 
 eo.a <- copy(eos[[1]])
 eo.q <- copy(eos[[2]])
@@ -121,7 +135,7 @@ cols.to.add.chollette <-
 cols.to.add <-
   c('pop', 'gini_net', 'gini_market', 'fiscal_transparency', "stconst", "parlsys")
 
-cols.to.add.locf <- c('muni', 'state', 'author', "auton", 'left')
+cols.to.add.locf <- c('muni', 'state', 'author', "auton")
 
 new.data[, author:=as.double(author)]
 new.data[, auton:=as.double(auton)]
@@ -148,6 +162,8 @@ setnames(eo.q, 'pop_interpolated', 'population_interpolated')
 eo.q[, gini_red_abs:=(gini_market_interpolated - gini_net_interpolated)]
 eo.q[, gini_red_rel:=100*gini_red_abs/gini_net_interpolated]
 
+
+
 DT <- fread('../data/execrlc_govfrac_yrcurnt_quartery_cleaned.csv')
 DT[, V1:=NULL]
 setnames(DT, 'location', 'country')
@@ -169,6 +185,7 @@ x[, QUARTER:=as.factor(QUARTER)]
 x[, YEAR:= as.factor(YEAR)]
 
 x[, egr := 100*eg/lf] # et: General Government employment, lf: Total labor force
+x[, self_employment_rate := 100*es/lf]
 
 x[, government_revenue:=100*yrg_interpolated/gdp, by='country'] # TODO gdp and not gdpv
 x[, nlg_to_gdp:=100*nlg_interpolated/gdp, by='country'] # TODO change to gdp and not gdpv
@@ -178,6 +195,7 @@ x[, openness:=100*(xgs+mgs)/gdp]
 
 x[, gdp_per_capita:=gdpvd/population_interpolated/1e6]
 x[, gdp_per_capita_log:=log(gdp_per_capita)]
+
 setnames(x, 'ny_gdp_totl_rt_zs_interpolated', 'natural_ressource_rent')
 
 ################################################################################
@@ -296,9 +314,13 @@ if (MAKE_PLOTS){
          na.omit(x[, c(cols, 'natural_ressource_rent', 'country', 'TIME.NUMERIC'), with=F]),
          main='Natural Ressource Rent', type='l')
 
-  xyplot(left_interpolated~ TIME.NUMERIC | country,
-         na.omit(x[, c(cols, 'left_interpolated', 'country', 'TIME.NUMERIC'), with=F]),
+  xyplot(left ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'left', 'country', 'TIME.NUMERIC'), with=F]),
          main='Left', type='l')
+
+  xyplot(self_employment_rate ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'self_employment_rate', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Self Employment Rate', type='l')
 
   dev.off()
 }

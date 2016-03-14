@@ -1,0 +1,28 @@
+\chapter{Conclusion}
+
+In this semester paper, part of theory of data completion is reviewed. The main
+work is devoted to build a framework to test several R packages for imputation
+methods on the FLAS data set. With this data set, it appears that K-nearest
+neighbor imputation works fairly well, although its implementation might throw
+frustrating low level errors (segmentation faults). Except for
+\texttt{softImpute}, all methods have the same order of error (distance between
+the imputed and true value). In practice, they could unfortunately not be used
+as black-box as most data matrix have collinear dimensions which constitutes an
+issue for all the algorithms based on regression.
+
+Finally, as departing words, one should not forget why these technique
+exists. From \cite{schafer2002missing},
+
+\begin{quote}
+  With or without missing data, the goal of a statistical procedure should be
+  to make valid and efficient inferences about a population of interest -- not to
+  estimate, predict, or recover missing observations nor to obtain the same
+  results that we would have seen with complete data.
+\end{quote}
+
+
+%%% Local Variables: ***
+%%% mode:latex ***
+%%% TeX-master: "semester_paper_sfs.tex"  ***
+%%% End: ***
+%%% reftex-default-bibliography: ("biblio.bib")
