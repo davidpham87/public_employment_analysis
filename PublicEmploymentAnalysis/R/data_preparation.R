@@ -10,13 +10,15 @@ MAX_YEAR_EXTRAPOLATION <- 2014
 
 cols <- c(# 'egr_diff', # public employement rate
   'gdpvd',
-  'gdp_per_capita_log',
+  'gdp_per_capita',
   'gdpv_yoy_annpct', # gdp growth
   'QUARTER',
   'unr',
-  'lpop_interpolated', # log population
+  'population_interpolated',
   'government_revenue',# yrg over gdpvd
-  'nlg_to_gdpv' # net landing in % of gdp
+  'openness',
+  'wage_share',
+  'nlg_to_gdp' # net landing in % of gdp
 )
 
 cols.to.save <- c(
@@ -31,10 +33,20 @@ cols.to.save <- c(
   'gini_red_rel',
   'gap_interpolated',
   'gaplfp_interpolated',
-  'execrlc',
+  'left',
   'govfrac',
   'yrcurnt', # year until next election
-  'is_election_date' # If the quarter is an election quarter
+  'is_election_date', # If the quarter is an election quarter
+  "natural_ressource_rent",
+  "revenueindex_interpolated",
+  "employmentindex_interpolated",
+  "regulationindex_interpolated",
+  "subsidisationindex_interpolated",
+  'muni_interpolated',
+  'state_interpolated',
+  'author_interpolated',
+  "auton_interpolated",
+  "self_employment_rate"
   ) %>% sort %>% {c('TIME', .)}
 
 
@@ -46,23 +58,27 @@ eo.desc <- readRDS('../data/eo-colnames-dt.rds')
 setkey(eo.desc, VARIABLE) # enamble eo.desc['bsii'] => Balance of income, value, BOP basis
 eos[[2]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.q # get non.missing country
 
-
 ################################################################################
 ## Splines for interpoalting between years
 
 cols.interpolation.denton.cholette <-
-  c('yrg', 'nlg', 'gdpv', 'gdpvd')
-
+  c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage')
 cols.interpolation.splines <-
-  c('unr', 'gap', 'gaplfp')
+  c('unr', 'gap', 'gaplfp', 'es', 'lf')
+
+
+## cols.interpolation.denton.cholette <- c()
+## cols.interpolation.splines <-
+##   c(c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage'),
+##     c('unr', 'gap', 'gaplfp', 'es'))
 
 eo.a <- copy(eos[[1]])
 eo.q <- copy(eos[[2]])
 
-pdf('plot/quarterly_vs_annual_levels', 12, 8)
-xyplot(yrg ~ TIME | country, eo.a[country=='USA'], type='l', main='YRG quarterly')
-xyplot(yrg ~ TIME | country, eo.q[country=='USA'], type='l', main='YRG annual')
-dev.off()
+## pdf('plot/quarterly_vs_annual_levels', 12, 8)
+## xyplot(yrg ~ TIME | country, eo.a[country=='USA'], type='l', main='YRG quarterly')
+## xyplot(yrg ~ TIME | country, eo.q[country=='USA'], type='l', main='YRG annual')
+## dev.off()
 
 ## NOTE: the function add a _interpolated at the end of the variables in
 ## cols.interpolation
@@ -71,6 +87,7 @@ eo.q <- Reduce(
   function(x, y) interpolateQuarterColumn(x, eo.a, y, MAX_YEAR_EXTRAPOLATION, 'denton-cholette'),
   cols.interpolation.denton.cholette, init=eo.q)
 
+## TODO debug denton chollette
 
 eo.q <- Reduce(
   function(x, y) interpolateQuarterColumn(x, eo.a, y, MAX_YEAR_EXTRAPOLATION),
@@ -95,7 +112,7 @@ eo.q[, gdpv_yoy_annpct:=c(NA, NA, NA, NA,
 ## SWIID provides measures of gini
 
 new.data.names <- new.data <-
-  c('population', 'imf_gfs_scores', 'SWIID')
+  c('population', 'imf_gfs_scores', 'SWIID', 'wdi_rest_federalism')
 
 # SWIID
 
@@ -110,13 +127,42 @@ new.data %<>% {paste0('../data/', ., '_cleaned.csv')} %>% lapply(fread) %>%
 setnames(new.data, 'location', 'country')
 setkeyv(eo.a, c('country', 'TIME'))
 
-for (col in c('pop', 'gini_net', 'gini_market', 'fiscal_transparency')){
+cols.to.add.chollette <-
+  c("ny_gdp_totl_rt_zs", "revenueindex", "employmentindex", "regulationindex",
+    "subsidisationindex")
+
+# TODO add columns left/execl, authon, muni.
+cols.to.add <-
+  c('pop', 'gini_net', 'gini_market', 'fiscal_transparency', "stconst", "parlsys")
+
+cols.to.add.locf <- c('muni', 'state', 'author', "auton")
+
+new.data[, author:=as.double(author)]
+new.data[, auton:=as.double(auton)]
+new.data[, stconst:=as.double(stconst)]
+new.data[, parlsys:=as.double(parlsys)]
+
+for (col in cols.to.add.chollette){
+  eo.q <- interpolateQuarterColumn(eo.q, new.data, col, MAX_YEAR_EXTRAPOLATION, 'denton-cholette')
+}
+
+for (col in cols.to.add){
   eo.q <- interpolateQuarterColumn(eo.q, new.data, col, MAX_YEAR_EXTRAPOLATION)
 }
 
+for (col in cols.to.add.locf){
+  eo.q <- interpolateQuarterColumn(eo.q, new.data, col, MAX_YEAR_EXTRAPOLATION, 'locf')
+}
+
+## Fill forwards for muni and state
+
+eo.q[, stconst_interpolated:=as.integer(stconst_interpolated)]
 eo.q[, lpop_interpolated:=log(pop_interpolated)]
+setnames(eo.q, 'pop_interpolated', 'population_interpolated')
 eo.q[, gini_red_abs:=(gini_market_interpolated - gini_net_interpolated)]
 eo.q[, gini_red_rel:=100*gini_red_abs/gini_net_interpolated]
+
+
 
 DT <- fread('../data/execrlc_govfrac_yrcurnt_quartery_cleaned.csv')
 DT[, V1:=NULL]
@@ -130,7 +176,7 @@ eo.q <- merge(eo.q, DT, by=c('country', 'TIME'), all=TRUE)
 x <- copy(eo.q)
 setkey(x, 'country')
 x <- x[country.q]
-x <- x[TIME< 2013 & TIME > 1984.75]
+# x <- x[TIME< 2013 & TIME > 1984.75]
 x[, country:=as.factor(country)]
 time.numeric <- x$TIME
 x[, TIME.NUMERIC:=time.numeric]
@@ -139,12 +185,18 @@ x[, QUARTER:=as.factor(QUARTER)]
 x[, YEAR:= as.factor(YEAR)]
 
 x[, egr := 100*eg/lf] # et: General Government employment, lf: Total labor force
+x[, self_employment_rate := 100*es/lf]
 
-x[, government_revenue:=100*yrg_interpolated/gdpv_interpolated, by='country'] # TODO gdp and not gdpv
-x[, nlg_to_gdpv:=100*nlg_interpolated/gdp, by='country'] # TODO change to gdp and not gdpv
+x[, government_revenue:=100*yrg_interpolated/gdp, by='country'] # TODO gdp and not gdpv
+x[, nlg_to_gdp:=100*nlg_interpolated/gdp, by='country'] # TODO change to gdp and not gdpv
 
-x[, gdp_per_capita:=gdpvd/pop_interpolated/1e6]
+x[, wage_share:=100*wage/gdp]
+x[, openness:=100*(xgs+mgs)/gdp]
+
+x[, gdp_per_capita:=gdpvd/population_interpolated/1e6]
 x[, gdp_per_capita_log:=log(gdp_per_capita)]
+
+setnames(x, 'ny_gdp_totl_rt_zs_interpolated', 'natural_ressource_rent')
 
 ################################################################################
 ## LAGs might be useful in the future
@@ -215,11 +267,6 @@ if (MAKE_PLOTS){
          x[, c(cols, 'gdp_per_capita', 'country', 'TIME.NUMERIC'), with=F],
          type='l', main='GDP per capita')
 
-
-  xyplot(government_revenue~ TIME.NUMERIC | country,
-         x[, c(cols, 'government_revenue', 'country', 'TIME.NUMERIC'), with=F],
-         type='l', main='Government revenue')
-
   ## For Gini: JPN and CAD -> Data stops in 2007. Hence the number afterwards
   ## are not trustable.
 
@@ -243,6 +290,37 @@ if (MAKE_PLOTS){
          x[, c('fiscal_transparency_interpolated', 'country', 'TIME.NUMERIC'), with=F],
          type='l', main='IMF Fiscal Transparency Score')
 
+  xyplot(openness ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'openness', 'country', 'TIME.NUMERIC'), with=F]),
+         type='l', main='Openness')
+
+  xyplot(wage_share ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'wage_share', 'country', 'TIME.NUMERIC'), with=F]),
+         type='l', main='Wage share')
+
+  xyplot(yrcurnt ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'yrcurnt', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Years until next election')
+
+  xyplot(parlsys_interpolated ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'parlsys_interpolated', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Parlsys')
+
+  xyplot(auton_interpolated ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'auton_interpolated', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Auton')
+
+  xyplot(natural_ressource_rent ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'natural_ressource_rent', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Natural Ressource Rent', type='l')
+
+  xyplot(left ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'left', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Left', type='l')
+
+  xyplot(self_employment_rate ~ TIME.NUMERIC | country,
+         na.omit(x[, c(cols, 'self_employment_rate', 'country', 'TIME.NUMERIC'), with=F]),
+         main='Self Employment Rate', type='l')
 
   dev.off()
 }

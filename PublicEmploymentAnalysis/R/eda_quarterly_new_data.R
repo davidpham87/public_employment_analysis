@@ -14,16 +14,23 @@ MAX_YEAR_EXTRAPOLATION <- 2014
 cols <- c(# 'egr_diff', # public employement rate
   ## 'gdpvd',
   'egr',
+  'egr_lagged', # lagged public employment rate
   'gdp_per_capita_log',
-  'gap_interpolated',
-  'gdpv_yoy_annpct', # gdp growth
+  ## 'gdp_per_capita_log_lagged',
+  # 'gap_interpolated',
+  ## 'gdpv_yoy_annpct', # gdp growth
+  'gdpv_yoy_annpct_lagged',
+  ##  'gdpv_yoy_annpct_lagged_2',
+  'unr',
+  # 'unr_lagged',
+  'government_revenue',# yrg over gdpvd
+  'nlg_to_gdp', # net landing in % of gdp
+  'wage_share',
+  'openness',
+  'self_employment_rate',
+  ## 'lpop_interpolated',
   'TIME',
   'QUARTER',
-  'unr',
-  'lpop_interpolated', # log population
-  'government_revenue',# yrg over gdpvd
-  # 'nlg_to_gdpv', # net landing in % of gdp
-  'egr_lagged', # lagged public employment rate
   'country'
 )
 
@@ -53,24 +60,39 @@ head(x)
 x[, V1:=NULL]
 setkey(x, 'country')
 
+x[, gdp_per_capita_log:= log(gdp_per_capita)]
+x[, gdpv_yoy_annpct_lagged:= c(NA, butlast(gdpv_yoy_annpct)), by='country']
+x[, gdpv_yoy_annpct_lagged_2:=c(NA, NA, butlast(gdpv_yoy_annpct, 2)), by='country']
+x[, lpop_interpolated:=log(population_interpolated)]
+
 time.numeric <- x$TIME
 x[, TIME:=as.numeric(TIME)]
+x <- x[TIME < 2013 & TIME > 1989.75]
 x[, QUARTER:=as.factor(QUARTER)]
 x[, YEAR:= as.numeric(YEAR)]
 # x[, egr := , by='country'] # et: General Government employment, et: Total employment
 x[, egr_lagged:= c(NA, butlast(egr)), by='country']
 x[, country:=as.factor(country)]
 
+# x[, egr := c(NA, diff(egr)), by='country'] # Diff only
+x[, unr_lagged := c(NA, butlast(unr)), by='country']
+x[, gdp_per_capita_log_lagged := c(NA, butlast(gdp_per_capita_log)), by='country']
+
 ## Keep data for plotting
 lvl2num <- function(x) as.numeric(levels(x)[x])
 x.model.lm <- na.omit(x[, c(cols, 'country', 'TIME'), with=FALSE])
 # x.model.lm$TIME <- lvl2num(x.model.lm$TIME)
+
+x[, egr_country := scale(egr, center=TRUE, scale=FALSE), by='country']
+# histogram(~ egr_country, x[TIME>1990 & TIME < 2012], breaks=seq(-2, 2, length.out=100))
 
 ## Simple lm model
 x.lm <- lm(egr  ~ ., x[, c(cols), with=FALSE])
 summary(x.lm)
 
 y.fit.simple.lm <- fitted(x.lm)
+
+# xyplot(government_revenue ~ TIME | country, x, type='l')
 
 showdiag <- function(lm.obj){
   par(mfrow = c(2, 2))
@@ -87,31 +109,85 @@ robustnessAnalysis <- function(data, cols, to.drop, formula=egr ~ .){
 }
 
 
+base.cols <- c('government_revenue', 'nlg_to_gdp', 'unr', 'country', 'TIME', 'egr')
+
+gov.lm <- robustnessAnalysis(x, c('government_revenue', 'country', 'TIME', 'egr'), '')
+nlg.lm <- robustnessAnalysis(x, c('nlg_to_gdp', 'country', 'TIME', 'egr'), '')
+unr.lm <- robustnessAnalysis(x, c('unr', 'country', 'TIME', 'egr'), '')
+
+baseline.lm <- robustnessAnalysis(x, c('government_revenue', 'nlg_to_gdp', 'unr', 'country', 'TIME', 'egr'), '')
+
+gdp.lm <- robustnessAnalysis(x, c('gdpv_yoy_annpct', base.cols), '')
+gdp.lm <- robustnessAnalysis(x, c('gdpv_yoy_annpct_lagged', base.cols), '')
+
+gdp_capita.lm <- robustnessAnalysis(x, c('gdp_per_capita_log', base.cols), '')
+wage.lm <- robustnessAnalysis(x, c('wage_share', base.cols), '')
+
+open.lm <- robustnessAnalysis(x, c('openness', base.cols), '')
+
+
 ## Fiscal Transparency
 ff <- egr ~ .
 imf.gfs.lm <- robustnessAnalysis(x, c(cols, 'fiscal_transparency_interpolated'), '', ff)
 imf.gfs.wo.lm <- robustnessAnalysis(as.data.table(imf.gfs.lm$model), cols, '', ff)
 
+## Lassen
+x.new <- copy(x)
+lassen <- fread('../data/lassen_fiscal_scores.csv')
+setnames(lassen, 'Index Score', 'lassen_score')
+x.lassen <- merge(x.new, lassen, by.x='country', by.y='ISO')
+lassen.lm <- robustnessAnalysis(x.lassen, c(cols, 'lassen_score', 'left'), '',
+                                egr ~ . + left*lassen_score + left - lassen_score)
+
 ## Left or right goverment
-govrlc.lm <- robustnessAnalysis(x, c(cols, 'execrlc'), '', ff)
+govrlc.lm <- robustnessAnalysis(x, c(cols, 'left'), '', ff)
+govrlc.base.lm <- robustnessAnalysis(x, c('left', base.cols), '', ff)
 govrlc.wo.lm <- robustnessAnalysis(as.data.table(govrlc.lm$model), cols, '', ff)
 
+is_election.base.lm <- robustnessAnalysis(x, c('is_election_date', base.cols), '', ff)
+
 ## Years until election
+nrr.lm <- robustnessAnalysis(x, c('natural_ressource_rent', 'is_election_date', base.cols), '', ff)
+nrr.mix.lm <- robustnessAnalysis(x, c('natural_ressource_rent', 'is_election_date', base.cols), '',
+                                 egr ~ . + natural_ressource_rent*is_election_date)
+
+lassen.lm <- robustnessAnalysis(x.lassen, c(base.cols, 'fiscal_transparency_interpolated', 'is_election_date'), '',
+                                egr ~ . + is_election_date*fiscal_transparency_interpolated)
+
+stconst.lm <- robustnessAnalysis(x, c('state_interpolated', 'is_election_date', base.cols), '', ff)
+
+
 yrcurnt.lm <- robustnessAnalysis(x, c(cols, 'yrcurnt'), '', ff)
 yrcurnt.wo.lm <- robustnessAnalysis(as.data.table(yrcurnt.lm$model), cols, '', ff)
+
+pop.lm <- robustnessAnalysis(x, c(cols, 'lpop_interpolated'), '', ff) # log population
+pop.wo.lm <- robustnessAnalysis(as.data.table(pop.lm$model), cols, '', ff)
 
 ## Inequality
 gini.red.lm <- robustnessAnalysis(x[TIME < 2010], c(cols, 'gini_red_abs'), '', ff)
 gini.lm <- robustnessAnalysis(x[TIME < 2010], c(cols, 'gini_market_interpolated', 'gini_net_interpolated'), '', ff)
+gini.lm <- robustnessAnalysis(x[TIME < 2010], c(cols, 'gini_market_interpolated', 'gini_net_interpolated', 'gini_red_rel'), '', ff)
 gini.wo.lm <- robustnessAnalysis(as.data.table(gini.lm$model), cols, '', ff)
 
 ## Net lending
-nlg.lm <- robustnessAnalysis(x, c(cols, 'nlg_to_gdpv'), '', ff)
+nlg.lm <- robustnessAnalysis(x, c(cols, 'nlg_to_gdp'), '', ff)
 nlg.wo.lm <- robustnessAnalysis(as.data.table(nlg.lm$model), cols, '', ff)
 
 ## Government fractionalization
 govfrac.lm <- robustnessAnalysis(x, c(cols, 'govfrac'), '', ff)
+govfrac.base.lm <- robustnessAnalysis(x, c('govfrac', base.cols), '', ff)
 govfrac.wo.lm <- robustnessAnalysis(as.data.table(govfrac.lm$model), cols, '', ff)
+
+## Federalism
+x[, muni_interpolated:=gsub("-999", NA, muni_interpolated)]
+x[, state_interpolated:=gsub("-999", NA, state_interpolated)]
+x[, state_interpolated:=gsub("No local elections", 0, state_interpolated)]
+x[, state_interpolated:=gsub("Legislature locally elected", 1, state_interpolated)]
+x[, state_interpolated:=gsub("Legislature and executive locally elected", 1, state_interpolated)]
+
+fed.lm <- robustnessAnalysis(x, c(cols, 'muni_interpolated', 'auton_interpolated', 'state_interpolated'), '',
+                             egr ~ . + muni_interpolated*gdpv_yoy_annpct_lagged + auton_interpolated*gdpv_yoy_annpct_lagged +
+                               state_interpolated*gdpv_yoy_annpct_lagged - state_interpolated)
 
 ## GDP GAP (gap_interpolated)
 ## gap.lm <- robustnessAnalysis(x, c(cols, 'gap_interpolated'), '', ff)
@@ -120,6 +196,15 @@ govfrac.wo.lm <- robustnessAnalysis(as.data.table(govfrac.lm$model), cols, '', f
 ## Labor Force Trend Gap (gaplfp_interpolated)
 gaplf.lm <- robustnessAnalysis(x, c(cols, 'gaplfp_interpolated'), '', ff)
 gaplf.wo.lm <- robustnessAnalysis(as.data.table(gaplf.lm$model), cols, '', ff)
+
+all.lm <- robustnessAnalysis(x, c(cols, 'gaplfp_interpolated', 'nlg_to_gdp', 'left', 'yrcurnt'), '', ff)
+
+natural.lm <- robustnessAnalysis(x, c(cols, 'natural_ressource_rent'), '', ff)
+natural.wo.lm <- robustnessAnalysis(as.data.table(natural.lm$model), cols, '', ff)
+
+## REST
+
+
 
 ################################################################################
 ### Residuals are really bad when using no difference
@@ -236,3 +321,14 @@ toTexModel(list(nlg.lm, nlg.wo.lm),
 
 
 ## Years until election
+
+library(readstata13)
+library(data.table)
+data_used <- as.data.table(read.dta13('../data/data_used.dta'))
+## summary(lm(eglf ~ ., data_used[date > list(eglf, date, nlgq, yrgq, unlf, NAMES_STD, elec)]))
+x.lm <- lm(eglf ~ ., data_used[date > 140, list(eglf, nlgq, yrgq, unlf, gdpv_yoy_lagged, date, NAMES_STD)])
+summary(x.lm)
+# p.adjust(summary(x.lm)$coefficient[, 4])
+
+# summary(lm(eglf ~ . + elec*parlsys, data_used[date > 140, list(eglf, date, nlgq, unlf, yrgq, NAMES_STD, elec, parlsys)]))
+# summary(lm(eglf ~ . , data_used[date > 140, list(eglf, date, nlgq, unlf, yrgq, NAMES_STD, elec)]))

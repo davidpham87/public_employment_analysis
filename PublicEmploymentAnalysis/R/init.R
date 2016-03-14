@@ -150,18 +150,33 @@ interpolateQuarter <- function(t, y, max.time=2016, method.interpolation=NULL){
   data <- na.omit(data.table(t, y))
   tout <- t
   t.idx <- data[, tout >= min(t) & tout <= max.time]
+  data <- data[t <= max.time]
   tout <- tout[t.idx]
+  yout.index <- data$t
+  method.interpolation <- if (is.null(method.interpolation)) 'spline' else method.interpolation
   tryCatch({
-    if (is.null(method.interpolation)){
+    if (method.interpolation == 'spline'){
       yout <- spline(data$t, data$y, xout=tout)$y
-    } else {
+    }
+
+    if (method.interpolation == 'denton-cholette'){
       y.ts <- ts(data$y, start=min(data$t))
       y.td <- td(y.ts ~ 1, conversion='sum', to='quarterly', method=method.interpolation)
-      yout <- as.numeric(predict(y.td))
+      y.predict <- predict(y.td)
+      yout <- as.numeric(y.predict) # max time not considered here. FIXME
+      yout.index <- index(y.predict)
     }
-    res <- c(rep(NA, times=length(t[t<min(data$t)])),
+
+    if (method.interpolation %in% c('locf', 'fill-forward')){
+      yout <- zoo::na.locf(y)
+    }
+
+    na.size.before <- length(t[t<min(yout.index)])
+    na.size.after <- length(t) - na.size.before - length(yout)
+    res <- c(rep(NA, times=na.size.before),
              yout,
-             rep(NA, times=length(t[t>max.time])))
+             rep(NA, times=na.size.after))
+
     return(res)
   }, error = function(e) y)
 }

@@ -12,7 +12,7 @@
     "oecd2015govspending"
     "oecd2015inequality"
     "toth2014chapter"
-    "wang2015trends")
-   (LaTeX-add-environments
-    '("innerlist" LaTeX-env-args ["argument"] 0))))
+    "wang2015trends"
+    "schuster2013retreat"))
+ :bibtex)
 

@@ -21,6 +21,7 @@ $100*nlg/gdpvd$, with nlg interpolated from annual data.
 
 # Meeting on 2016-02-22
 
+
 + Joining dataset: federalism. Natural resources rents % of GDP. (WDI). World development institution. Rest database.
 + Openness: (Import + Export)/GDPV. OECD Data base (XGS + MGS)/GDP for openness.
 + Government revenue $100*YRG/GDP$.
