@@ -35,3 +35,13 @@ $100*nlg/gdpvd$, with nlg interpolated from annual data.
 + Take difference as dependent variable, but lagged level.
 + Nickel bias (ICKKL bias). GMM.
 + Lagged variables on the right hand side.
+
+# Meeting on 2016-03-08
+
++ Clustered errors in regression (heteroscedasticiy).
++ Revenue Stronger during election. interact election with baseline.
++ Use other dummies.
++ Compare annual data compare.
++ Election dummies for annual data is summed over a year (3/4, 1/4) if the lection is in first Quarter.
++ GGFLMQ.
++ EBA Extreme base averaging.
