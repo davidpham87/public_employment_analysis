@@ -6,6 +6,10 @@
 \usepackage[english]{ETHDAsfs}%--> ETHDASA + fancyheadings + ... "umlaute"
 %  + sfs-hyper -> hyperref
 
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
+\usepackage{graphicx}
 
 \usepackage{hyperref}
 \usepackage{pdfpages}%%to include the confirmation of originality (plagiarism
@@ -189,6 +193,20 @@ literate={<-}{{$\leftarrow$}}1 {~}{{$\sim$}}1}
   otherkeywords={}% undefine otherkeywords to remove !,!=,~,$,*,\&,\%/\%,\%*\%,\%\%,<-,<<-,_,/
 }
 
+
+\newcommand{\insertplot}[2]{
+  \begin{figure}[!ht]
+    \centering
+    \input{tex_output/#1}
+    \caption{#2}
+  \end{figure}
+}
+
+\newcommand{\insertmodel}[2]{
+  \input{tex_output\#1}
+}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% End of listing parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -216,6 +234,8 @@ literate={<-}{{$\leftarrow$}}1 {~}{{$\sim$}}1}
 \cleardoublepage
  %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+\linespread{1.5}\selectfont
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Insert here acknowledgements and abstract %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,7 +243,8 @@ literate={<-}{{$\leftarrow$}}1 {~}{{$\sim$}}1}
 \markright{}
 \vspace*{\stretch{1}}
 \begin{center}
-  To Myriam for her support during the long night of works.
+  To Myriam for her support during the long nights of work and to our future
+  children.
 \end{center}
 \vspace*{\stretch{2}}
 
@@ -266,8 +287,10 @@ literate={<-}{{$\leftarrow$}}1 {~}{{$\sim$}}1}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{introduction}
 \include{theoretical_background} % theoretical background
-% \include{empirical_results} % empirical results % description of data set
-% \include{conclusion}
+\include{empirical_results} % empirical results % description of data set
+\include{conclusion}
+
+\linespread{1.0}\selectfont
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% bibliography                              %%%
@@ -288,9 +311,7 @@ literate={<-}{{$\leftarrow$}}1 {~}{{$\sim$}}1}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addtocontents{toc}{\vspace{.5\baselineskip}}
 \appendix
-% \include{appendix1}
-
-
+\include{appendix1}
 
 % %% epilogue (optional)
 % \addtocontents{toc}{\vspace{.5\baselineskip}}

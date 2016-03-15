@@ -18,8 +18,8 @@ loadPackages <- function(){
   lapply(PCKGS, require, character.only=TRUE)
 }
 
-################################################################################
-### Utiltis
+###########################################################################
+### Utilities
 
 joinDataTable <- function(lDT, kx=c('LOCATION', 'TIME')){
   Reduce(function(x, y) merge(x, y, all=TRUE), lDT)
@@ -53,7 +53,19 @@ unselect <- function(data, cols){
 
 unselectVector <- function(x, kx) x[!x %in% kx]
 
-################################################################################
+butlast <- function(x, k=1) x[1:(length(x)-k)]
+
+fctr2num <- function(x) as.numeric(levels(x)[x])
+
+robustnessAnalysis <- function(data, cols, to.drop, formula=egr ~ .){
+  cols.extended <- unselectVector(cols, to.drop)
+  x.lm <- lm(formula, data[, cols.extended, with=FALSE])
+  print(summary(x.lm))
+  x.lm
+}
+
+
+###########################################################################
 ### Robustness Analysis
 
 ##' Useful this when doing robustness analysis (including excluding variable)
@@ -65,7 +77,7 @@ completeLmData <- function(lm.model, DT, new.cols){
 }
 
 
-################################################################################
+###########################################################################
 ### Imputation functions
 
 scaleNumeric <- function(x){
@@ -92,7 +104,8 @@ imputeDataMi <- function(dataset, n, column.type.mi=NULL, ...){
 
   ## check that the modification are valid
   if (!is.null(column.type.mi)){
-    stopifnot(all(vapply(column.type.mi, is.element, TRUE, set=valid.column.type)))
+    stopifnot(all(vapply(column.type.mi, is.element, TRUE,
+                         set=valid.column.type)))
   } else {
     column.type.mi <- list()
   }
@@ -142,11 +155,12 @@ imputeDataSoftImpute <- function(dataset, ...){
   list(dataset)
 }
 
-################################################################################
+###########################################################################
 ### Quarterly Functions
 
 ##' Expects annual regular data with t being the year
-interpolateQuarter <- function(t, y, max.time=2016, method.interpolation=NULL){
+interpolateQuarter <- function(t, y, max.time=2016,
+                               method.interpolation=NULL){
   data <- na.omit(data.table(t, y))
   tout <- t
   t.idx <- data[, tout >= min(t) & tout <= max.time]
@@ -161,7 +175,8 @@ interpolateQuarter <- function(t, y, max.time=2016, method.interpolation=NULL){
 
     if (method.interpolation == 'denton-cholette'){
       y.ts <- ts(data$y, start=min(data$t))
-      y.td <- td(y.ts ~ 1, conversion='sum', to='quarterly', method=method.interpolation)
+      y.td <- td(y.ts ~ 1, conversion='sum', to='quarterly',
+                 method=method.interpolation)
       y.predict <- predict(y.td)
       yout <- as.numeric(y.predict) # max time not considered here. FIXME
       yout.index <- index(y.predict)
@@ -182,21 +197,26 @@ interpolateQuarter <- function(t, y, max.time=2016, method.interpolation=NULL){
 }
 
 
-interpolateQuarterColumn <- function(eo.q, eo.a, col, max.time, method.interpolation=NULL){
+interpolateQuarterColumn <- function(eo.q, eo.a, col, max.time,
+                                     method.interpolation=NULL){
   setkey(eo.a, country, TIME)
   setkey(eo.q, country, TIME)
 
   col.new <- paste0(col, '_annual_data')
   col.q <- paste0(col, '_interpolated')
   tryCatch(setnames(eo.a, col, col.new), error=function(e) NA)
-  eo.q <- merge(eo.q, eo.a[, c('country', 'TIME', col.new), with=FALSE], all.x=TRUE)
-  eo.q[, (col.q):=interpolateQuarter(TIME, get(col.new), get('max.time'), get('method.interpolation')), by='country']
+  eo.q <- merge(eo.q,
+                eo.a[, c('country', 'TIME', col.new), with=FALSE],
+                all.x=TRUE)
+  eo.q[, (col.q):=interpolateQuarter(TIME, get(col.new), get('max.time'),
+                                     get('method.interpolation')),
+       by='country']
   eo.q[, (col.new):=NULL]
   eo.q
 }
 
 
-################################################################################
+###########################################################################
 ### Plots
 
 ##' Shortcut to compare to variable in data.table x
@@ -205,8 +225,14 @@ compareValue <- function(x, ...){
   argx <- unlist(list(...))
   plot.data <- melt(x[, c('TIME', 'country', argx), with=FALSE],
                     id.vars=c('TIME', 'country'))
-  gg <- ggplot(plot.data, aes(TIME, value)) + geom_line(aes(color=variable)) +
+  gg <- ggplot(plot.data, aes(TIME, value)) +
+    geom_line(aes(color=variable)) +
     facet_wrap(~country)
   print(ggplotly(gg))
   gg
+}
+
+showdiag <- function(lm.obj){
+  par(mfrow = c(2, 2))
+  plot(lm.obj)
 }

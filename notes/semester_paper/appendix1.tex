@@ -1,0 +1,62 @@
+\chapter{Data visualizations}
+\label{ch:data-viz}
+The purpose of the following graphics is to offer some visual checks in order
+to detect any anomalies in the data set.
+
+\begin{landscape}
+  \insertplot{simple_model_quarterly_gdpv_annpct.tex}{GDP growth, volume}
+  \insertplot{simple_model_quarterly_unr.tex}{Unemployment rate}
+  \insertplot{simple_model_quarterly_government_revenue.tex}{Government revenue in
+    percent of GDP}
+  \insertplot{simple_model_quarterly_gdp_per_capita_interpolated.tex}{GDP per
+    Capita in USD millions}
+  \insertplot{simple_model_quarterly_nlg_to_gdp.tex}{Net lending in
+    percent of GDP}
+\end{landscape}
+
+
+\chapter{Regression tables}
+\label{ch:reg-tbls}
+This part provides the regression tables of the many regressions used to test
+the different variables and to check the robustness of the base model, which
+includes the unemployment rate, government revenues and net lending as main
+variables.
+
+\begin{landscape}
+
+\input{tex_output/simple_lm_gdp_quarterly}
+\input{tex_output/simple_lm_gdp_capita_quarterly}
+\input{tex_output/simple_lm_yrcurnt_quarterly}
+\input{tex_output/simple_lm_imf_quarterly}
+\input{tex_output/simple_lm_govrlc_quarterly}
+\input{tex_output/simple_lm_gini_quarterly}
+
+\end{landscape}
+
+
+\chapter{R Implementation Details}
+\label{app:complement}
+
+The complete \textsf{R} code to generate the results is stored on
+\url{https://github.com/davidpham87/public_employment_analysis} where the
+procedures are more documented. The first script provides some functions useful
+for the analysis, the second displays how the data were manipulated to create
+the data matrix, whereas the third is used to produce the results.
+
+\paragraph{Initialization script} \ \vspace{10pt}
+
+\lstinputlisting[language=R, style=Rstyle]{../../PublicEmploymentAnalysis/R/init.R}
+
+\paragraph{Data manipulation script} \ \vspace{10pt}
+
+\lstinputlisting[language=R, style=Rstyle]{../../PublicEmploymentAnalysis/R/data_preparation.R}
+
+\paragraph{Analysis script} \ \vspace{10pt}
+
+\lstinputlisting[language=R, style=Rstyle]{../../PublicEmploymentAnalysis/R/eda_quarterly_new_data.R}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "semester_paper_sfs"
+%%% End:

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.19)  14 JAN 2016 18:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.1.19)  14 MAR 2016 23:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -26,7 +26,7 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
@@ -74,10 +74,10 @@ Package: pgf 2013/12/18 v3.0.0 (rcs-revision 1.14)
 
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
@@ -85,7 +85,7 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 94.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
@@ -367,7 +367,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
-Package: pdfpages 2013/08/25 v0.4v Insert pages of external PDF documents (AM)
+Package: pdfpages 2015/06/15 v0.4y Insert pages of external PDF documents (AM)
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
@@ -380,19 +380,22 @@ Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Bdimen=\dimen160
 \calc@Askip=\skip43
 \calc@Bskip=\skip44
-LaTeX Info: Redefining \setlength on input line 75.
-LaTeX Info: Redefining \addtolength on input line 76.
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count112
 \calc@Cskip=\skip45
 )
 (/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
-Package: eso-pic 2013/10/06 v2.0d eso-pic (RN)
+Package: eso-pic 2015/04/20 v2.0e eso-pic (RN)
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
 ))
+\AM@pagewidth=\dimen161
+\AM@pageheight=\dimen162
+
 (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
-File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
+File: pppdftex.def 2015/06/15 v0.4y Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box37
 \AM@toc@title=\toks28
@@ -453,13 +456,13 @@ ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count114
-\scratchdimen=\dimen161
+\scratchdimen=\dimen163
 \scratchbox=\box39
 \nofMPsegments=\count115
 \nofMParguments=\count116
 \everyMPshowfont=\toks29
 \MPscratchCnt=\count117
-\MPscratchDim=\dimen162
+\MPscratchDim=\dimen164
 \MPnumerator=\count118
 \makeMPintoPDFobject=\count119
 \everyMPtoPDFconversion=\toks30
@@ -547,22 +550,30 @@ LaTeX Warning: Float too large for page by 2.32033pt on input line 44.
 
 LaTeX Warning: Float too large for page by 2.32033pt on input line 46.
 
+(./simple_model_quarterly_nlg_to_gdp.tex)
+
+LaTeX Warning: Float too large for page by 2.32033pt on input line 48.
+
+(./simple_model_quarterly_government_revenue.tex)
+
+LaTeX Warning: Float too large for page by 2.32033pt on input line 50.
+
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./model_diagnostic_quart
-erly.pdf>] [2] [3] [4] [5] [6] [7] (./main_simple_model_quarterly.aux) ) 
+erly.pdf>] [2] [3] [4] [5] [6] [7] [8] [9] (./main_simple_model_quarterly.aux) 
+) 
 Here is how much of TeX's memory you used:
- 26257 strings out of 493105
- 522491 string characters out of 6137072
- 1095454 words of memory out of 5000000
- 29478 multiletter control sequences out of 15000+600000
+ 26980 strings out of 493085
+ 536685 string characters out of 6136917
+ 1288619 words of memory out of 5000000
+ 30215 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,8n,54p,437b,722s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on main_simple_model_quarterly.pdf (7 pages, 287203 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on main_simple_model_quarterly.pdf (9 pages, 314351 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,2 +1,15 @@
 \select@language {english}
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Ratio of civil servants over total labor force, in the OECD data set. Note that the curves are quite stable in the last 20 years.}}{12}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Structural breaks of the public employment rate using a non-parametric estimation of the breaks. Although there seems to have some breaks in individual countries, these do not justify a split in the analysis of the whole data set.}}{13}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagnostic plots for the base line model. On the upper-left plot, one observes that the residuals are not uniformly distributed on the fitted values. The upper-right plot shows that the residuals are probably not distributed as a Gaussian variable as well. Hence some care should be taken with the assumption of the model and its output.}}{14}{figure.2.3}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces GDP growth, volume}}{20}{figure.A.1}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Unemployment rate}}{21}{figure.A.2}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Government revenue in percent of GDP}}{22}{figure.A.3}
+\contentsline {figure}{\numberline {A.4}{\ignorespaces GDP per Capita in USD millions}}{23}{figure.A.4}
+\contentsline {figure}{\numberline {A.5}{\ignorespaces Net lending in percent of GDP}}{24}{figure.A.5}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

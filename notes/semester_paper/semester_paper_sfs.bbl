@@ -19,11 +19,66 @@ Alt, J., D.~D. Lassen, and J.~Wehner (2014).
 \newblock {\em British Journal of Political Science\/}~{\em 44\/}(04),
   707--716.
 
-\bibitem[\protect\citeauthoryear{Schuster, Schmitt, and Traub}{Schuster
-  et~al.}{2013}]{schuster2013retreat}
-Schuster, P., C.~Schmitt, and S.~Traub (2013).
-\newblock The retreat of the state from entrepreneurial activities: A
-  convergence analysis for oecd countries, 1980--2007.
-\newblock {\em European Journal of Political Economy\/}~{\em 32}, 95--112.
+\bibitem[\protect\citeauthoryear{Beck, Clarke, Groff, Keefer, and Walsh}{Beck
+  et~al.}{2001}]{beck2001new}
+Beck, T., G.~Clarke, A.~Groff, P.~Keefer, and P.~Walsh (2001).
+\newblock New tools in comparative political economy: The database of political
+  institutions.
+\newblock {\em the world bank economic review\/}~{\em 15\/}(1), 165--176.
+
+\bibitem[\protect\citeauthoryear{Benjamini and Hochberg}{Benjamini and
+  Hochberg}{1995}]{benjamini1995controlling}
+Benjamini, Y. and Y.~Hochberg (1995).
+\newblock Controlling the false discovery rate: a practical and powerful
+  approach to multiple testing.
+\newblock {\em Journal of the Royal Statistical Society. Series B
+  (Methodological)\/}, 289--300.
+
+\bibitem[\protect\citeauthoryear{Hlavac}{Hlavac}{2015}]{hlavac2015stargazer}
+Hlavac, M. (2015).
+\newblock {\em stargazer: Well-Formatted Regression and Summary Statistics
+  Tables}.
+\newblock Cambridge, USA: Harvard University.
+\newblock R package version 5.2.
+
+\bibitem[\protect\citeauthoryear{James and Matteson}{James and
+  Matteson}{2014}]{james2014ecp}
+James, N.~A. and D.~S. Matteson (2014).
+\newblock {ecp}: An {R} package for nonparametric multiple change point
+  analysis of multivariate data.
+\newblock {\em Journal of Statistical Software\/}~{\em 62\/}(7), 1--25.
+
+\bibitem[\protect\citeauthoryear{OECD}{OECD}{2015}]{oecd2015eo}
+OECD (2015).
+\newblock Economic outlook.
+
+\bibitem[\protect\citeauthoryear{{R Core Team}}{{R Core Team}}{2015}]{R2015}
+{R Core Team} (2015).
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock Vienna, Austria: R Foundation for Statistical Computing.
+
+\bibitem[\protect\citeauthoryear{Sax and Steiner}{Sax and
+  Steiner}{2014}]{sax2014tempdisagg}
+Sax, C. and P.~Steiner (2014).
+\newblock {\em tempdisagg: Methods for Temporal Disaggregation and
+  Interpolation of Time Series}.
+\newblock R package version 0.24.0.
+
+\bibitem[\protect\citeauthoryear{Solt}{Solt}{2009}]{solt2009standardizing}
+Solt, F. (2009).
+\newblock Standardizing the world income inequality database.
+\newblock {\em Social Science Quarterly\/}~{\em 90\/}(2), 231--242.
+
+\bibitem[\protect\citeauthoryear{Wang, Irwin, and Murara}{Wang
+  et~al.}{2015}]{wang2015trends}
+Wang, R.~F., M.~T. Irwin, and L.~K. Murara (2015).
+\newblock {\em Trends in Fiscal Transparency: Evidence from a New Database of
+  the Coverage of Fiscal Reporting}.
+\newblock Number 15-188. International Monetary Fund.
+
+\bibitem[\protect\citeauthoryear{Wikipedia}{Wikipedia}{2015}]{wiki2015election}
+Wikipedia (2015).
+\newblock {W}ikipedia{,} the free encyclopedia.
+\newblock [Online; accessed 2015-12-31].
 
 \end{thebibliography}

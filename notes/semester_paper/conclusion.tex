@@ -1,24 +1,42 @@
 \chapter{Conclusion}
 
-In this semester paper, part of theory of data completion is reviewed. The main
-work is devoted to build a framework to test several R packages for imputation
-methods on the FLAS data set. With this data set, it appears that K-nearest
-neighbor imputation works fairly well, although its implementation might throw
-frustrating low level errors (segmentation faults). Except for
-\texttt{softImpute}, all methods have the same order of error (distance between
-the imputed and true value). In practice, they could unfortunately not be used
-as black-box as most data matrix have collinear dimensions which constitutes an
-issue for all the algorithms based on regression.
+This semester paper quickly summarizes the current literature on the theory of
+civil servants and tries to find a reasonable model which could explain
+quarterly variation of the share of public employees in the labor force. With
+analysis on annual data, it is believed that the level of wealth, the fiscal
+transparency, the government political partisanship, the proximity of election
+terms or the degree of inequality would correlate with the public employment
+rate. With quarterly frequency, data suggest that the influence of these
+variables on the public employment rate might be weak. Even though our analysis
+showed some significant unadjusted $p$-values with these variables, these
+become statistically insignificant after correction. These results do not
+support the conclusions of the existing literature. Nevertheless, one can not
+exclude that the adjustment might have been too sharp or that some observations
+of the data were imprecise.
 
-Finally, as departing words, one should not forget why these technique
-exists. From \cite{schafer2002missing},
+In order to test these ideas with quarterly frequency, the OECD Economic
+Outlook quarterly data set has been retrieved and many missing variables were
+interpolated from annual data from the same data set or alternative sources,
+leading to potential mistakes.
 
-\begin{quote}
-  With or without missing data, the goal of a statistical procedure should be
-  to make valid and efficient inferences about a population of interest -- not to
-  estimate, predict, or recover missing observations nor to obtain the same
-  results that we would have seen with complete data.
-\end{quote}
+In order to confirm or invalidate this conclusion, one could replicate the
+study in order to check the consistency of the data, restrict the number
+of variables at the beginning of the study in order to increase the power of the
+statistical test, and maybe use more precise methods for the interpolation in
+order to capture undetected signals. The challenge of over-fitting and
+overstating statistical significance remains and one should probably stick to
+simple statistical models.
+
+In order to ease the results, the data and programming scripts are shared on
+Github\footnote{\url{https://github.com/davidpham87/public_employment_analysis}}.
+References should provide enough indication concerning the technical and the
+economical background.
+
+Finally, the base model with unemployment rate, government revenues and net
+lending seems to be surprisingly consistent to explain public employment share
+with quarterly data from the OECD. This is a deceptive result as it is
+difficult to see why these variables would be correlated with the share of
+civil servants according to the literature.
 
 
 %%% Local Variables: ***

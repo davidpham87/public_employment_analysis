@@ -15,5 +15,6 @@
     "pdfpages"
     "graphicx")
    (TeX-add-symbols
-    '("insertplot" 2))))
+    '("insertplot" 2)))
+ :latex)
 

@@ -3,8 +3,6 @@ pckgs <- loadPackages()
 library(magrittr)
 library(lattice)
 
-butlast <- function(x, k=1) x[1:(length(x)-k)]
-
 MAKE_PLOTS <- TRUE
 MAX_YEAR_EXTRAPOLATION <- 2014
 
@@ -50,7 +48,7 @@ cols.to.save <- c(
   ) %>% sort %>% {c('TIME', .)}
 
 
-################################################################################
+###########################################################################
 ## Load data
 
 eos <- readRDS('../data/eo-data.rds')
@@ -58,19 +56,19 @@ eo.desc <- readRDS('../data/eo-colnames-dt.rds')
 setkey(eo.desc, VARIABLE) # enamble eo.desc['bsii'] => Balance of income, value, BOP basis
 eos[[2]][ , list(country, eg)] %>% na.omit %>% {unique(.$country)} -> country.q # get non.missing country
 
-################################################################################
+###########################################################################
 ## Splines for interpoalting between years
 
-cols.interpolation.denton.cholette <-
-  c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage')
-cols.interpolation.splines <-
-  c('unr', 'gap', 'gaplfp', 'es', 'lf')
-
-
-## cols.interpolation.denton.cholette <- c()
+## cols.interpolation.denton.cholette <-
+##   c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage')
 ## cols.interpolation.splines <-
-##   c(c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage'),
-##     c('unr', 'gap', 'gaplfp', 'es'))
+##   c('unr', 'gap', 'gaplfp', 'es', 'lf')
+
+
+cols.interpolation.denton.cholette <- c()
+cols.interpolation.splines <-
+  c(c('yrg', 'nlg', 'xgs', 'mgs', 'gdp', 'gdpv', 'gdpvd', 'wage'),
+    c('unr', 'gap', 'gaplfp', 'es'))
 
 eo.a <- copy(eos[[1]])
 eo.q <- copy(eos[[2]])
@@ -93,7 +91,7 @@ eo.q <- Reduce(
   function(x, y) interpolateQuarterColumn(x, eo.a, y, MAX_YEAR_EXTRAPOLATION),
   cols.interpolation.splines, init=eo.q)
 
-################################################################################
+###########################################################################
 ## Patching quarterly data
 
 for (col in c(cols.interpolation.denton.cholette, cols.interpolation.splines)){
@@ -105,7 +103,7 @@ for (col in c(cols.interpolation.denton.cholette, cols.interpolation.splines)){
 eo.q[, gdpv_yoy_annpct:=c(NA, NA, NA, NA,
                       100*gdpv[-(1:4)]/butlast(gdpv, 4)-100), by='country']
 
-################################################################################
+###########################################################################
 ## New Data
 ## Gathering of of additional data in order to make robustness analysis.
 ## The data are not a part of the oecd economic outlook data set.
@@ -169,7 +167,7 @@ DT[, V1:=NULL]
 setnames(DT, 'location', 'country')
 eo.q <- merge(eo.q, DT, by=c('country', 'TIME'), all=TRUE)
 
-################################################################################
+###########################################################################
 ### Transformation of the data to create the data matrix
 
 ### x is the data set with annual observation for eg
@@ -198,7 +196,7 @@ x[, gdp_per_capita_log:=log(gdp_per_capita)]
 
 setnames(x, 'ny_gdp_totl_rt_zs_interpolated', 'natural_ressource_rent')
 
-################################################################################
+###########################################################################
 ## LAGs might be useful in the future
 
 ## x[, ypgtq_interpolated_diff:=c(NA, diff(ypgtq_interpolated)), by='country']
@@ -220,11 +218,11 @@ setnames(x, 'ny_gdp_totl_rt_zs_interpolated', 'natural_ressource_rent')
 # x[, gdpv_annpct_quarterly_lagged:=c(NA, butlast(gdpv_annpct_quarterly)), by='country']
 # x[, gdpv_annpct_quarterly_lagged_2:=c(NA, NA, butlast(gdpv_annpct_quarterly, 2)), by='country']
 
-################################################################################
+###########################################################################
 ## Remove NAs
 x <- x[!is.na(egr)] # Non na observation
 
-################################################################################
+###########################################################################
 ## Diagnostic plots
 
 if (MAKE_PLOTS){
@@ -326,7 +324,7 @@ if (MAKE_PLOTS){
 }
 
 
-################################################################################
+###########################################################################
 ## Save into CSV
 
 write.csv(x, '../data/public_employment_data_all.csv')
